@@ -1,0 +1,90 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Joe Snuffy",
+      "rank": "PVT",
+      "email": "joe.a.snuffy.mil@army.mil",
+      "enrolled_date": "2024-07-01",
+      "courses": [1]
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "rank": "PFC",
+      "email": "jane.s.doe.mil@army.mil",
+      "enrolled_date": "2024-07-01",
+      "courses": [1]
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Cyber Crash Course",
+      "description": "Introduction to Cyber Security",
+      "instructor": "SGT Snuffy",
+      "code": "C3",
+      "start_date": "2024-07-01",
+      "end_date": "2024-07-30"
+    }
+  ],
+  "assignments": [
+    {
+      "id": 1,
+      "course_id": 1,
+      "name": "Assignment 1",
+      "description": "Introduction to Cyber Security",
+      "due_date": "2024-07-15",
+      "course_name": "Cyber Crash Course",
+      "course_code": "C3",
+      "submissions": [
+        {
+          "id": 1,
+          "student_id": 1,
+          "assignment_id": 1,
+          "submission_date": "2024-07-15",
+          "grade": 50
+        },
+        {
+          "id": 2,
+          "student_id": 2,
+          "assignment_id": 1,
+          "submission_date": "2024-07-15",
+          "grade": 100
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "course_id": 1,
+      "name": "Assignment 2",
+      "description": "Introduction to Cyber Security",
+      "due_date": "2024-07-30",
+      "course_name": "Cyber Crash Course",
+      "course_code": "C3",
+      "submissions": []
+    }
+  ],
+  "grades": [
+    {
+      "id": 1,
+      "student_id": 1,
+      "student_name": "Joe Snuffy",
+      "course": 1,
+      "course_name": "Cyber Crash Course",
+      "assignment_id": 1,
+      "assignment_name": "Assignment 1",
+      "grade": 100
+    },
+    {
+      "id": 2,
+      "student_id": 2,
+      "student_name": "Jane Doe",
+      "course": 1,
+      "course_name": "Cyber Crash Course",
+      "assignment_id": 1,
+      "assignment_name": "Assignment 1",
+      "grade": 100
+    }
+  ]
+}
