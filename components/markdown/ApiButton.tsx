@@ -3,10 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "../ui/input";
 
-export default function ApiButton() {
-  const [fetchURL, setFetchURL] = useState<string>(
-    "https://dummyjson.com/products/1?delay=1000"
-  );
+export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
+  const [fetchURL, setFetchURL] = useState<string>(fetchUrl);
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
