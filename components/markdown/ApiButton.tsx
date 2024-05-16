@@ -46,7 +46,7 @@ export default function ApiButton() {
   };
 
   return (
-    <Card>
+    <Card className="bg-transparent">
       <CardHeader>
         <CardTitle>API Button</CardTitle>
       </CardHeader>
