@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import PocketBase from "pocketbase";
 
 export default async function getPb() {
-  const pb = new PocketBase("http://10.1.2.93:8090");
+  const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
   if (cookies().has("pb_auth")) {
     const cookie = cookies().get("pb_auth")!.value;

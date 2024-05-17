@@ -3,7 +3,7 @@ import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
-const pb = new PocketBase("http://10.1.2.93:8090");
+const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 pb.autoCancellation(false);
 
 export default function InstructorTip({ tip }: { tip: string }) {
