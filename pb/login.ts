@@ -11,7 +11,7 @@ async function login(identity: string, password: string) {
     await pb.collection("users").authWithPassword(identity, password);
 
     // Success to login
-    const cookie = pb.authStore.exportToCookie();
+    const cookie = pb.authStore.exportToCookie({ httpOnly: false });
 
     const { Path, Expires, SameSite } = cookieParse(cookie);
 

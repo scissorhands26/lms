@@ -1,25 +1,49 @@
-import getUser from "@/pb/getUser";
-import { useEffect, useState } from "react";
+import PocketBase from "pocketbase";
 
-export default function InstructorTip() {
-  const [user, setUser] = useState(null);
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+
+const pb = new PocketBase("http://10.1.2.93:8090");
+pb.autoCancellation(false);
+
+export default function InstructorTip({ tip }: { tip: string }) {
+  const [user, setUser] = useState<any>(null);
+  const [isInstrctor, setIsInstructor] = useState<boolean>(false);
+
+  const pb_cookie: any = Cookies.get("pb_auth");
+
+  pb.authStore.loadFromCookie(pb_cookie);
+
+  console.log(pb.authStore.model);
 
   useEffect(() => {
     async function fetchUser() {
-      const user: any = await getUser();
-      console.log(user);
-      setUser(user);
+      if (!pb.authStore.model?.id) {
+        return;
+      }
+      const userRecord = await pb
+        .collection("users")
+        .getOne(pb.authStore.model?.id, {
+          expand: "branch,courses,roles",
+        });
+      setUser(userRecord);
+      setIsInstructor(
+        userRecord.expand?.roles.some((role: any) => role.name === "instructor")
+      );
     }
+
     fetchUser();
   }, []);
 
-  return (
-    <div
-      className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4"
-      role="alert"
-    >
-      <p className="font-bold">Instructor Tip</p>
-      <p>{user?.username}</p>
-    </div>
-  );
+  if (isInstrctor) {
+    return (
+      <div
+        className="bg-blue-950 border-l-4 border-blue-700 text-blue-100 mt-4"
+        role="alert"
+      >
+        <p className="font-bold bg-blue-700 px-2 text-lg">Instructor Tip</p>
+        <p className="font-bold p-4">{tip}</p>
+      </div>
+    );
+  }
 }
