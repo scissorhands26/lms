@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "../ui/input";
 import QuickCopy from "./QuickCopy";
-//import getUser from "@/pb/getUser";
+import { GetUser } from "./GetUser";
 
 export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   const [fetchURL, setFetchURL] = useState<string>(fetchUrl);
@@ -14,6 +13,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   const [intance, setInstance] = useState<any>(null);
   const [owner, setOwner] = useState<any>(null);
   const [exerciseId, setExerciseId] = useState<any>(null);
+  const [user, setUser] = useState<any>(null);
 
   function validateURL(url: string) {
     try {
@@ -24,14 +24,15 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     }
   }
 
-  const getUser = () => {
-    return {
-      id: "nu2udn80polbnp0",
-    };
-  };
+  useEffect(() => {
+    async function fetchUser() {
+      const currentUser = await GetUser();
+      setUser(currentUser);
+    }
+    fetchUser();
+  }, []);
 
   async function getActiveSession() {
-    const user: any = getUser();
     // javascript code to get current time plus 30 minutes
     var currentTime = new Date();
     var minutes = 30;
@@ -52,7 +53,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       if (json.items && json.items.length > 0) {
         console.log(json.items[0]);
         console.log(
-          `password: ${json.items[0].password} command: ${json.items[0].command}`
+          `password: ${json.items[0].password} command: ${json.items[0].command}`,
         );
         setActive(true);
         setData(json.items[0]);
@@ -79,7 +80,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
           headers: {
             accept: "application/json",
           },
-        }
+        },
       );
 
       console.log(response);
@@ -111,7 +112,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
           headers: {
             accept: "application/json",
           },
-        }
+        },
       );
 
       console.log(response);
@@ -158,9 +159,9 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
             </Button>
           )}
         </div>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {error && <p className="mt-2 text-red-500">{error}</p>}
         {active && (
-          <div className="border border-white p-2 rounded mt-4">
+          <div className="mt-4 rounded border border-white p-2">
             <QuickCopy snippet={data.command} title="Command" />
             <QuickCopy snippet={data.password} title="Password" />
           </div>

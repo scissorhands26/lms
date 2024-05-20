@@ -1,0 +1,54 @@
+# Dynamic Host Configuration Protocol (DHCP)
+
+Understanding the Dynamic Host Configuration Protocol (DHCP) is essential for anyone involved in networking and cybersecurity. This document provides an overview of DHCP, its function within network communications, and its importance in ensuring efficient and automated network management.
+
+## Introduction to DHCP
+
+The Dynamic Host Configuration Protocol (DHCP) is a network management protocol used to automatically assign IP addresses and other network configuration parameters to devices on a network. This allows devices to communicate on a network without needing manual configuration.
+
+## How DHCP Works
+
+DHCP operates by leasing IP addresses and other configuration information to network devices for a specified period. The DHCP process involves four key steps, often referred to as DORA: Discover, Offer, Request, and Acknowledge.
+
+### DHCP Process
+
+1. **DHCP Discover**: When a device connects to a network, it sends a DHCP Discover message to locate available DHCP servers. This message is broadcast to all devices on the local network.
+2. **DHCP Offer**: A DHCP server receives the Discover message and responds with a DHCP Offer message. This message includes an available IP address and other network configuration parameters.
+3. **DHCP Request**: The device receives the Offer message and responds with a DHCP Request message, indicating its acceptance of the offered IP address.
+4. **DHCP Acknowledge**: The DHCP server receives the Request message and responds with a DHCP Acknowledge message, confirming the lease of the IP address to the device. The device can now use the assigned IP address for network communication.
+
+### Example of DHCP Operation
+
+1. **Device**: Sends a DHCP Discover message to find a DHCP server.
+2. **DHCP Server**: Responds with a DHCP Offer message, providing an IP address.
+3. **Device**: Sends a DHCP Request message to accept the offered IP address.
+4. **DHCP Server**: Responds with a DHCP Acknowledge message, confirming the IP address lease.
+
+## DHCP Lease
+
+The IP address assigned by the DHCP server is leased to the device for a specific period. The device must renew the lease before it expires to continue using the IP address. If the lease expires, the device must request a new IP address.
+
+### DHCP Lease Renewal
+
+1. **Lease Renewal Request**: The device sends a DHCP Request message to renew the lease.
+2. **Lease Renewal Acknowledge**: The DHCP server responds with a DHCP Acknowledge message, extending the lease period.
+
+## DHCP Options
+
+DHCP provides various configuration parameters, known as DHCP options, in addition to IP addresses. These options include:
+
+- **Subnet Mask**: Defines the network's subnet.
+- **Default Gateway**: Specifies the router for accessing other networks.
+- **DNS Servers**: Provides the IP addresses of DNS servers for resolving domain names.
+- **Domain Name**: Specifies the network's domain name.
+
+## Importance of DHCP
+
+DHCP is crucial for network management because it:
+
+1. **Automates IP Address Assignment**: Eliminates the need for manual configuration of IP addresses.
+2. **Reduces Configuration Errors**: Minimizes the risk of IP address conflicts and configuration errors.
+3. **Simplifies Network Administration**: Facilitates the management of large networks by automating the assignment and renewal of IP addresses.
+4. **Supports Mobile Devices**: Enables seamless connectivity for mobile devices that frequently join and leave the network.
+
+## Exercise

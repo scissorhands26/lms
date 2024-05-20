@@ -19,7 +19,7 @@ async function login(identity: string, password: string) {
       path: Path,
       expires: new Date(Expires),
       sameSite: SameSite,
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
     });
   } catch (_) {

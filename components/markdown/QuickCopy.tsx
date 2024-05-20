@@ -23,16 +23,18 @@ export default function CodeBlockWithCopy({
   }
 
   return (
-    <div className="bg-slate-900 flex flex-col rounded-lg my-2">
+    <div className="my-2 flex flex-col rounded-lg bg-blue-300 dark:bg-slate-900">
       <Toaster />
 
-      <div className="bg-slate-800 px-4 rounded-t-lg">{title}:</div>
-      <div className="flex flex-row justify-between items-center">
+      <div className="rounded-t-lg bg-blue-200 px-4 dark:bg-slate-800">
+        {title}:
+      </div>
+      <div className="flex flex-row items-center justify-between">
         <pre className="overflow-auto">
           <code className="font-mono">{snippet}</code>
         </pre>
         <button
-          className="p-2 text-gray-300 hover:text-gray-100"
+          className="p-2 text-white hover:text-black dark:text-gray-300 dark:hover:text-gray-100"
           onClick={copyToClipboard}
           aria-label="Copy to clipboard"
         >
