@@ -35,9 +35,6 @@
   "firewalls": "Firewalls",
   "static-dynamic-routing": "Static and Dynamic Routing",
   "router-configs": "Router Configurations",
-  "dns-records": "DNS Records",
-  "dns-lookups": "DNS Lookups",
-  "dns-transfers": "DNS Transfers",
   "mail-servers": "Mail Servers",
   "proxy-servers": "Proxy Servers",
   "network-maps": "Network Maps"

@@ -29,7 +29,7 @@ export default function CodeBlockWithCopy({
       <div className="bg-slate-800 px-4 rounded-t-lg">{title}:</div>
       <div className="flex flex-row justify-between items-center">
         <pre className="overflow-auto">
-          <code>{snippet}</code>
+          <code className="font-mono">{snippet}</code>
         </pre>
         <button
           className="p-2 text-gray-300 hover:text-gray-100"
