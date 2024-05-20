@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "../ui/input";
+import QuickCopy from "./QuickCopy";
 //import getUser from "@/pb/getUser";
 
 export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
@@ -14,14 +15,14 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   const [owner, setOwner] = useState<any>(null);
   const [exerciseId, setExerciseId] = useState<any>(null);
 
-  const validateURL = (url: string) => {
+  function validateURL(url: string) {
     try {
       new URL(url);
       return true;
     } catch (e) {
       return false;
     }
-  };
+  }
 
   const getUser = () => {
     return {
@@ -29,7 +30,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     };
   };
 
-  const getActiveSession = async () => {
+  async function getActiveSession() {
     const user: any = getUser();
     // javascript code to get current time plus 30 minutes
     var currentTime = new Date();
@@ -61,9 +62,9 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       setError(error.message || "Failed to fetch data");
       setData(null);
     }
-  };
+  }
 
-  const launchSession = async (exercise_id: string, owner: string) => {
+  async function launchSession(exercise_id: string, owner: string) {
     console.log("Launching session");
     setLoading(true);
 
@@ -97,9 +98,9 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       setActive(false);
       setLoading(false);
     }
-  };
+  }
 
-  const stopSession = async (exercise_id: string) => {
+  async function stopSession(exercise_id: string) {
     console.log("Stopping session");
     setLoading(true);
     try {
@@ -129,16 +130,16 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       setActive(false);
       setLoading(false);
     }
-  };
+  }
 
-  const launchOrGetSession = async () => {
+  async function launchOrGetSession() {
     if (active) {
       console.log("Getting active session");
       getActiveSession();
     } else {
       launchSession("exercise01", "nu2udn80polbnp0");
     }
-  };
+  }
 
   return (
     <Card className="bg-transparent">
@@ -147,19 +148,21 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       </CardHeader>
       <CardContent>
         <div className="flex items-center">
-          {active ? (
+          {active && !loading ? (
             <Button onClick={() => stopSession("exercise01")}>
               Stop instance
             </Button>
           ) : (
-            <Button onClick={launchOrGetSession}>Launch instance</Button>
+            <Button onClick={launchOrGetSession} disabled={loading}>
+              {loading ? "Loading..." : "Launch instance"}
+            </Button>
           )}
         </div>
         {error && <p className="text-red-500 mt-2">{error}</p>}
         {active && (
           <div className="border border-white p-2 rounded mt-4">
-            <pre>Password: {data.password}</pre>
-            <pre>Command: {data.command}</pre>
+            <QuickCopy snippet={data.command} title="Command" />
+            <QuickCopy snippet={data.password} title="Password" />
           </div>
         )}
       </CardContent>
