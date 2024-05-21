@@ -1,3 +1,5 @@
+import BlockDiagram from "@/components/markdown/BlockDiagram";
+
 # User Datagram Protocol (UDP)
 
 Understanding the User Datagram Protocol (UDP) is essential for anyone involved in networking and cybersecurity. This document provides an overview of UDP, its function within network communications, and its importance in scenarios where speed and efficiency are prioritized over reliability.
@@ -19,6 +21,14 @@ UDP provides a simple mechanism for transmitting datagrams (packets) between dev
 
 ### Example of UDP Operation
 
+```mermaid
+sequenceDiagram
+  participant Client
+  participant Server
+
+  Client->>Server: Data
+```
+
 1. **Client**: Sends a UDP datagram to the server with the data.
 2. **Server**: Receives the datagram and processes the data.
 3. **No Acknowledgment**: There is no acknowledgment or guarantee of delivery, so the client does not receive confirmation from the server.
@@ -31,6 +41,40 @@ UDP includes several features that make it suitable for specific types of applic
 - **No Sequencing or Acknowledgment**: UDP does not sequence packets or acknowledge their receipt, making it faster but less reliable.
 - **Checksum**: UDP includes a checksum to detect errors in the transmitted data. However, error detection and correction are not guaranteed.
 - **Simple Header**: The UDP header is minimal, containing only essential information (source port, destination port, length, and checksum).
+
+## UDP Header Structure
+
+<BlockDiagram
+  colCount={32}
+  rows={[
+    [
+      {
+        label: "Source Port",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-red-700 bg-red-300",
+      },
+      {
+        label: "Destination Port",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-green-700 bg-green-300",
+      },
+      {
+        label: "Length",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-blue-700 bg-blue-300",
+      },
+      {
+        label: "Checksum",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-yellow-700 bg-yellow-300",
+      },
+    ],
+  ]}
+/>
 
 ## Importance of UDP
 
