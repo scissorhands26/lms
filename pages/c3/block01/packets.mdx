@@ -1,0 +1,35 @@
+import BlockDiagram from "@/components/markdown/BlockDiagram";
+
+## Diagram
+
+<BlockDiagram
+  rows={[
+    [
+      { label: "Version", length: 2, className: "bg-red-600" },
+      {
+        label: "Header Length",
+        length: 2,
+        className: "bg-red-600",
+      },
+      {
+        label: "Type of Service",
+        length: 12,
+        className: "bg-red-600",
+      },
+    ],
+    [
+      { label: "Payload length", length: "4", className: "bg-blue-600" },
+      { label: "Next header", length: "4", className: "bg-green-600" },
+      { label: "Hop limit", length: "4", className: "bg-yellow-600" },
+      { label: "Hop limit", length: "4", className: "bg-yellow-600" },
+    ],
+    [{ label: "Source address", length: "16", className: "bg-purple-600" }],
+    [
+      {
+        label: "Destination address",
+        length: "16",
+        className: "bg-pink-600",
+      },
+    ],
+  ]}
+/>

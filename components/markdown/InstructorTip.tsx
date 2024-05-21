@@ -25,10 +25,12 @@ export default function InstructorTip({ tip }: { tip: string }) {
   if (isInstructor) {
     return (
       <div
-        className="mt-4 border-l-4 border-blue-700 bg-blue-950 text-blue-100"
+        className="mt-4 rounded-r-lg rounded-t-lg border-l-4 border-blue-700 bg-blue-950 text-blue-100"
         role="alert"
       >
-        <p className="bg-blue-700 px-2 text-lg font-bold">Instructor Tip</p>
+        <p className="rounded-t bg-blue-700 px-2 text-lg font-bold">
+          Instructor Tip
+        </p>
         <p className="p-4 font-bold">{tip}</p>
       </div>
     );

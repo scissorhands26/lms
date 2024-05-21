@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 # Transmission Control Protocol (TCP)
 
 Understanding the Transmission Control Protocol (TCP) is essential for anyone involved in networking and cybersecurity. This document provides an overview of TCP, its function within network communications, and its importance in ensuring reliable data transmission.
@@ -12,11 +14,32 @@ TCP ensures reliable data transmission through a series of mechanisms, including
 
 ### TCP Connection Establishment (Three-Way Handshake)
 
+```mermaid
+sequenceDiagram
+  participant Client
+  participant Server
+
+  Client->>Server: SYN
+  Server->>Client: SYN-ACK
+  Client->>Server: ACK
+```
+
 1. **SYN**: The client sends a TCP segment with the SYN (synchronize) flag set to the server, indicating it wants to establish a connection.
 2. **SYN-ACK**: The server responds with a TCP segment with both SYN and ACK (acknowledgment) flags set, acknowledging the client's request and indicating readiness to establish the connection.
 3. **ACK**: The client sends a TCP segment with the ACK flag set to the server, confirming the connection is established.
 
-### TCP Connection Termination (Four-Way Handshake)
+### TCP Connection Termination (Four-Way Teardown)
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant Server
+
+  Client->>Server: FIN
+  Server->>Client: ACK
+  Server->>Client: FIN
+  Client->>Server: ACK
+```
 
 1. **FIN**: The client sends a TCP segment with the FIN (finish) flag set, indicating it wants to terminate the connection.
 2. **ACK**: The server responds with a TCP segment with the ACK flag set, acknowledging the client's request.
@@ -42,6 +65,19 @@ TCP includes several features to ensure reliable data transmission:
 - **Retransmission**: If a segment is lost or corrupted, TCP retransmits it to ensure reliable delivery.
 - **Flow Control**: TCP uses a flow control mechanism called sliding window to prevent overwhelming the receiver with too much data at once.
 - **Congestion Control**: TCP employs congestion control algorithms to prevent network congestion and ensure fair usage of network resources.
+
+### Flow Control with Sliding Window
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant Server
+
+  Client->>Server: [Seq=1, Data=Hello]
+  Server->>Client: [Ack=2]
+  Client->>Server: [Seq=2, Data=World]
+  Server->>Client: [Ack=3]
+```
 
 ## Importance of TCP
 
