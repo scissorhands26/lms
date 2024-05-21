@@ -1,0 +1,97 @@
+import InstructorTip from "@/components/markdown/InstructorTip";
+
+# APT TTP Analysis
+
+## Advanced Persistent Threats: Tactics, Techniques, and Procedures
+
+### Cyber Crash Course
+
+---
+
+### What is APT TTP Analysis?
+
+A method in cybersecurity utilized to understand the behavior, strategies, and methods employed by advanced threat actors. It involves studying the patterns, tactics, techniques, and procedures utilized to associate an attack back to a threat actor.
+
+**Comprised of three components:**
+
+- **Tactics:** Goals and actions of threat actors, like gaining access.
+- **Techniques:** Specific methods used, like exploiting vulnerabilities or social engineering.
+- **Procedures:** Detailed steps followed, including commands and infrastructure.
+
+---
+
+### How does an APT get its name/number?
+
+APT campaigns are typically named by cybersecurity researchers, analysts, or organizations that discover and analyze them. These names are often based on various factors such as:
+
+- **Attribution:** Sometimes the name reflects the suspected or confirmed origin of the threat actor, such as a specific country or known cybercriminal group.
+- **Characteristics:** The name might describe unique characteristics of the attack, such as the techniques used, the target industry or sector, or the geographic location of the victims.
+- **Incident Response:** In some cases, the name might be derived from the incident response process, including the time of discovery, the affected systems, or other relevant details.
+- **Thematic Naming:** Occasionally names are chosen based on a thematic element related to the attack, such as a common thread or pattern observed in multiple incidents.
+
+---
+
+### Examples:
+
+#### Attribution:
+
+- **APT28 (also known as Fancy Bear):** This name is attributed to a threat actor group believed to be associated with the Russian government. It was named "APT28" by FireEye, a cybersecurity firm, based on their internal tracking system.
+- **Lazarus Group:** This name is attributed to a threat actor group believed to be associated with North Korea. It was named "Lazarus Group" by Kaspersky Lab, a cybersecurity company, following their investigation into various cyberattacks.
+
+#### Characteristics:
+
+- **Operation Aurora:** Named after the Aurora vulnerability, this campaign targeted major technology companies and was widely attributed to Chinese state-sponsored actors. The name "Operation Aurora" was coined by McAfee, a cybersecurity company, based on their analysis of the attack.
+- **Watering Hole Attacks:** These attacks involve compromising websites frequently visited by members of a target group. The name "Watering Hole" reflects the predatory behavior of attackers lying in wait for their victims, similar to predators waiting near a watering hole in the wild.
+
+#### Incident Response:
+
+- **NotPetya:** This ransomware attack, initially thought to be a variant of the Petya ransomware, was named "NotPetya" by some researchers to distinguish it from the original Petya ransomware. The name reflects the confusion surrounding the incident and the need to differentiate it for effective incident response.
+- **SolarWinds Attack:** Named after the SolarWinds Orion software that was compromised, this cyberattack campaign targeted multiple U.S. government agencies and private sector organizations. The name "SolarWinds Attack" became widely used in the cybersecurity community and media to refer to the incident.
+
+#### Thematic Naming:
+
+- **Olympic Destroyer:** This malware was used in a cyberattack during the 2018 Winter Olympics. The name "Olympic Destroyer" was chosen because of the timing of the attack and its disruptive nature, which targeted Olympic-related infrastructure and caused significant disruption to the event.
+- **Shamoon:** This malware was used in attacks targeting energy companies in the Middle East. The name "Shamoon" was inspired by a filename found in the malware's code, which referenced a character from the "Arabian Nights" folktales.
+
+---
+
+### Exercise Time!
+
+**Case Study (APT29)**
+
+1.  What is APT29’s primary method of attack?
+    <InstructorTip
+      tip="
+Spear Phishing"
+    />
+2.  What defensive measures can organizations implement to mitigate the risk of falling victim to APT29's lateral movement techniques?
+    <InstructorTip
+      tip="
+**Network Segmentation**
+**Multi-Factor Authentication (MFA)**
+**Least Privilege Principle**
+**Patch Management**
+**Network Monitoring and Anomaly Detection**
+**Endpoint Detection and Response (EDR)**
+**Regular Audits and Penetration Testing**
+**User Training and Awareness**
+**Implementing Security Information and Event Management (SIEM)**
+**Access Control Lists (ACLs)**
+"
+    />
+3.  Why is the development of custom malware a significant challenge for traditional antivirus solutions?
+
+        <InstructorTip
+          tip="
+
+    **Signature-Based Detection Limitations:**
+    **Polymorphism and Metamorphism**
+    **Zero-Day Exploits:**
+    **Behavioral Anomalies**
+    **Encrypted Communication:**
+    "
+    />
+
+4.  How can threat intelligence sharing and collaboration enhance defenses against APT29 and similar threat actor groups?
+
+<InstructorTip tip="Engaging in joint threat hunting exercises allows organizations to actively search for signs of APT29 and other threat actors within their networks. Collective threat hunting benefits from diverse perspectives and expertise, increasing the likelihood of identifying hidden threats." />

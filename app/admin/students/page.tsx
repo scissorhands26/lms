@@ -1,4 +1,6 @@
 import React from "react";
+import getPb from "@/pb/getPb";
+import { handleCreateStudent } from "./actions";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,13 +33,55 @@ import { Badge } from "@/components/ui/badge";
 import { MoveHorizontal } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function StudentsPage() {
-  const fakeDB = require("../../../fakeDatabase.json");
+async function getStudents() {
+  const pb = await getPb();
+
+  const users = await pb.collection("users").getFullList({
+    sort: "-created",
+    expand: "roles,courses,branch",
+  });
+
+  const students: any[] = [];
+
+  users.forEach((user) => {
+    const student = {
+      age: user.age,
+      avatar: user.avatar,
+      branch: user.expand?.branch,
+      courses: user.expand?.courses,
+      created: user.created,
+      email: user.email || "Not found",
+      enrolled_date: user.enrolled_date,
+      first_name: user.first_name,
+      id: user.id,
+      last_login: user.last_login,
+      last_name: user.last_name,
+      mos: user.mos,
+      name: user.name,
+      rank: user.rank,
+      roles: user.expand?.roles,
+      updated: user.updated,
+      username: user.username,
+      verified: user.verified,
+    };
+
+    student.roles.forEach((role) => {
+      if (role.name === "student") {
+        students.push(student);
+      }
+    });
+  });
+
+  return students;
+}
+
+export default async function StudentsPage() {
+  const students = await getStudents();
 
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
       <div className="flex items-center">
-        <h1 className="font-semibold text-lg md:text-2xl">Students</h1>{" "}
+        <h1 className="text-lg font-semibold md:text-2xl">Students</h1>{" "}
         <Dialog>
           <DialogTrigger asChild>
             <Button className="ml-auto" size="sm">
@@ -49,12 +93,22 @@ export default function StudentsPage() {
               <DialogTitle>Add New Student</DialogTitle>
             </DialogHeader>
             <DialogDescription>
-              <form className="grid gap-4">
+              <form className="grid gap-4" action={handleCreateStudent}>
                 <div className="grid gap-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="first_name">First Name</Label>
                   <Input
-                    id="name"
-                    placeholder="Enter student name"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="Enter student first name"
+                    type="text"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="last_name">Last Name</Label>
+                  <Input
+                    id="last_name"
+                    name="last_name"
+                    placeholder="Enter student last name"
                     type="text"
                   />
                 </div>
@@ -62,16 +116,63 @@ export default function StudentsPage() {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
                     placeholder="Enter student email"
                     type="email"
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="courses">Courses</Label>{" "}
+                  <Label htmlFor="password">Password</Label>
                   <Input
-                    id="email"
+                    id="password"
+                    name="password"
+                    placeholder="Enter student password"
+                    type="password"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="birthdate">Birthdate</Label>
+                  <Input
+                    id="birthdate"
+                    name="birthdate"
+                    placeholder="Enter student birthdate"
+                    type="text"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="branch">Branch</Label>
+                  <Input
+                    id="branch"
+                    name="branch"
+                    placeholder="Enter student branch"
+                    type="text"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="mos">MOS</Label>
+                  <Input
+                    id="mos"
+                    name="mos"
+                    placeholder="Enter student MOS"
+                    type="text"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="rank">Rank</Label>
+                  <Input
+                    id="rank"
+                    name="rank"
+                    placeholder="Enter student rank"
+                    type="text"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="courses">Courses</Label>
+                  <Input
+                    id="courses"
+                    name="courses"
                     placeholder="Enter student course"
-                    type="email"
+                    type="text"
                   />
                 </div>
                 <div className="grid gap-2">
@@ -86,7 +187,7 @@ export default function StudentsPage() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="border shadow-sm rounded-lg">
+      <div className="rounded-lg border shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>
@@ -98,11 +199,11 @@ export default function StudentsPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {fakeDB.students.map((student) => (
+            {students.map((student) => (
               <TableRow key={student.id}>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <Avatar className="w-8 h-8 border">
+                    <Avatar className="h-8 w-8 border">
                       <AvatarImage
                         alt="Instructor"
                         src="/placeholder-user.jpg"
@@ -112,15 +213,15 @@ export default function StudentsPage() {
                       </AvatarFallback>
                     </Avatar>
                     <span className="font-medium">
-                      {student.rank + " " + student.name}
+                      {student.rank + " " + student.last_name}
                     </span>
                   </div>
                 </TableCell>
                 <TableCell>{student.email}</TableCell>
                 <TableCell>
-                  {student.courses.map((course) => (
+                  {student.courses.map((course: any) => (
                     <Badge key={course} variant="success">
-                      {course}
+                      {course.name}
                     </Badge>
                   ))}
                 </TableCell>
@@ -129,7 +230,7 @@ export default function StudentsPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button size="icon" variant="ghost">
-                        <MoveHorizontal className="w-4 h-4" />
+                        <MoveHorizontal className="h-4 w-4" />
                         <span className="sr-only">Actions</span>
                       </Button>
                     </DropdownMenuTrigger>

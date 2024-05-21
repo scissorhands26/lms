@@ -35,14 +35,71 @@ import {
 } from "@/components/ui/dialog";
 
 import { Plus } from "lucide-react";
+import getPb from "@/pb/getPb";
 
-export default function GradesPage() {
-  const fakeDB = require("../../../fakeDatabase.json");
+async function getGrades() {
+  const pb = await getPb();
+
+  // Fetch all assignments
+  const assignments = await pb.collection("assignments").getFullList({
+    sort: "-created",
+    expand: "course",
+  });
+
+  // Prepare a list of promises to fetch assignment answers
+  const assignmentPromises = assignments.map(async (assignment) => {
+    // Fetch all answers for the current assignment
+    const answers = await pb.collection("assignment_answers").getFullList({
+      sort: "-created",
+      filter: `assignment = "${assignment.id}"`,
+      expand: "student", // Expanding student details
+    });
+
+    // Group answers by student and calculate the grade for each student
+    const studentGrades = answers.reduce((acc, answer) => {
+      const studentId = answer.expand?.student.id;
+      if (!acc[studentId]) {
+        acc[studentId] = {
+          student_last_name: answer.expand?.student.last_name,
+          student_first_name: answer.expand?.student.first_name,
+          student_rank: answer.expand?.student.rank,
+          course_name: assignment.expand?.course.name,
+          assignment_name: assignment.name,
+          total: 0,
+          correct: 0,
+        };
+      }
+      acc[studentId].total += 1;
+      if (answer.correct) {
+        acc[studentId].correct += 1;
+      }
+      return acc;
+    }, {});
+
+    // Convert the student grades object to an array and calculate the percentage grade
+    return Object.values(studentGrades).map((student) => ({
+      student_last_name: student.student_last_name,
+      student_first_name: student.student_first_name,
+      student_rank: student.student_rank,
+      course_name: student.course_name,
+      assignment_name: student.assignment_name,
+      grade: (student.correct / student.total) * 100,
+    }));
+  });
+
+  // Wait for all promises to resolve and flatten the results
+  const results = (await Promise.all(assignmentPromises)).flat();
+
+  return results;
+}
+
+export default async function GradesPage() {
+  const grades = await getGrades();
 
   return (
     <main className="flex-1 p-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Grades</h1>{" "}
+        <h1 className="text-2xl font-bold">Grades</h1>
         <Dialog>
           <DialogTrigger asChild>
             <Button size="sm">
@@ -135,9 +192,11 @@ export default function GradesPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {fakeDB.grades.map((grade) => (
+                  {grades.map((grade) => (
                     <TableRow key={grade.id}>
-                      <TableCell>{grade.student_name}</TableCell>
+                      <TableCell>
+                        {grade.student_rank} {grade.student_last_name}
+                      </TableCell>
                       <TableCell>{grade.course_name}</TableCell>
                       <TableCell>{grade.assignment_name}</TableCell>
                       <TableCell>{grade.grade}</TableCell>

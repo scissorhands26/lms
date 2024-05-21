@@ -20,7 +20,7 @@ function Block({
     >
       <div className="flex flex-col">
         <div>{label}</div>
-        <div className="text-xs">({description})</div>
+        {description ? <div className="text-xs">{description}</div> : null}{" "}
       </div>
     </div>
   );
@@ -28,7 +28,14 @@ function Block({
 
 function BlockRow({ children, colCount }: { children: any; colCount: number }) {
   return (
-    <div className={`grid grid-cols-${colCount} w-full justify-center`}>
+    <div
+      style={{
+        gridColumn: `span ${colCount} / span ${colCount}`,
+
+        gridTemplateColumns: `repeat(${colCount}, minmax(0, 1fr))`,
+      }}
+      className={`grid w-full justify-center`}
+    >
       {children}
     </div>
   );
@@ -47,7 +54,7 @@ export default function BlockDiagram({
   colCount?: number;
 }) {
   return (
-    <div className="my-5 flex flex-col items-center border border-black text-sm">
+    <div className="my-5 flex w-full flex-col items-center border border-black text-sm">
       {rows.map((row, rowIndex) => (
         <BlockRow key={rowIndex} colCount={colCount}>
           {row.map((block, blockIndex) => (
