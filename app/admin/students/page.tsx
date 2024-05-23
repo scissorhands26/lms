@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import React from "react";
 import getPb from "@/pb/getPb";
 import { handleCreateStudent } from "./actions";

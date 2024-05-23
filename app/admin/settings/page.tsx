@@ -1,19 +1,22 @@
+//@ts-nocheck
+
+import React from "react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import React from "react";
 
 export default function SettingsPage() {
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
       <div className="flex items-center">
-        <h1 className="font-semibold text-lg md:text-2xl">Settings</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Settings</h1>
       </div>
-      <div className="border shadow-sm rounded-lg p-4">
-        <h2 className="text-lg font-semibold mb-4">General Settings</h2>
+      <div className="rounded-lg border p-4 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">General Settings</h2>
         <form className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="school-name">School Name</Label>
@@ -48,8 +51,8 @@ export default function SettingsPage() {
           </Button>
         </form>
       </div>
-      <div className="border shadow-sm rounded-lg p-4">
-        <h2 className="text-lg font-semibold mb-4">User Management</h2>
+      <div className="rounded-lg border p-4 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">User Management</h2>
         <form className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="admin-name">Admin Name</Label>
@@ -76,8 +79,8 @@ export default function SettingsPage() {
           </Button>
         </form>
       </div>
-      <div className="border shadow-sm rounded-lg p-4">
-        <h2 className="text-lg font-semibold mb-4">Notifications</h2>
+      <div className="rounded-lg border p-4 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">Notifications</h2>
         <form className="grid gap-4">
           <div className="flex items-center space-x-2">
             <Switch id="new-enrollment-notifications" />
@@ -102,8 +105,8 @@ export default function SettingsPage() {
           </Button>
         </form>
       </div>
-      <div className="border shadow-sm rounded-lg p-4">
-        <h2 className="text-lg font-semibold mb-4">Integrations</h2>
+      <div className="rounded-lg border p-4 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold">Integrations</h2>
         <form className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="lms-integration">LMS Integration</Label>

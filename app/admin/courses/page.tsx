@@ -33,12 +33,10 @@ import {
 import { MoveHorizontal } from "lucide-react";
 
 export default function CoursesPage() {
-  const fakeDB = require("../../../fakeDatabase.json");
-
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
       <div className="flex items-center">
-        <h1 className="font-semibold text-lg md:text-2xl">Courses</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Courses</h1>
         <Dialog>
           <DialogTrigger asChild>
             <Button className="ml-auto" size="sm">
@@ -90,7 +88,7 @@ export default function CoursesPage() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="border shadow-sm rounded-lg">
+      <div className="rounded-lg border shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>
@@ -102,7 +100,7 @@ export default function CoursesPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {fakeDB.courses.map((course) => (
+            {/* {fakeDB.courses.map((course) => (
               <TableRow key={course.id}>
                 <TableCell>
                   <div className="flex items-center gap-2">
@@ -146,7 +144,7 @@ export default function CoursesPage() {
                   </DropdownMenu>
                 </TableCell>
               </TableRow>
-            ))}
+            ))} */}
           </TableBody>
         </Table>
       </div>
