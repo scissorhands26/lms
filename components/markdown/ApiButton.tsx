@@ -43,7 +43,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     console.log(time);
 
     try {
-      var fetchURL = `http://10.1.2.93:8090/api/collections/sessions/records?filter=(owner="${user.id}")&&(expires<"${time}")`;
+      var fetchURL = `http://10.0.0.5:8090/api/collections/sessions/records?filter=(owner="${user.id}")&&(expires<"${time}")`;
       console.log(fetchURL);
       const response = await fetch(fetchURL);
       if (!response.ok) {
