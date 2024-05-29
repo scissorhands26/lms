@@ -106,7 +106,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://container-srv:8000/containers/${exercise_id}`,
+        `${process.env.NEXT_PUBLIC_CONTAINER_URL}/containers/${exercise_id}`,
         {
           method: "DELETE",
           headers: {

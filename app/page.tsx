@@ -5,11 +5,10 @@ export default async function Home() {
   const user: any = await getUser();
 
   if (user) {
-    redirect("/c3");
+    redirect("/home");
   } else {
-    redirect("/login")
+    redirect("/login");
   }
-
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
