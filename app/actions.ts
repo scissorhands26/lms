@@ -13,7 +13,7 @@ async function handleLogin(formData: FormData) {
   }
 
   await login(identity, password);
-  redirect("/c3");
+  // redirect("/c3");
 }
 
 async function handleLogout() {

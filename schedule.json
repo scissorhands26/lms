@@ -191,7 +191,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-lr] text-xs"
     },
     {
       "label": "CNMF ORG Structure",
@@ -201,7 +201,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "CNMF Work-Roles",
@@ -221,7 +221,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "ATP TTP Analysis",
@@ -236,12 +236,12 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
   [
@@ -258,7 +258,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Frame Structure, MACs, Switching, Bridges",
@@ -268,7 +268,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "VLANs, ARP, STP, Error Correction",
@@ -288,7 +288,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Subnets, ICMP, Ping/tracert/ nestat/ip config",
@@ -303,12 +303,12 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
   [
@@ -325,7 +325,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "TCP and UDP",
@@ -335,7 +335,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Telnet/SSH/ TLS/SNMP/ SMTP/POP/ IMAP/HTTPS/ RDP/FTP",
@@ -355,7 +355,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Packet Capture Exercise",
@@ -365,12 +365,12 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
   [
@@ -387,7 +387,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Firewalls and router config",
@@ -397,7 +397,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Routing Worksheet",
@@ -417,7 +417,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Layer 2, 3, and 4 Exercise",
@@ -427,12 +427,12 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
   [
@@ -449,7 +449,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "DNS Resource Records",
@@ -459,7 +459,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "DNS Worksheet",
@@ -479,7 +479,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Mail/syslog/ proxy execise",
@@ -489,12 +489,12 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
   [
@@ -506,12 +506,12 @@
     {
       "label": "Exam Prep",
       "length": 6,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-green-700 bg-green-300 text-xs"
     },
     {
       "label": "Block 1 Exam",
       "length": 8,
-      "className": "dark:bg-indigo-700 bg-indigo-300"
+      "className": "dark:bg-red-700 bg-red-300"
     },
     {
       "label": "Lunch",
@@ -526,7 +526,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Basic Powershell and Bash Commands",
@@ -536,12 +536,12 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
   [
@@ -551,28 +551,8 @@
       "className": "dark:bg-gray-700 bg-gray-300"
     },
     {
-      "label": "Computer Architecture",
-      "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
-    },
-    {
-      "label": "Windows File System and Permissions",
-      "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
-    },
-    {
-      "label": "Windows API",
-      "length": 4,
+      "label": "Empty",
+      "length": 14,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
     },
     {
@@ -581,34 +561,324 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
-      "label": "Registry Presentation",
-      "length": 4,
+      "label": "Empty",
+      "length": 11,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
-    },
-    {
-      "label": "Windows Processes and Services",
-      "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
-    },
-    {
-      "label": "Windows Worksheet",
-      "length": 2,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-rl] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
     },
     {
       "label": "Office Hours",
       "length": 3,
-      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs"
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "08",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "09",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "10",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "11",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "12",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "13",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "14",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "15",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "16",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Empty",
+      "length": 14,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Lunch",
+      "length": 3,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Empty",
+      "length": 11,
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+    },
+    {
+      "label": "Break",
+      "length": 1,
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+    },
+    {
+      "label": "Office Hours",
+      "length": 3,
+      "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
+    }
+  ],
+  [
+    {
+      "label": "17",
+      "length": 2,
+      "className": "dark:bg-gray-700 bg-gray-300"
+    },
+    {
+      "label": "Exam Prep",
+      "length": 6,
+      "className": "dark:bg-green-700 bg-green-300 text-xs"
+    },
+    {
+      "label": "Block 3 Exam",
+      "length": 15,
+      "className": "dark:bg-red-700 bg-red-300 text-xs"
     }
   ]
 ]

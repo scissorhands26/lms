@@ -43,7 +43,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     console.log(time);
 
     try {
-      var fetchURL = `http://10.0.0.5:8090/api/collections/sessions/records?filter=(owner="${user.id}")&&(expires<"${time}")`;
+      var fetchURL = `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/sessions/records?filter=(owner="${user.id}")&&(expires<"${time}")`;
       console.log(fetchURL);
       const response = await fetch(fetchURL);
       if (!response.ok) {
@@ -73,7 +73,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       var body = { owner: "nu2udn80polbnp0" };
       console.log(body);
       const response = await fetch(
-        `http://10.1.2.93:8000/containers/${exercise_id}?owner=${owner}`,
+        `${process.env.NEXT_PUBLIC_CONTAINER_URL}/containers/${exercise_id}?owner=${owner}`,
         {
           method: "POST",
           // mode: "no-cors",
@@ -106,7 +106,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://10.1.2.93:8000/containers/${exercise_id}`,
+        `http://container-srv:8000/containers/${exercise_id}`,
         {
           method: "DELETE",
           headers: {
@@ -138,7 +138,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       console.log("Getting active session");
       getActiveSession();
     } else {
-      launchSession("exercise01", "nu2udn80polbnp0");
+      launchSession("exercise01", user.id);
     }
   }
 

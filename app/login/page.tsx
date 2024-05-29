@@ -22,7 +22,7 @@ export default async function LoginPage() {
     <div className="h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
-          <div className="relative mx-auto flex h-[35rem] max-w-sm flex-col items-center border border-black/[0.2] p-4 dark:border-white/[0.2]">
+          <div className="relative mx-auto flex h-[38rem] max-w-sm flex-col items-center border border-black/[0.2] p-4 dark:border-white/[0.2]">
             <Icon className="absolute -left-3 -top-3 h-6 w-6 text-black dark:text-white" />
             <Icon className="absolute -bottom-3 -left-3 h-6 w-6 text-black dark:text-white" />
             <Icon className="absolute -right-3 -top-3 h-6 w-6 text-black dark:text-white" />
