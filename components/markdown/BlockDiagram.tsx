@@ -5,13 +5,31 @@ function Block({
   length,
   description,
   className,
+  link,
 }: {
   label: string;
   description: string;
   length: number;
   className: string;
+  link?: string;
 }) {
-  return (
+  return link ? (
+    <a
+      href={link}
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        gridColumn: `span ${length} / span ${length}`,
+        ...(label === "Break" ? { writingMode: "vertical-rl" } : {}),
+      }}
+      className={`flex items-center justify-center border border-black text-center text-black dark:text-white ${className} rounded-none hover:opacity-80`}
+    >
+      <div className="flex flex-col">
+        <div>{label}</div>
+        {description ? <div className="text-xs">{description}</div> : null}
+      </div>
+    </a>
+  ) : (
     <div
       style={{
         gridColumn: `span ${length} / span ${length}`,
@@ -21,7 +39,7 @@ function Block({
     >
       <div className="flex flex-col">
         <div>{label}</div>
-        {description ? <div className="text-xs">{description}</div> : null}{" "}
+        {description ? <div className="text-xs">{description}</div> : null}
       </div>
     </div>
   );
@@ -51,6 +69,7 @@ export default function BlockDiagram({
     description: string;
     length: number;
     className: string;
+    link: string;
   }[][];
   colCount?: number;
 }) {
@@ -65,6 +84,7 @@ export default function BlockDiagram({
               description={block.description}
               length={block.length}
               className={block.className}
+              link={block.link}
             />
           ))}
         </BlockRow>
