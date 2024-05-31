@@ -3,7 +3,7 @@
     {
       "label": "Day",
       "length": 2,
-      "className": "dark:bg-gray-700 bg-gray-300 p-2"
+      "className": "dark:bg-gray-700 bg-gray-300 p-1"
     },
     {
       "label": "0800",
