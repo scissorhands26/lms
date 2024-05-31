@@ -184,49 +184,49 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
-      "label": "Course and student introduction",
+      "label": "Course and Student Introduction",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 [writing-mode:vertical-lr] text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "CNMF ORG Structure",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "CNMF Work-Roles",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "MITRE ATT&CK Framework",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "ATP TTP Analysis",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -243,48 +243,48 @@
     {
       "label": "TCP/IP & OSI Model",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs",
-      "link": "https://c3.cnmfu.local/c3/block01/tcpip"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/tcpip"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "ARP, MAC, IP Addresses",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Resolving IP Addresses Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Bridges, Switches, and Modems",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Hands-On Hardware Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -301,47 +301,47 @@
     {
       "label": "Routers and Access Points",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Subnetting and CIDR",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Subnetting and CIDR Hands-On",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Network Topology",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Designing Network Topologies",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -356,49 +356,49 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
-      "label": "Network Admin-istration",
+      "label": "Internet Protocol and ICMP",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "TCP and UDP",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Wireshark Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Servers and Services",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Connecting to Services",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -413,49 +413,49 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
-      "label": "Internet Protocol and ICMP",
+      "label": "Network Admin-istration",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "TCP and UDP",
+      "label": "Administrative Command Challenge",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Wireshark Exercise",
+      "label": "Wireshark Packet Capture Lab",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Exam Prep",
       "length": 4,
-      "className": "dark:bg-green-700 bg-green-300 text-xs"
+      "className": "dark:bg-green-700 bg-green-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Block 1 Exam",
       "length": 6,
-      "className": "dark:bg-red-700 bg-red-300 text-xs"
+      "className": "dark:bg-red-700 bg-red-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -472,47 +472,47 @@
     {
       "label": "Mail and FTP Protocols",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Mail and FTP Exercise",
+      "label": "Mail and FTP Simulation",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Web and Remote Access",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Web Exercise",
+      "label": "Web and HTTP Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Remote Access Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -529,47 +529,47 @@
     {
       "label": "Encryption Part 1",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Encryption Part 2",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Encryptng Files Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Secure Protocols",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Examining Secure Protocols",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -591,42 +591,42 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "DNS Records",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-2"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "DNS Resolution Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "DNS Security",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-2"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "DNS and DHCP Configuration Lab",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -643,37 +643,37 @@
     {
       "label": "Network Security",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Network Mapping",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Guided Network Mapping",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Network Mapping One (Command Output)",
       "length": 9,
-      "className": "dark:bg-purple-700 bg-purple-300 text-xs p-2"
+      "className": "dark:bg-purple-700 bg-purple-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -690,47 +690,47 @@
     {
       "label": "IPv6",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Windows Fundamentals",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Windows Survey Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Linux Fundamentals",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Linux Survey Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -747,47 +747,47 @@
     {
       "label": "Malware",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Attacks and Malicious Activity",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Malware Analysis Lab",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Exam Prep",
       "length": 4,
-      "className": "dark:bg-green-700 bg-green-300 text-xs"
+      "className": "dark:bg-green-700 bg-green-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Block 2 Exam",
       "length": 6,
-      "className": "dark:bg-red-700 bg-red-300 text-xs"
+      "className": "dark:bg-red-700 bg-red-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -804,37 +804,37 @@
     {
       "label": "Advanced Routing Concepts",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Enterprise Routing Protocols",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Advanced Routing Scenarios",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Network Mapping Two (Packet Capture)",
       "length": 9,
-      "className": "dark:bg-purple-700 bg-purple-300 text-xs p-2"
+      "className": "dark:bg-purple-700 bg-purple-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -851,47 +851,47 @@
     {
       "label": "Routing Configuration Part 1",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Routing Configuration Part 2",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "Routing Configuration Lab",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Atonomous Systems and BGP",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "ISP Simulation Lab",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
@@ -908,41 +908,36 @@
     {
       "label": "Network Mapping Three (Router Configuration)",
       "length": 9,
-      "className": "dark:bg-purple-700 bg-purple-300 text-xs p-2"
+      "className": "dark:bg-purple-700 bg-purple-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Exercise",
+      "label": "VPNs, VPSs, and TOR",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "VPNs and TOR",
+      "label": "Putting It All Together",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
-    },
-    {
-      "label": "Exercise",
-      "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Office Hours",
-      "length": 4,
+      "length": 8,
       "className": "dark:bg-yellow-700 bg-yellow-300 text-xs p-1"
     }
   ],
@@ -960,7 +955,7 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Scripting and Automation",
@@ -970,22 +965,22 @@
     {
       "label": "Break",
       "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-2"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Optional Exercises / Office Hours",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Optional Exercises / Office Hours",
       "length": 13,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     }
   ],
   [
@@ -997,22 +992,22 @@
     {
       "label": "Exam Prep",
       "length": 6,
-      "className": "dark:bg-green-700 bg-green-300 text-xs"
+      "className": "dark:bg-green-700 bg-green-300 text-xs p-1"
     },
     {
       "label": "Block 3 Exam",
       "length": 8,
-      "className": "dark:bg-red-700 bg-red-300 text-xs"
+      "className": "dark:bg-red-700 bg-red-300 text-xs p-1"
     },
     {
       "label": "Lunch",
       "length": 5,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs"
+      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Final Grades, Feedback, and Certificates",
       "length": 5,
-      "className": "dark:bg-orange-700 bg-orange-300 text-xs"
+      "className": "dark:bg-orange-700 bg-orange-300 text-xs p-1"
     }
   ]
 ]
