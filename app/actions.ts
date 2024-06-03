@@ -1,24 +1,28 @@
+"use server";
+
 import login from "@/pb/login";
 import logout from "@/pb/logout";
 import { redirect } from "next/navigation";
 
-async function handleLogin(formData: FormData) {
-  "use server";
-  console.log(formData.get("identity"), formData.get("password"));
+export async function handleLogin(formData: FormData) {
   const identity = (formData.get("identity") as string) ?? "";
   const password = (formData.get("password") as string) ?? "";
 
   if (!identity || !password) {
-    return;
+    return { error: "Identity and password are required." };
   }
 
-  await login(identity, password);
-  // redirect("/c3");
+  const res = await login(identity, password);
+
+  if (res.success === false) {
+    return {
+      error: "Failed to authenticate. Please check your username and password.",
+    };
+  }
+
+  redirect("/c3");
 }
 
-async function handleLogout() {
-  "use server";
+export async function handleLogout() {
   await logout();
 }
-
-export { handleLogin, handleLogout };

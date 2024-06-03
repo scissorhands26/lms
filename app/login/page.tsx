@@ -1,21 +1,29 @@
-import Link from "next/link";
-import React from "react";
+"use client";
 
+import Link from "next/link";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import GlobeComponent from "@/components/login/GlobeComponent";
-
 import getUser from "@/pb/getUser";
 import { redirect } from "next/navigation";
 import { handleLogin } from "@/app/actions";
 import { EvervaultCard, Icon } from "@/components/login/evervault-card";
 
-export default async function LoginPage() {
-  const user: any = await getUser();
+export default function LoginPage() {
+  const [error, setError] = useState<string | null>(null);
 
-  if (user) {
-    redirect("/c3");
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const response = await handleLogin(formData);
+
+    if (response?.error) {
+      setError(response.error);
+    } else {
+      window.location.href = "/c3"; // Ensure navigation to the dashboard
+    }
   }
 
   return (
@@ -30,14 +38,14 @@ export default async function LoginPage() {
 
             <EvervaultCard text="C3" />
 
-            <form action={handleLogin} className="mt-4 flex w-full">
+            <form onSubmit={handleSubmit} className="mt-4 flex w-full">
               <div className="grid w-full gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="username">Username</Label>
                   <Input
                     name="identity"
                     id="username"
-                    type="username"
+                    type="text"
                     placeholder="student00"
                     required
                   />
@@ -60,6 +68,7 @@ export default async function LoginPage() {
               </div>
             </form>
           </div>
+          {error && <p className="text-center text-red-500">{error}</p>}
         </div>
       </div>
       <div className="hidden bg-muted lg:block">

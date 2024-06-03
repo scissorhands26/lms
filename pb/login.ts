@@ -8,7 +8,9 @@ async function login(identity: string, password: string) {
   try {
     const pb = await getPb();
 
-    await pb.collection("users").authWithPassword(identity, password);
+    const auth = await pb
+      .collection("users")
+      .authWithPassword(identity, password);
 
     // Success to login
     const cookie = pb.authStore.exportToCookie({ httpOnly: false });
@@ -22,9 +24,21 @@ async function login(identity: string, password: string) {
       httpOnly: false,
       secure: true,
     });
-  } catch (_) {
+
+    return {
+      success: true,
+      obj: auth,
+    };
+  } catch (error) {
     // Fail to login
-    console.log("Fail to login. Please check your identity and password.", _);
+    console.log(
+      "Fail to login. Please check your identity and password.",
+      error,
+    );
+    return {
+      success: false,
+      obj: error,
+    };
   }
 }
 
