@@ -370,7 +370,7 @@
       "label": "TCP and UDP",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
-      "link": "/c3/block01/tcp-and-udp"
+      "link": "/c3/block01/tcp"
     },
     {
       "label": "Break",
@@ -695,7 +695,8 @@
     {
       "label": "Windows Fundamentals",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/windows-fundamentals"
     },
     {
       "label": "Break",

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import QuickCopy from "./QuickCopy";
 import { GetUser } from "./GetUser";
 
@@ -160,6 +161,12 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
           )}
         </div>
         {error && <p className="mt-2 text-red-500">{error}</p>}
+        {!active && loading ? (
+          <div className="mt-4 rounded border border-white p-2">
+            <Skeleton className="mb-2 h-[72px] w-full rounded" />
+            <Skeleton className="h-[72px] w-full rounded" />
+          </div>
+        ) : null}
         {active && (
           <div className="mt-4 rounded border border-white p-2">
             <QuickCopy snippet={data.command} title="Command" />

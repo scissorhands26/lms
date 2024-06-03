@@ -1,0 +1,174 @@
+# Windows Fundamentals
+
+## What is Windows?
+
+Windows is a family of operating systems developed by Microsoft that are widely used on personal computers, servers, and other devices. The Windows operating system provides a graphical user interface (GUI) for users to interact with the system and run applications. Windows offers a wide range of features and capabilities, making it suitable for various computing needs.
+
+## Windows History
+
+Microsoft Windows has a long history of development, starting with the release of Windows 1.0 in 1985 by Microsoft co-founder Bill Gates. Windows was developed to provide a user-friendly operating system that could run on a wide range of hardware platforms. At the time, operating systems were primarily text-based, and Windows introduced a graphical user interface that revolutionized the way people interacted with computers. Windows was able to overtake its main competitor, Apple's Macintosh, by offering a more affordable and versatile platform. Windows is now installed on over 1 billion devices worldwide.
+
+## Windows Versions
+
+Windows has evolved over the years, with each version introducing new features, improvements, and enhancements. Windows is broken up into to separate categories: Server operating systems and client operating systems. Here are some key versions of Windows:
+
+### Windows Server Operating Systems
+
+| Version                | Kernel | Kernel Version | Description                                                                                                                     |
+| ---------------------- | ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Windows NT 3.1 Server  | NT     | 3.1            | The first version of Windows NT, released in 1993, aimed at professional and business users.                                    |
+| Windows NT 3.5 Server  | NT     | 3.5            | Released in 1994, offered improved performance and support for new hardware.                                                    |
+| Windows NT 3.51 Server | NT     | 3.51           | Released in 1995, added support for the PowerPC architecture and improved compatibility with Windows 95.                        |
+| Windows NT 4.0 Server  | NT     | 4.0            | Released in 1996, featured a user interface similar to Windows 95 and introduced DirectX support.                               |
+| Windows 2000 Server    | NT     | 5.0            | Released in 2000, combined NT stability with server-oriented features, introduced Active Directory.                             |
+| Windows Server 2003    | NT     | 5.2            | Released in 2003, offered improved performance, scalability, and security features.                                             |
+| Windows Server 2003 R2 | NT     | 5.2            | Released in 2005, included additional features and improvements over the original Windows Server 2003.                          |
+| Windows Server 2008    | NT     | 6.0            | Released in 2008, introduced new features like Server Core and Hyper-V virtualization.                                          |
+| Windows Server 2008 R2 | NT     | 6.1            | Released in 2009, built on Windows Server 2008, added features like improved virtualization and new management tools.           |
+| Windows Server 2012    | NT     | 6.2            | Released in 2012, introduced a new user interface, improved storage options, and enhanced virtualization.                       |
+| Windows Server 2012 R2 | NT     | 6.3            | Released in 2013, included updates and enhancements over Windows Server 2012, improved cloud integration.                       |
+| Windows Server 2016    | NT     | 10.0           | Released in 2016, introduced features like Nano Server, Docker support, and improved security features.                         |
+| Windows Server 2019    | NT     | 10.0           | Released in 2018, offered improved hybrid cloud integration, enhanced security, and better support for containers.              |
+| Windows Server 2022    | NT     | 10.0           | Released in 2021, includes advanced multi-layer security, hybrid capabilities with Azure, and modernized server infrastructure. |
+
+### Windows Client Operating Systems
+
+| Version         | Kernel | Kernel Version | Description                                                                                                                              |
+| --------------- | ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows 1.0     | MS-DOS | N/A            | The first graphical user interface-based operating environment for MS-DOS, released in 1985.                                             |
+| Windows 2.0     | MS-DOS | N/A            | Released in 1987, introduced overlapping windows and improved memory management.                                                         |
+| Windows 3.0     | MS-DOS | N/A            | Released in 1990, included enhanced memory management and user interface improvements.                                                   |
+| Windows 3.1     | MS-DOS | N/A            | Released in 1992, improved the GUI, introduced TrueType fonts, and enhanced multimedia.                                                  |
+| Windows 95      | MS-DOS | 4.00.950       | Released in 1995, integrated MS-DOS with Windows, introduced the Start menu, taskbar, and Plug and Play.                                 |
+| Windows 98      | MS-DOS | 4.10.1998      | Released in 1998, included Internet Explorer integration, improved USB support, and the Windows Driver Model.                            |
+| Windows 98 SE   | MS-DOS | 4.10.2222      | The Second Edition of Windows 98, released in 1999, included bug fixes and improved hardware compatibility.                              |
+| Windows ME      | MS-DOS | 4.90.3000      | Released in 2000, the last DOS-based Windows, introduced System Restore and improved multimedia capabilities.                            |
+| Windows NT 3.1  | NT     | 3.1            | The first version of Windows NT, released in 1993, aimed at professional and business users.                                             |
+| Windows NT 3.5  | NT     | 3.5            | Released in 1994, offered improved performance and support for new hardware.                                                             |
+| Windows NT 3.51 | NT     | 3.51           | Released in 1995, added support for the PowerPC architecture and improved compatibility with Windows 95.                                 |
+| Windows NT 4.0  | NT     | 4.0            | Released in 1996, featured a user interface similar to Windows 95 and introduced DirectX support.                                        |
+| Windows 2000    | NT     | 5.0            | Released in 2000, combined NT stability with the user-friendly interface of Windows 98.                                                  |
+| Windows XP      | NT     | 5.1            | Released in 2001, known for its stability, performance, and user-friendly interface.                                                     |
+| Windows Vista   | NT     | 6.0            | Released in 2007, introduced a new visual style (Aero), UAC security features, and improved search.                                      |
+| Windows 7       | NT     | 6.1            | Released in 2009, refined the user interface, added new features like Aero Snap, and improved performance.                               |
+| Windows 8       | NT     | 6.2            | Released in 2012, featured a new touch-friendly interface (Metro) and the Windows Store.                                                 |
+| Windows 8.1     | NT     | 6.3            | An update to Windows 8 released in 2013, improved the Start screen and included additional features.                                     |
+| Windows 10      | NT     | 10.0           | Released in 2015, offered a unified platform across devices, regular updates, and introduced features like Cortana and the Edge browser. |
+| Windows 11      | NT     | 10.0           | Released in 2021, introduced a redesigned interface, new productivity features, and improved performance and security.                   |
+
+## Common Windows Processes
+
+Understanding common Windows processes is essential for analysts make decisions about what is legitimate and what may be malicious. Here are some key Windows processes and their descriptions:
+
+| **Executable**        | **Path**               | **Description**                                                                                                |
+| --------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `System Idle Process` | N/A                    | Represents the percentage of CPU that is not being used. It helps to measure how much idle time the CPU has.   |
+| `System`              | N/A                    | Represents the kernel and core components of the Windows operating system. The PID will always be 4.           |
+| `explorer.exe`        | `C:\Windows\`          | The Windows File Explorer process that provides the graphical user interface for file management.              |
+| `lsass.exe`           | `C:\Windows\System32\` | The Local Security Authority Subsystem Service, responsible for enforcing security policy on the system.       |
+| `csrss.exe`           | `C:\Windows\System32\` | The Client/Server Runtime Subsystem, responsible for user-mode portion of the Win32 subsystem.                 |
+| `winlogon.exe`        | `C:\Windows\System32\` | Manages user logon and logoff.                                                                                 |
+| `services.exe`        | `C:\Windows\System32\` | The Service Control Manager, responsible for starting, stopping, and interacting with system services.         |
+| `svchost.exe`         | `C:\Windows\System32\` | A generic host process name for services that run from dynamic-link libraries (DLLs).                          |
+| `taskmgr.exe`         | `C:\Windows\System32\` | The Task Manager application that provides information about processes and performance.                        |
+| `spoolsv.exe`         | `C:\Windows\System32\` | The Print Spooler service, responsible for managing print jobs.                                                |
+| `dwm.exe`             | `C:\Windows\System32\` | The Desktop Window Manager, which enables visual effects on the desktop.                                       |
+| `smss.exe`            | `C:\Windows\System32\` | The Session Manager Subsystem, responsible for creating user sessions and initializing the environment.        |
+| `wuauserv`            | N/A                    | The Windows Update service, responsible for checking, downloading, and installing updates from Windows Update. |
+| `wuauclt.exe`         | `C:\Windows\System32\` | The Windows Update AutoUpdate Client, responsible for downloading and installing updates.                      |
+| `conhost.exe`         | `C:\Windows\System32\` | The Console Window Host process, used to host command-line interfaces.                                         |
+| `ctfmon.exe`          | `C:\Windows\System32\` | The CTF Loader process, responsible for managing the Alternative User Input and the Office Language bar.       |
+| `SearchIndexer.exe`   | `C:\Windows\System32\` | The Windows Search Indexer, responsible for indexing files for faster search.                                  |
+| `wininit.exe`         | `C:\Windows\System32\` | The Windows Initialization process, which initializes system services during startup.                          |
+
+### Important Points for Analysts
+
+- **Paths**: If the process is not located in the expected directory, it may be suspicious.
+- **System Idle Process**: This process is not harmful. It shows the percentage of time the CPU is idle.
+- **svchost.exe**: Multiple instances of this process can run simultaneously. Each instance can host different services.
+- **explorer.exe**: Responsible for the desktop and file management. Restarting this process can resolve issues with the taskbar and desktop.
+
+## Windows File System
+
+The Windows operating system uses the New Technology File System (NTFS) as its primary file system. NTFS offers several advantages over other file systems, such as FAT32, including support for larger file sizes, improved security features, and better reliability. Here are some key features of NTFS:
+
+- **File Compression**: NTFS supports file compression to reduce disk space usage.
+- **File Encryption**: NTFS includes built-in encryption capabilities to protect sensitive data.
+- **Disk Quotas**: Administrators can set disk quotas to limit the amount of disk space users can consume.
+- **File Permissions**: NTFS provides granular file permissions to control access to files and folders.
+- **Journaling**: NTFS uses a journaling file system to recover from disk errors and system crashes.
+- **Sparse Files**: NTFS supports sparse files, which allow for efficient storage of large, empty files.
+- **Alternate Data Streams**: NTFS allows files to have multiple data streams, providing additional metadata or content.
+- **Reparse Points**: NTFS supports reparse points, which allow for the creation of symbolic links and junction points.
+
+### Directory Structure
+
+The Windows file system is organized into a hierarchical directory structure, with each drive having its own root directory. Here are some common directories found in Windows:
+
+| **Directory**                            | **Description**                                                                                                                                      |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **C:\Windows**                           | Contains essential system files, device drivers, and configuration settings necessary for the operating system.                                      |
+| **C:\Windows\System32**                  | Contains critical system files and libraries essential for the core operation of Windows, including many system utilities and commands.              |
+| **C:\Windows\SysWOW64**                  | Stores 32-bit versions of system files and libraries on 64-bit versions of Windows, ensuring compatibility with older software.                      |
+| **C:\Windows\Temp**                      | Temporary files used by the system and applications.                                                                                                 |
+| **C:\Program Files**                     | Stores installed 64-bit applications and programs.                                                                                                   |
+| **C:\Program Files\Common Files**        | Contains files shared among different programs.                                                                                                      |
+| **C:\Program Files (x86)**               | Contains 32-bit applications on 64-bit versions of Windows, ensuring compatibility with older software.                                              |
+| **C:\Program Files (x86)\Common Files**  | Contains shared files for 32-bit applications.                                                                                                       |
+| **C:\Users**                             | Contains user profiles, including personal data, documents, and user-specific settings.                                                              |
+| **C:\Users\USERNAME\Documents**          | Default location for personal documents.                                                                                                             |
+| **C:\Users\USERNAME\Downloads**          | Default location for downloaded files.                                                                                                               |
+| **C:\Users\USERNAME\AppData**            | Contains application data specific to each user.                                                                                                     |
+| **C:\Users\USERNAME\AppData\Local**      | Stores application data specific to the local machine.                                                                                               |
+| **C:\Users\USERNAME\AppData\Roaming**    | Stores application data that roams with the user profile in a domain environment.                                                                    |
+| **C:\Users\USERNAME\AppData\Local\Temp** | Temporary files specific to the user.                                                                                                                |
+| **C:\Documents and Settings**            | Legacy directory for user profiles in older versions of Windows (prior to Windows Vista).                                                            |
+| **C:\Temp**                              | Used for temporary files and storage, often utilized by applications for temporary data.                                                             |
+| **C:\ProgramData**                       | Stores application data and settings that are shared by all users on the computer, typically used for application configurations and database files. |
+| **C:\System Volume Information**         | Contains system restore points and other system data. This directory is hidden and protected.                                                        |
+| **C:\Recycle Bin**                       | Stores deleted files and folders, allowing users to recover them if needed. Each drive has its own Recycle Bin folder.                               |
+
+### Additional Directories and Files to Know
+
+- **C:\Boot.ini**: (In older versions of Windows) Configuration file for the boot loader.
+- **C:\pagefile.sys**: System paging file used for virtual memory.
+- **C:\hiberfil.sys**: File used by Windows to save the system state when hibernating.
+- **C:\Windows\Prefetch**: Contains prefetch files to speed up the loading time of applications.
+- **C:\Windows\WinSxS**: Stores multiple versions of system files (side-by-side assemblies) to support applications with different dependencies.
+
+## Active Directory
+
+Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. It is a critical component in managing and securing enterprise environments.
+
+Active Directory is designed to handle the management of users, computers, and other devices within a network. It provides a centralized and standardized system for network administration and security, making it easier to manage complex IT environments.
+
+### Key Features
+
+1. **Centralized Management**: Allows administrators to manage all network resources from a single location.
+2. **Authentication and Authorization**: Provides mechanisms for authenticating and authorizing users and computers within a domain.
+3. **Group Policy**: Enables administrators to implement specific configurations for users and computers across the network.
+4. **Scalability**: Supports millions of objects in a single domain, making it suitable for large organizations.
+5. **Replication**: Ensures that data is consistently available across multiple domain controllers, providing fault tolerance and redundancy.
+6. **Organizational Units (OUs)**: Allows for a hierarchical organization of resources, making it easier to apply policies and delegate administrative tasks.
+
+### Components
+
+1. **Domain**: The core unit of AD, a domain is a collection of objects such as users, groups, and devices.
+2. **Domain Controllers**: Servers that host AD services and store directory data, responsible for authentication and authorization.
+3. **Forest**: A collection of one or more domains that share a common schema and global catalog.
+4. **Schema**: Defines the structure of directory objects and the types of data they can contain.
+5. **Global Catalog**: A distributed data repository that contains a searchable, partial representation of every object in every domain within a forest.
+
+### Benefits
+
+- **Security**: Enhances network security through centralized control of authentication and access permissions.
+- **Efficiency**: Simplifies user and resource management, reducing administrative overhead.
+- **Consistency**: Ensures consistent application of policies and settings across the network.
+- **Integration**: Seamlessly integrates with other Microsoft products and services, as well as third-party applications.
+
+### Common Uses
+
+- **User and Group Management**: Creating, modifying, and deleting user accounts and groups.
+- **Access Control**: Assigning permissions and access rights to resources such as files, folders, and applications.
+- **Policy Enforcement**: Applying group policies to enforce security settings, software installations, and other configurations.
+- **Directory Services**: Providing directory services for locating network resources and managing information about network objects.
