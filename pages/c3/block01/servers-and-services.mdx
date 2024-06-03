@@ -1,0 +1,149 @@
+# Servers and Services
+
+## What is a Server
+
+A server is a computer or software system that provides services or resources to other computers, known as clients, over a network. Servers can offer a wide range of functionalities, such as hosting websites, storing files, managing databases, or providing network services.
+
+Any computer can be turned into a server by installing server software and configuring it to provide specific services. Servers are designed to be reliable, secure, and scalable to handle multiple client requests simultaneously.
+
+## Types of Servers
+
+### Web Servers
+
+A web server is a server that hosts websites and serves web pages to clients over the internet or a local network. Web servers use HTTP (Hypertext Transfer Protocol) to communicate with web browsers and deliver web content to users.
+Popular web servers include Apache, Nginx, and Microsoft Internet Information Services (IIS). These servers can host static web pages, dynamic websites, web applications, and APIs.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| HTTP, HTTPS         | 80, 443      | Web Hosting     |
+
+### File Servers
+
+A file server is a server that stores and manages files for clients on a network. File servers allow users to access and share files, documents, and media over a network connection. They provide centralized storage and backup solutions for organizations and facilitate collaboration among users.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| FTP, SFTP, NFS      | 21, 22, 2049 | File Sharing    |
+
+### Database Servers
+
+A database server is a server that hosts databases and manages data storage, retrieval, and processing. Database servers store structured data in tables and provide access to databases through query languages like SQL (Structured Query Language). They are used to store and manage large volumes of data for applications, websites, and business operations.
+
+| Common Applications | Common Ports | Common Services  |
+| ------------------- | ------------ | ---------------- |
+| MySQL, PostgreSQL   | 3306, 5432   | Database Hosting |
+
+### Mail Servers
+
+A mail server is a server that handles email communication between clients over a network. Mail servers send, receive, and store email messages and manage user mailboxes. They use protocols like SMTP (Simple Mail Transfer Protocol) and IMAP (Internet Message Access Protocol) to deliver and retrieve email messages.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| SMTP, IMAP, POP3    | 25, 143, 110 | Email Hosting   |
+
+### Proxy Servers
+
+A proxy server is a server that acts as an intermediary between clients and other servers on the internet. Proxy servers can provide security, privacy, and performance benefits by caching content, filtering web traffic, and masking client IP addresses. They are commonly used to control access to websites, improve network performance, and protect client devices from malicious content.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| Squid, Nginx        | 3128, 8080   | Web Filtering   |
+
+### Application Servers
+
+An application server is a server that hosts and executes applications or software services for clients over a network. Application servers provide a runtime environment for applications to run and interact with databases, web servers, and other services. They are used to deploy web applications, APIs, and business software that require server-side processing.
+
+| Common Applications | Common Ports | Common Services  |
+| ------------------- | ------------ | ---------------- |
+| Tomcat, JBoss       | 8080, 8443   | Web Applications |
+
+### DNS Servers
+
+A DNS (Domain Name System) server is a server that translates domain names into IP addresses and vice versa. DNS servers resolve domain names to their corresponding IP addresses, allowing clients to access websites and services using human-readable names. They are essential for navigating the internet and locating resources on the web.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| Bind, Unbound       | 53           | DNS Resolution  |
+
+### DHCP Servers
+
+A DHCP (Dynamic Host Configuration Protocol) server is a server that automatically assigns IP addresses and network configuration settings to clients on a network. DHCP servers manage IP address allocation, subnet masks, default gateways, and DNS server addresses for client devices. They simplify network configuration and ensure that devices can connect to the network without manual configuration.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| ISC DHCP Server     | 67, 68       | IP Addressing   |
+
+### Print Servers
+
+A print server is a server that manages and controls printing services for clients on a network. Print servers receive print jobs from clients, queue them for printing, and send them to network printers or multifunction devices. They centralize print management, provide print job monitoring, and enable users to share printers across the network.
+
+| Common Applications | Common Ports | Common Services  |
+| ------------------- | ------------ | ---------------- |
+| CUPS, Windows Print | 631, 9100    | Print Management |
+
+### Media Servers
+
+A media server is a server that stores, organizes, and streams multimedia content to clients over a network. Media servers host music, videos, photos, and other media files for users to access and enjoy on various devices. They provide media sharing, transcoding, and streaming capabilities to deliver content to smart TVs, game consoles, and mobile devices.
+
+| Common Applications | Common Ports | Common Services |
+| ------------------- | ------------ | --------------- |
+| Plex, Emby          | 32400        | Media Streaming |
+
+## Server Management
+
+### Server Operating Systems
+
+Server operating systems are specialized versions of operating systems designed to run on servers and provide server-specific functionalities. These operating systems are optimized for performance, reliability, and security to support server workloads and services.
+
+Common server operating systems include:
+
+- **Linux**: Popular distributions like Ubuntu, CentOS, and Debian are widely used for web servers, file servers, and database servers.
+- **Windows Server**: Microsoft's server operating system offers support for Active Directory, IIS, and other Microsoft services.
+- **macOS Server**: Apple's server operating system provides services like file sharing, Time Machine backups, and device management.
+
+### Server Hardware
+
+Server hardware refers to the physical components of a server system, including the server chassis, motherboard, CPU, memory, storage devices, network interfaces, and power supplies. Server hardware is designed for reliability, performance, and scalability to meet the demands of server workloads.
+
+Key considerations for server hardware include:
+
+- **Processor**: Multi-core CPUs with high clock speeds for processing power.
+- **Memory**: Sufficient RAM for running applications and services.
+- **Storage**: Fast and reliable storage devices like SSDs or HDDs for data storage.
+- **Network Interfaces**: Gigabit or 10 Gigabit Ethernet ports for network connectivity.
+- **Redundancy**: Redundant power supplies, RAID storage, and network connections for fault tolerance.
+
+### Server Virtualization
+
+Server virtualization is the process of running multiple virtual servers on a single physical server to maximize resource utilization and improve server efficiency. Virtualization software, known as hypervisors, creates and manages virtual machines (VMs) that run independent operating systems and applications.
+
+Benefits of server virtualization include:
+
+- **Resource Consolidation**: Run multiple virtual servers on a single physical server.
+- **Isolation**: Isolate applications and services in separate virtual machines.
+- **Resource Allocation**: Allocate CPU, memory, and storage resources to virtual machines.
+- **High Availability**: Migrate virtual machines between physical servers for fault tolerance.
+
+### Server Security
+
+Server security involves implementing measures to protect servers from unauthorized access, data breaches, malware, and other security threats. Security practices include configuring firewalls, applying security patches, using encryption, and monitoring server activity for suspicious behavior.
+
+Key aspects of server security include:
+
+- **Firewalls**: Control network traffic and filter incoming and outgoing connections.
+- **Access Control**: Restrict user access to servers and services based on permissions.
+- **Encryption**: Secure data in transit and at rest using encryption protocols.
+- **Security Updates**: Apply software patches and updates to fix security vulnerabilities.
+- **Monitoring**: Monitor server logs, network traffic, and system activity for security incidents.
+
+### Server Backup and Recovery
+
+Server backup and recovery strategies involve creating copies of server data and configurations to protect against data loss, system failures, and disasters. Backup solutions store data on separate storage devices or cloud services and enable administrators to restore servers to a previous state in case of data corruption or hardware failures.
+
+Common backup and recovery methods include:
+
+- **Full Backup**: Copy all server data and configurations to a backup storage device.
+- **Incremental Backup**: Back up changes made since the last full or incremental backup.
+- **Offsite Backup**: Store backup copies in a remote location for disaster recovery.
+- **Snapshot**: Capture the state of a server at a specific point in time for quick recovery.
+- **Recovery Plan**: Document procedures for restoring servers and data in case of failures.

@@ -358,7 +358,8 @@
     {
       "label": "Internet Protocol and ICMP",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/internet-protocol-and-icmp"
     },
     {
       "label": "Break",
@@ -368,7 +369,8 @@
     {
       "label": "TCP and UDP",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/tcp-and-udp"
     },
     {
       "label": "Break",
@@ -386,9 +388,10 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Servers and Services",
+      "label": "Processes and Services",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/processes-and-services"
     },
     {
       "label": "Break",
@@ -396,9 +399,10 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Connecting to Services",
+      "label": "Network Administration",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/network-administration"
     },
     {
       "label": "Office Hours",
@@ -413,9 +417,10 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
-      "label": "Network Admin-istration",
+      "label": "Servers and Services",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/servers-and-services"
     },
     {
       "label": "Break",
@@ -423,18 +428,8 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Administrative Command Challenge",
-      "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
-    },
-    {
-      "label": "Wireshark Packet Capture Lab",
-      "length": 4,
+      "label": "Connecting to and Managing Processes and Services Lab",
+      "length": 9,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
@@ -1006,7 +1001,7 @@
     },
     {
       "label": "Final Grades, Feedback, and Certificates",
-      "length": 5,
+      "length": 13,
       "className": "dark:bg-orange-700 bg-orange-300 text-xs p-1"
     }
   ]

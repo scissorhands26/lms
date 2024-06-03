@@ -1,0 +1,78 @@
+# Processes and Services
+
+## What is a Process
+
+A process is an instance of a running program on a computer system, managed by the operating system.
+
+- **Definition**: A process is an instance of a running program on a computer system.
+- **Managed by the OS**: Processes are managed by the operating system, which allocates resources and controls their execution.
+- **Unique Identifier**: Each process has a unique process ID (PID) assigned by the operating system.
+- **States**: Processes can be in various states, such as running, sleeping, or terminated.
+- **Process Management**: Administrators can manage processes by starting, stopping, pausing, or monitoring them.
+
+## What is a Service
+
+A service is a background process that runs continuously to provide specific functionality on a computer system.
+
+- **Definition**: A service is a background process that runs continuously to provide specific functionality.
+- **Managed by the OS**: Services are managed by the operating system and can start automatically when the system boots.
+- **Examples**: Services can include web servers, database servers, network services, and system utilities.
+- **Control and Monitoring**: Administrators can control and monitor services using tools provided by the operating system.
+- **Service Management**: Services can be started, stopped, restarted, or configured to run with specific settings.
+
+## Key Differences
+
+| Processess                                                | Services                                                              |
+| --------------------------------------------------------- | --------------------------------------------------------------------- |
+| Instances of running programs.                            | Background processes that provide specific functionality.             |
+| Managed by the operating system.                          | Managed by the operating system.                                      |
+| Have unique process IDs (PIDs).                           | Can start automatically when the system boots.                        |
+| Can be in various states (running, sleeping, terminated). | Examples include web servers, database servers, and network services. |
+| Managed by administrators to control execution.           | Controlled and monitored by administrators using system tools.        |
+
+## Managing Processes
+
+### Linux Procesess
+
+- **Viewing Processes**: Use the `ps` command to view information about running processes.
+- **Process States**: Processes can be in various states, such as running, sleeping, or terminated.
+- **Process IDs**: Each process has a unique process ID (PID) assigned by the operating system.
+- **Process Management**: Administrators can manage processes by starting, stopping, pausing, or monitoring them.
+
+### Windows Processes
+
+- **Task Manager**: Use the `tasklist` and `taskkill` commands to manage processes from the command line.
+- **Process States**: Processes can be running, suspended, or terminated.
+- **Process IDs**: Each process has a unique process ID (PID) assigned by the operating system.
+- **Process Management**: Administrators can manage processes by starting, stopping, or terminating them.
+
+## Managing Services
+
+### Linux Services
+
+- **Service Management**: Use tools like `systemd` or `service` to manage services on Linux.
+- **Starting and Stopping Services**: Services can be started, stopped, or restarted as needed.
+- **Configuring Services**: Administrators can configure services to run with specific settings or parameters.
+- **Monitoring Services**: Monitor service status and performance to ensure they are running correctly.
+
+### Windows Services
+
+- **Service Management**: Use the Services console or `sc` command to manage services on Windows.
+- **Starting and Stopping Services**: Services can be started, stopped, or restarted as needed.
+- **Configuring Services**: Administrators can configure services to run automatically or manually.
+- **Monitoring Services**: Monitor service status and performance using the Services console or Event Viewer.
+
+## Command List
+
+Commands are essential for managing and troubleshooting systems. The table below compares key Linux and Windows commands for processes, connections, and settings. Mastering these commands ensures efficient system management.
+| **Description** | **Linux** | **Windows (CLI)** | **Windows (PowerShell)** |
+| --------------------------------------- | ------------------------ | ------------------------------- | ------------------------------- |
+| List running processes | `ps -elf` | `tasklist /svc` | `Get-Process` |
+| Start a service | `systemctl start <service>` | `net start <service>` | `Start-Service <service>` |
+| Stop a service | `systemctl stop <service>` | `net stop <service>` | `Stop-Service <service>` |
+| Restart a service | `systemctl restart <service>` | `net stop <service> & net start <service>` | `Restart-Service <service>` |
+| List services | `systemctl list-units --type=service` | `sc query` | `Get-Service` |
+| Enable a service | `systemctl enable <service>` | `sc config <service> start=auto` | `Set-Service -StartupType Automatic` |
+| Disable a service | `systemctl disable <service>` | `sc config <service> start=demand` | `Set-Service -StartupType Manual` |
+| Check service status | `systemctl status <service>` | `sc query <service>` | `Get-Service <service>` |
+| Check service dependencies | `systemctl show <service> -p Requires` | `sc qc <service>` | `Get-Service <service>` | `Select-Object -ExpandProperty ServicesDependedOn` |
