@@ -11,7 +11,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [active, setActive] = useState<boolean>(false);
-  const [intance, setInstance] = useState<any>(null);
+  const [instance, setInstance] = useState<any>(null);
   const [owner, setOwner] = useState<any>(null);
   const [exerciseId, setExerciseId] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
@@ -34,32 +34,24 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   }, []);
 
   async function getActiveSession() {
-    // javascript code to get current time plus 30 minutes
     var currentTime = new Date();
     var minutes = 30;
     currentTime.setMinutes(currentTime.getMinutes() + minutes);
     var time = currentTime.toISOString();
     time = time.replace("T", " ");
     time = time.replace("Z", "");
-    console.log(time);
 
     try {
       var fetchURL = `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/sessions/records?filter=(owner="${user.id}")&&(expires<"${time}")`;
-      console.log(fetchURL);
       const response = await fetch(fetchURL);
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
       const json = await response.json();
       if (json.items && json.items.length > 0) {
-        console.log(json.items[0]);
-        console.log(
-          `password: ${json.items[0].password} command: ${json.items[0].command}`,
-        );
         setActive(true);
         setData(json.items[0]);
       }
-      console.log(json);
     } catch (error: any) {
       setError(error.message || "Failed to fetch data");
       setData(null);
@@ -67,43 +59,35 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   }
 
   async function launchSession(exercise_id: string, owner: string) {
-    console.log("Launching session");
     setLoading(true);
-
     try {
       var body = { owner: "nu2udn80polbnp0" };
-      console.log(body);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_CONTAINER_URL}/containers/${exercise_id}?owner=${owner}`,
         {
           method: "POST",
-          // mode: "no-cors",
           headers: {
             accept: "application/json",
           },
         },
       );
 
-      console.log(response);
       if (!response.ok) {
-        console.log("response not ok");
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
       const json = await response.json();
-      console.log(json);
       setData(json);
       setActive(true);
-      setLoading(false);
     } catch (error: any) {
       setError(error.message || "Failed to fetch data");
       setData(null);
       setActive(false);
+    } finally {
       setLoading(false);
     }
   }
 
   async function stopSession(exercise_id: string) {
-    console.log("Stopping session");
     setLoading(true);
     try {
       const response = await fetch(
@@ -116,27 +100,21 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
         },
       );
 
-      console.log(response);
       if (!response.ok) {
-        console.log("response not ok");
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
-      const json = await response.json();
-      console.log(json);
-      setData(json);
+      setData(null);
       setActive(false);
-      setLoading(false);
     } catch (error: any) {
       setError(error.message || "Failed to fetch data");
       setData(null);
-      setActive(false);
+    } finally {
       setLoading(false);
     }
   }
 
   async function launchOrGetSession() {
     if (active) {
-      console.log("Getting active session");
       getActiveSession();
     } else {
       launchSession("exercise01", user.id);
@@ -156,23 +134,27 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
             </Button>
           ) : (
             <Button onClick={launchOrGetSession} disabled={loading}>
-              {loading ? "Loading..." : "Launch instance"}
+              {loading && !active
+                ? "Launching..."
+                : loading && active
+                  ? "Shutting down..."
+                  : "Launch instance"}
             </Button>
           )}
         </div>
         {error && <p className="mt-2 text-red-500">{error}</p>}
-        {!active && loading ? (
+        {loading ? (
           <div className="mt-4 rounded border border-white p-2">
             <Skeleton className="mb-2 h-[72px] w-full rounded" />
             <Skeleton className="h-[72px] w-full rounded" />
           </div>
         ) : null}
-        {active && (
+        {active && !loading ? (
           <div className="mt-4 rounded border border-white p-2">
             <QuickCopy snippet={data.command} title="Command" />
             <QuickCopy snippet={data.password} title="Password" />
           </div>
-        )}
+        ) : null}
       </CardContent>
     </Card>
   );
