@@ -19,10 +19,12 @@ export default function LoginPage() {
     const formData = new FormData(event.currentTarget);
     const response = await handleLogin(formData);
 
+    console.log(response);
+
     if (response?.error) {
       setError(response.error);
     } else {
-      window.location.href = "/c3"; // Ensure navigation to the dashboard
+      redirect("/c3");
     }
   }
 
