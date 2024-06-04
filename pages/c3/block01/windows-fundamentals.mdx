@@ -136,6 +136,49 @@ The Windows file system is organized into a hierarchical directory structure, wi
 - **C:\Windows\Prefetch**: Contains prefetch files to speed up the loading time of applications.
 - **C:\Windows\WinSxS**: Stores multiple versions of system files (side-by-side assemblies) to support applications with different dependencies.
 
+## Windows Registry
+
+The Windows Registry is a hierarchical database that stores configuration settings and options for the Windows operating system and installed applications. The Registry is organized into keys, subkeys, and values, similar to a file system. It is used to store information about hardware, software, user preferences, and system settings.
+
+### Key Components
+
+1. **Hives**: The Registry is divided into hives, which are logical groupings of keys and values. The main hives are:
+   - **HKEY_CLASSES_ROOT**: Contains file association information and OLE object class information
+   - **HKEY_CURRENT_USER**: Contains settings for the current user
+   - **HKEY_LOCAL_MACHINE**: Contains settings for all users on the local machine
+   - **HKEY_USERS**: Contains settings for all user profiles on the machine
+   - **HKEY_CURRENT_CONFIG**: Contains information about the current hardware profile
+2. **Keys**: Represent folders in the Registry hierarchy and contain subkeys and values.
+3. **Subkeys**: Nested within keys and can contain additional subkeys or values.
+4. **Values**: Store data associated with keys and subkeys, such as configuration settings or preferences.
+
+### Common Registry Paths
+
+- **HKEY_LOCAL_MACHINE\SOFTWARE**: Contains software-related configuration settings.
+- **HKEY_LOCAL_MACHINE\SYSTEM**: Stores system-related configuration settings.
+- **HKEY_CURRENT_USER\SOFTWARE**: Contains user-specific software settings.
+- **HKEY_CURRENT_USER\Control Panel\Desktop**: Stores desktop-related settings.
+- **HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run**: Contains programs that run at startup.
+- **HKEY_CLASSES_ROOT**: Contains file association information and OLE object class information.
+- **HKEY_USERS**: Contains settings for all user profiles on the machine.
+- **HKEY_CURRENT_CONFIG**: Contains information about the current hardware profile.
+
+### Common Registry Values
+
+- **REG_SZ**: String value.
+- **REG_DWORD**: Double word value (32-bit integer).
+- **REG_BINARY**: Binary value.
+- **REG_MULTI_SZ**: Multi-string value.
+- **REG_EXPAND_SZ**: Expandable string value.
+
+### Important Registry Keys
+
+- **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run**: Programs that run at startup for all users.
+- **HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run**: Programs that run at startup for the current user.
+- **HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services**: Information about system services.
+- **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon**: User login settings.
+- **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList**: User profile information.
+
 ## Active Directory
 
 Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. It is a critical component in managing and securing enterprise environments.
