@@ -184,6 +184,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Course and Student Introduction",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -205,7 +210,7 @@
     },
     {
       "label": "CNMF Work-Roles",
-      "length": 4,
+      "length": 3,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
@@ -241,6 +246,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "TCP/IP & OSI Model",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
@@ -255,11 +265,6 @@
       "label": "ARP, MAC, IP Addresses",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Resolving IP Addresses Exercise",
@@ -299,6 +304,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Routers and Access Points",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -314,12 +324,7 @@
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
     },
     {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
-    },
-    {
-      "label": "Subnetting and CIDR Hands-On",
+      "label": "Subnetting and CIDR Worksheet",
       "length": 4,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
@@ -356,6 +361,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Internet Protocol and ICMP",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
@@ -371,11 +381,6 @@
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
       "link": "/c3/block01/tcp"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Wireshark Exercise",
@@ -417,15 +422,15 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Servers and Services",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
       "link": "/c3/block01/servers-and-services"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Connecting to and Managing Processes and Services Lab",
@@ -465,6 +470,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Mail and FTP Protocols",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -476,7 +486,7 @@
     },
     {
       "label": "Mail and FTP Simulation",
-      "length": 4,
+      "length": 3,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
@@ -522,6 +532,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Encryption Part 1",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -535,11 +550,6 @@
       "label": "Encryption Part 2",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Encryptng Files Exercise",
@@ -579,6 +589,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "DNS Overview and DHCP",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -592,11 +607,6 @@
       "label": "DNS Records",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "DNS Resolution Exercise",
@@ -636,6 +646,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Network Security",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -656,8 +671,8 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Guided Network Mapping",
-      "length": 4,
+      "label": "Network Mapping Demo",
+      "length": 3,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
     {
@@ -683,6 +698,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "IPv6",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -697,11 +717,6 @@
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
       "link": "/c3/block01/windows-fundamentals"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Windows Survey Exercise",
@@ -741,6 +756,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Malware",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -754,11 +774,6 @@
       "label": "Attacks and Malicious Activity",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Malware Analysis Lab",
@@ -798,6 +813,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Advanced Routing Concepts",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -811,11 +831,6 @@
       "label": "Enterprise Routing Protocols",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Advanced Routing Scenarios",
@@ -845,6 +860,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Routing Configuration Part 1",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -858,11 +878,6 @@
       "label": "Routing Configuration Part 2",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Routing Configuration Lab",
@@ -902,14 +917,14 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Network Mapping Three (Router Configuration)",
       "length": 9,
       "className": "dark:bg-purple-700 bg-purple-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "VPNs, VPSs, and TOR",
@@ -944,6 +959,11 @@
       "className": "dark:bg-gray-700 bg-gray-300 p-4"
     },
     {
+      "label": "Quiz",
+      "length": 1,
+      "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
+    },
+    {
       "label": "Logic and Databases",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
@@ -957,11 +977,6 @@
       "label": "Scripting and Automation",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
-    },
-    {
-      "label": "Break",
-      "length": 1,
-      "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
       "label": "Optional Exercises / Office Hours",

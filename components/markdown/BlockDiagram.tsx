@@ -33,7 +33,11 @@ function Block({
     <div
       style={{
         gridColumn: `span ${length} / span ${length}`,
-        ...(label === "Break" ? { writingMode: "vertical-rl" } : {}),
+        ...(label === "Break"
+          ? { writingMode: "vertical-rl" }
+          : label === "Quiz"
+            ? { writingMode: "vertical-rl" }
+            : {}),
       }}
       className={`flex items-center justify-center border border-black text-center text-black dark:text-white ${className}`}
     >
