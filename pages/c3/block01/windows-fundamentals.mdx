@@ -56,6 +56,8 @@ Windows has evolved over the years, with each version introducing new features, 
 | Windows 10      | NT     | 10.0           | Released in 2015, offered a unified platform across devices, regular updates, and introduced features like Cortana and the Edge browser. |
 | Windows 11      | NT     | 10.0           | Released in 2021, introduced a redesigned interface, new productivity features, and improved performance and security.                   |
 
+You can find your Windows version by running the `winver` command in the Command Prompt or PowerShell.
+
 ## Common Windows Processes
 
 Understanding common Windows processes is essential for analysts make decisions about what is legitimate and what may be malicious. Here are some key Windows processes and their descriptions:
@@ -80,6 +82,8 @@ Understanding common Windows processes is essential for analysts make decisions 
 | `ctfmon.exe`          | `C:\Windows\System32\` | The CTF Loader process, responsible for managing the Alternative User Input and the Office Language bar.       |
 | `SearchIndexer.exe`   | `C:\Windows\System32\` | The Windows Search Indexer, responsible for indexing files for faster search.                                  |
 | `wininit.exe`         | `C:\Windows\System32\` | The Windows Initialization process, which initializes system services during startup.                          |
+
+You can list running processes the `tasklist` command in the Command Prompt or `Get-Process` in PowerShell.
 
 ### Important Points for Analysts
 
@@ -106,6 +110,8 @@ Understanding common Windows services is essential for analysts make decisions a
 | **Group Policy Client**                | `gpsvc`        | Applies Group Policy settings for users and computers.                                           |
 | **Windows Event Log**                  | `svchost.exe`  | Manages events and event logs, providing a centralized way to monitor and analyze system events. |
 | **Windows Management Instrumentation** | `Winmgmt`      | Provides management information and control in an enterprise environment.                        |
+
+You can list running services using the `services.msc` command in the Run dialog or `Get-Service` in PowerShell.
 
 ## Windows File System
 
@@ -198,6 +204,8 @@ The Windows Registry is a hierarchical database that stores configuration settin
 - **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon**: User login settings.
 - **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList**: User profile information.
 
+You can query the Registry using the `reg` command from the Command Prompt or `Get-Item` in PowerShell.
+
 ## Windows Logging
 
 Windows provides a variety of logging mechanisms to help administrators and analysts monitor system events, troubleshoot issues, and identify security incidents. Understanding Windows logging tools, log files, and logging locations, can help make sense of system activity.
@@ -287,3 +295,5 @@ Active Directory is designed to handle the management of users, computers, and o
 - **Access Control**: Assigning permissions and access rights to resources such as files, folders, and applications.
 - **Policy Enforcement**: Applying group policies to enforce security settings, software installations, and other configurations.
 - **Directory Services**: Providing directory services for locating network resources and managing information about network objects.
+
+You can interact with Active Directory using tools such as Active Directory Users and Computers (`dsa.msc`), Active Directory Administrative Center (`dsac.exe`), and PowerShell cmdlets like `Get-ADUser`, `New-ADUser`, and `Get-ADGroup`.
