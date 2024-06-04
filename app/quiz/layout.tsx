@@ -12,7 +12,7 @@ import {
 import { BookOpen, Search } from "lucide-react";
 import { NavLinks } from "@/components/admin/NavLinks";
 
-export default function AdminLayout({
+export default function QuizLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (

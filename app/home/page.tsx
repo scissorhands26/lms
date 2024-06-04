@@ -23,6 +23,28 @@ export default async function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/quiz">
+          <Card>
+            <CardHeader>
+              <CardTitle>Quizzes</CardTitle>
+              <CardDescription>Take a Quiz</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Click Here</p>
+            </CardContent>
+          </Card>
+        </Link>
+        <Link href="/exam">
+          <Card>
+            <CardHeader>
+              <CardTitle>Exams</CardTitle>
+              <CardDescription>Take an Exam</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Click Here</p>
+            </CardContent>
+          </Card>
+        </Link>
         <Link href="/admin/dashboard">
           <Card>
             <CardHeader>
