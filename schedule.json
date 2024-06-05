@@ -191,7 +191,8 @@
     {
       "label": "Course and Student Introduction",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/course-and-student-introduction"
     },
     {
       "label": "Break",
@@ -201,7 +202,8 @@
     {
       "label": "CNMF ORG Structure",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/cnmf-org-structure"
     },
     {
       "label": "Break",
@@ -211,7 +213,8 @@
     {
       "label": "CNMF Work-Roles",
       "length": 3,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/cnmf-work-roles"
     },
     {
       "label": "Lunch",
@@ -221,7 +224,8 @@
     {
       "label": "MITRE ATT&CK Framework",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/mitre"
     },
     {
       "label": "Break",
@@ -231,7 +235,8 @@
     {
       "label": "ATP TTP Analysis",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/apt-ttp-analysis"
     },
     {
       "label": "Office Hours",
@@ -264,7 +269,8 @@
     {
       "label": "ARP, MAC, IP Addresses",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/arp-mac-and-ip-addresses"
     },
     {
       "label": "Resolving IP Addresses Exercise",
@@ -279,7 +285,8 @@
     {
       "label": "Bridges, Switches, and Modems",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/bridges-switches-and-modems"
     },
     {
       "label": "Break",
@@ -477,7 +484,8 @@
     {
       "label": "Mail and FTP Protocols",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/mail-and-ftp-protocols"
     },
     {
       "label": "Break",
@@ -497,7 +505,8 @@
     {
       "label": "Web and Remote Access",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/web-and-remote-access"
     },
     {
       "label": "Lunch",
@@ -731,7 +740,8 @@
     {
       "label": "Linux Fundamentals",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/linux-fundamentals"
     },
     {
       "label": "Break",

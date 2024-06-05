@@ -11,9 +11,8 @@ export default function InstructorTip({ tip }: { tip: string }) {
       setUser(currentUser);
 
       if (
-        currentUser?.expand?.roles?.some(
-          (role: any) => role.name === "instructor",
-        )
+        currentUser?.expand?.roles?.name === "instructor" ||
+        currentUser?.expand?.roles?.name === "admin"
       ) {
         setIsInstructor(true);
       }
