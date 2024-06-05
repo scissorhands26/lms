@@ -318,7 +318,8 @@
     {
       "label": "Routers and Access Points",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/routers-and-access-points"
     },
     {
       "label": "Break",
@@ -328,7 +329,8 @@
     {
       "label": "Subnetting and CIDR",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/subnetting-and-cidr"
     },
     {
       "label": "Subnetting and CIDR Worksheet",
@@ -343,7 +345,8 @@
     {
       "label": "Network Topology",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block01/network-topology"
     },
     {
       "label": "Break",
@@ -662,7 +665,8 @@
     {
       "label": "Network Security",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/network-security"
     },
     {
       "label": "Break",
@@ -672,7 +676,8 @@
     {
       "label": "Network Mapping",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/network-mapping"
     },
     {
       "label": "Break",
@@ -714,7 +719,8 @@
     {
       "label": "IPv6",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/ipv6"
     },
     {
       "label": "Break",
@@ -725,7 +731,7 @@
       "label": "Windows Fundamentals",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
-      "link": "/c3/block01/windows-fundamentals"
+      "link": "/c3/block02/windows-fundamentals"
     },
     {
       "label": "Windows Survey Exercise",
