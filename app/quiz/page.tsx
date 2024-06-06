@@ -13,8 +13,8 @@ export default async function Quiz() {
   const pb = await getPb();
 
   const unlockedQuizzes = await pb.collection("quiz_attempts").getFullList({
-    filter: `user = "${pb.authStore.model.id}" && submitted = false`,
-    expand: "quiz",
+    filter: `user = "${pb.authStore.model.id}" && submitted = false && expired = false`,
+    expand: "quiz,quiz.questions",
   });
 
   const now = new Date();
@@ -54,7 +54,7 @@ export default async function Quiz() {
               <CardTitle>{quiz.expand.quiz.name}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Questions: {quiz.expand.quiz.questions}</p>
+              <p>Questions: {quiz.expand.quiz.questions.length}</p>
               <p>Time: {formatTime(quiz.expand.quiz.time_allowed)}</p>
             </CardContent>
             <CardFooter>

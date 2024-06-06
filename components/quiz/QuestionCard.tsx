@@ -1,22 +1,42 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { submitQuiz } from "@/app/quiz/actions";
+import { submitQuiz, updateAnswerInDB } from "@/app/quiz/actions";
 
-export default function QuestionCard({ questions, attempt }: any) {
+export default function QuestionCard({ questions, attempt, answers }: any) {
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [timeRemaining, setTimeRemaining] = useState(attempt.time_remaining);
+  const [timeRemaining, setTimeRemaining] = useState(
+    attempt.expand.quiz.time_allowed,
+  );
+  const router = useRouter();
+
+  useEffect(() => {
+    // Initialize the selectedAnswers state with existing answers
+    const initialAnswers = {};
+    answers.forEach((answer) => {
+      initialAnswers[answer.question] = answer.answer;
+    });
+    setSelectedAnswers(initialAnswers);
+    calculateTimeLeft(
+      attempt.expand.quiz.time_allowed,
+      timeRemaining,
+      attempt.created,
+    );
+  }, [answers]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeRemaining((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
+          handleExpiredQuiz(selectedAnswers); // Submit the quiz (time expired
+          router.push("/quiz/expired"); // Redirect to the root page
           return 0;
         }
         return prevTime - 1;
@@ -24,52 +44,69 @@ export default function QuestionCard({ questions, attempt }: any) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [router]);
 
-  const formatTime = (seconds) => {
+  function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-  };
+  }
 
-  const handleAnswerSelect = (questionId, answer, isMultiSelect = false) => {
+  function calculateTimeLeft(time_allowed, timeRemaining, attempt_started) {
+    const timeElapsed = Math.floor(
+      (new Date() - new Date(attempt_started)) / 1000,
+    );
+    const timeLeft = time_allowed - timeElapsed;
+    setTimeRemaining(timeLeft);
+  }
+
+  const handleAnswerSelect = (question, answer, isMultiSelect = false) => {
     setSelectedAnswers((prevState) => {
+      let newState;
       if (isMultiSelect) {
-        const updatedAnswers = prevState[questionId] || [];
+        const updatedAnswers = prevState[question.id] || [];
         const index = updatedAnswers.indexOf(answer);
         if (index !== -1) {
-          // If the answer is already selected, remove it
           updatedAnswers.splice(index, 1);
         } else {
           updatedAnswers.push(answer);
         }
-        return {
+        newState = {
           ...prevState,
-          [questionId]: updatedAnswers,
+          [question.id]: updatedAnswers,
         };
       } else {
-        return {
+        newState = {
           ...prevState,
-          [questionId]: answer,
+          [question.id]: [answer], // Ensure single answer is stored as an array
         };
       }
+
+      // Call the database update function after the state is updated
+      saveAnswerToDB(attempt, question, newState[question.id]);
+
+      return newState;
     });
   };
 
-  const handleSubmitQuiz = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
+  async function saveAnswerToDB(attempt, question, answerArray) {
+    try {
+      await updateAnswerInDB(attempt, question, answerArray);
+    } catch (error) {
+      console.error("Error saving answer:", error);
+    }
+  }
 
-    Object.entries(selectedAnswers).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        value.forEach((v) => formData.append(key, v));
-      } else {
-        formData.append(key, value);
-      }
-    });
+  async function handleExpiredQuiz(answers) {
+    // Submit the quiz (time expired)
+    await submitQuiz(attempt, answers);
+    router.push("/quiz/expired");
+  }
 
-    await submitQuiz(formData);
-  };
+  async function handleSubmitQuiz(answers) {
+    await submitQuiz(attempt, answers);
+    router.push("/quiz/submitted");
+  }
 
   return (
     <div>
@@ -85,31 +122,7 @@ export default function QuestionCard({ questions, attempt }: any) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {question.type === "multiple-choice" && (
-                <div className="space-y-2">
-                  {question.options.map((option) => (
-                    <div
-                      key={option}
-                      className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                        selectedAnswers[question.id] === option
-                          ? "bg-gray-100 dark:bg-gray-800"
-                          : ""
-                      }`}
-                      onClick={() => handleAnswerSelect(question.id, option)}
-                    >
-                      <Checkbox
-                        className="rounded-full"
-                        checked={selectedAnswers[question.id] === option}
-                        onCheckedChange={() =>
-                          handleAnswerSelect(question.id, option)
-                        }
-                      />
-                      <span>{option}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {question.type === "select-all" && (
+              {question.expand.type.type === "multiple-choice" && (
                 <div className="space-y-2">
                   {question.options.map((option) => (
                     <div
@@ -119,16 +132,14 @@ export default function QuestionCard({ questions, attempt }: any) {
                           ? "bg-gray-100 dark:bg-gray-800"
                           : ""
                       }`}
-                      onClick={() =>
-                        handleAnswerSelect(question.id, option, true)
-                      }
                     >
                       <Checkbox
+                        className="rounded-full"
                         checked={(selectedAnswers[question.id] || []).includes(
                           option,
                         )}
                         onCheckedChange={() =>
-                          handleAnswerSelect(question.id, option, true)
+                          handleAnswerSelect(question, option)
                         }
                       />
                       <span>{option}</span>
@@ -136,61 +147,72 @@ export default function QuestionCard({ questions, attempt }: any) {
                   ))}
                 </div>
               )}
-              {question.type === "fill-in-the-blank" && (
+              {question.expand.type.type === "select-all" && (
+                <div className="space-y-2">
+                  {question.options.map((option) => (
+                    <div
+                      key={option}
+                      className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                        (selectedAnswers[question.id] || []).includes(option)
+                          ? "bg-gray-100 dark:bg-gray-800"
+                          : ""
+                      }`}
+                    >
+                      <Checkbox
+                        checked={(selectedAnswers[question.id] || []).includes(
+                          option,
+                        )}
+                        onCheckedChange={() =>
+                          handleAnswerSelect(question, option, true)
+                        }
+                      />
+                      <span>{option}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {question.expand.type.type === "fill-in-the-blank" && (
                 <div className="space-y-2">
                   <Input
-                    value={selectedAnswers[question.id] || ""}
+                    value={selectedAnswers[question.id]?.[0] || ""}
                     onChange={(e) =>
-                      handleAnswerSelect(question.id, e.target.value)
+                      handleAnswerSelect(question, e.target.value)
                     }
                     placeholder="Enter your answer"
                   />
                 </div>
               )}
-              {question.type === "true-false" && (
+              {question.expand.type.type === "true-false" && (
                 <div className="space-y-2">
-                  <div
-                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                      selectedAnswers[question.id] === true
-                        ? "bg-gray-100 dark:bg-gray-800"
-                        : ""
-                    }`}
-                    onClick={() => handleAnswerSelect(question.id, true)}
-                  >
-                    <Checkbox
-                      className="rounded-full"
-                      checked={selectedAnswers[question.id] === true}
-                      onCheckedChange={() =>
-                        handleAnswerSelect(question.id, true)
-                      }
-                    />
-                    <span>True</span>
-                  </div>
-                  <div
-                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                      selectedAnswers[question.id] === false
-                        ? "bg-gray-100 dark:bg-gray-800"
-                        : ""
-                    }`}
-                    onClick={() => handleAnswerSelect(question.id, false)}
-                  >
-                    <Checkbox
-                      className="rounded-full"
-                      checked={selectedAnswers[question.id] === false}
-                      onCheckedChange={() =>
-                        handleAnswerSelect(question.id, false)
-                      }
-                    />
-                    <span>False</span>
-                  </div>
+                  {question.options.map((option) => (
+                    <div
+                      key={option}
+                      className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                        (selectedAnswers[question.id] || []).includes(option)
+                          ? "bg-gray-100 dark:bg-gray-800"
+                          : ""
+                      }`}
+                    >
+                      <Checkbox
+                        className="rounded-full"
+                        checked={(selectedAnswers[question.id] || []).includes(
+                          option,
+                        )}
+                        onCheckedChange={() =>
+                          handleAnswerSelect(question, option)
+                        }
+                      />
+                      <span>{option}</span>
+                    </div>
+                  ))}
                 </div>
               )}
-              {question.type === "free-response" && (
+              {question.expand.type.type === "free-response" && (
                 <div className="space-y-2">
                   <Textarea
-                    value={selectedAnswers[question.id] || ""}
+                    value={selectedAnswers[question.id]?.[0] || ""}
                     onChange={(e) =>
-                      handleAnswerSelect(question.id, e.target.value)
+                      handleAnswerSelect(question, e.target.value)
                     }
                     placeholder="Enter your answer"
                     rows={4}
@@ -202,7 +224,7 @@ export default function QuestionCard({ questions, attempt }: any) {
         ))}
 
         <div className="mt-8 flex justify-end">
-          <Button>Submit Quiz</Button>
+          <Button type="submit">Submit Quiz</Button>
         </div>
       </form>
     </div>

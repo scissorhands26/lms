@@ -1,11 +1,39 @@
 "use server";
+import getPb from "@/pb/getPb";
 
-export async function submitQuiz(formData: FormData) {
-  console.log("Submitted Quiz:");
+export async function submitQuiz(attempt: any, answers: string) {
+  console.log("Attempt:", attempt);
+  console.log("Answers:", answers);
+}
 
-  for (const [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
+export async function updateAnswerInDB(
+  attempt: any,
+  question: any,
+  answer: string,
+) {
+  const pb = await getPb();
+
+  const doesAnswerExist = await pb.collection("quiz_answers").getFullList({
+    filter: `question = "${question.id}" && attempt = "${attempt.id}"`,
+  });
+
+  if (doesAnswerExist.length > 0) {
+    await pb.collection("quiz_answers").update(doesAnswerExist[0].id, {
+      answer,
+    });
+  } else {
+    await pb.collection("quiz_answers").create({
+      user: pb.authStore.model.id,
+      quiz: attempt.expand.quiz.id,
+      question: question.id,
+      attempt: attempt.id,
+      answer,
+    });
   }
+
+  console.log("Attempt:", attempt);
+  console.log("Question:", question);
+  console.log("Answer:", answer);
 }
 
 export async function navigateToQuiz(quiz: any) {}

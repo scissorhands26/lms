@@ -27,6 +27,9 @@ export async function startQuiz({ quiz, selectedStudents }: StartQuizData) {
     started: new Date(),
   };
   await pb.collection("quizzes").update(quiz.id, quizData);
+  const quizRecord = await pb.collection("quizzes").getOne(quiz.id, {
+    expand: "questions",
+  });
 
   // Create quiz_attempts entries for selected students
   const quizAttempts = selectedStudents.map((studentId) => ({
@@ -35,11 +38,31 @@ export async function startQuiz({ quiz, selectedStudents }: StartQuizData) {
     submitted: false,
   }));
 
-  // Perform batch insertion
-  await Promise.all(
+  // Perform batch insertion of quiz_attempts
+  const createdAttempts = await Promise.all(
     quizAttempts.map((attempt) =>
       pb.collection("quiz_attempts").create(attempt, { requestKey: null }),
     ),
+  );
+
+  // Perform batch insertion of quiz_answers
+  await Promise.all(
+    createdAttempts.map(async (attempt) => {
+      await Promise.all(
+        quizRecord.questions.map((question) => {
+          const data = {
+            question: question,
+            quiz: quiz.id,
+            user: attempt.user,
+            answer: "",
+            attempt: attempt.id,
+          };
+          return pb
+            .collection("quiz_answers")
+            .create(data, { requestKey: null });
+        }),
+      );
+    }),
   );
 }
 
