@@ -1,9 +1,29 @@
 "use server";
 import getPb from "@/pb/getPb";
 
-export async function submitQuiz(attempt: any, answers: string) {
+export async function submitQuiz(
+  attempt: any,
+  answers: any,
+  submitted: boolean,
+) {
   console.log("Attempt:", attempt);
   console.log("Answers:", answers);
+
+  const pb = await getPb();
+
+  await pb.collection("quiz_attempts").update(attempt.id, {
+    submitted: submitted,
+    expired: true,
+  });
+
+  for (const questionId in answers) {
+    const answer = answers[questionId];
+    const question = await pb.collection("question_bank").getOne(questionId);
+
+    await updateAnswerInDB(attempt, question, answer);
+
+    console.log("Question:", question);
+  }
 }
 
 export async function updateAnswerInDB(

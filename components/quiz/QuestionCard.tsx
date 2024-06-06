@@ -99,12 +99,12 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
 
   async function handleExpiredQuiz(answers) {
     // Submit the quiz (time expired)
-    await submitQuiz(attempt, answers);
+    await submitQuiz(attempt, answers, false);
     router.push("/quiz/expired");
   }
 
   async function handleSubmitQuiz(answers) {
-    await submitQuiz(attempt, answers);
+    await submitQuiz(attempt, answers, true);
     router.push("/quiz/submitted");
   }
 

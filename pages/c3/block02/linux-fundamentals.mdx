@@ -2,66 +2,29 @@
 
 ## What is Linux?
 
-Linux, an open-source kernel originally developed by Linus Torvalds, allows for easy modification to fit various needs while remaining highly efficient. As a result, it has become a popular choice for uses such as servers, data centers, virtualization, containers, high-performance computing, and embedded systems.
+Linux, an open-source kernel, forms the bedrock for various operating systems collectively known as Linux distributions. Praised for its stability, security, and flexibility, Linux finds widespread use in servers, supercomputers, embedded systems, data centers, and virtualization environments. While less prevalent than Windows or macOS, some individuals opt for Linux distributions as their desktop operating system.
 
 ## Linux History
 
-Linux, created in the early 1990s by Finnish software engineer Linus Torvalds and the Free Software Foundation (FSF), emerged as an alternative to the UNIX operating system. While still a student at the University of Helsinki, Torvalds began developing Linux with the goal of creating a system similar to MINIX. The initial release of Linux consisted of a kernel, which later became the foundation for the complete operating system we know today.
+The Linux kernel was created in 1991 by Finnish computer science student Linux Torvalds as a hobby project. Frustrated with the limitations of existing operating systems, Linus set out to develop a Unix-like kernel that would be freely available for anyone to customize and improve on. The Free Software Foundation (FSF), creators of the the GNU Project, teamed up with Linus and rereleased the Linux kernel under the GNU General Public License, creating the free operating system known as GNU/Linux.
 
 ## Linux Distributions
 
-Various groups and institutions have leveraged the Linux kernel to create their own operating systems, commonly referred to as distributions. It’s crucial to recognize that the functionality of a computer can significantly vary based on the chosen distribution. These differences may include variations in system initialization software, file systems, default shells, and available binaries.
+Various groups and institutions have leveraged the Linux kernel to create their own operating systems, commonly referred to as distributions. It’s crucial to recognize that the functionality of a computer can significantly vary based on the chosen distribution. These differences may include variations in the system initialization process, the file system, the native binaries and applications, as well ass default configurations.
 
-| Distribution       | Year | Based On                 | Release type    | Description                                                                                                                       |
-| ------------------ | ---- | ------------------------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Debian             | 1993 | N/A                      | Stable Release  | One of the oldest and most influential Linux distributions.                                                                       |
-| Red Hat            | 1994 | N/A                      | Stable Release  | A commercial distribution known for its system administration and security tools, with enterprise features.                       |
-| Arch Linux         | 2002 | N/A                      | Rolling Release | A minimalist and user-centric distribution that requires significant manual configuration.                                        |
-| Fedora             | 2003 | Red Hat Linux            | Stable Release  | The open-source counterpart to Red Hat Linux; designed to promote innovation.                                                     |
-| Ubuntu             | 2004 | Debian                   | Stable Release  | The most widely used distribution for desktop Linux.                                                                              |
-| CentOS (now Rocky) | 2004 | Red Hat Enterprise Linux | Rolling Release | Originally designed to bridge the gap between Fedora and RHEL; later forked into Rocky due to a shift to a rolling release cycle. |
-| openSUSE           | 2005 | SUSE Linux               | Stable Release  | Focuses on ease of use and stability; popular in enterprise environments.                                                         |
+Distribution | Year | Based On | Release type | Description |
+| - | - | - | - | - |
+Debian | 1993 | N/A | Stable Release | One of the oldest and most influential Linux distributions. |
+Red Hat | 1994 | N/A | Stable Release | A commercial distribution known for its system administration and security tools, with enterprise features. |
+Arch | 2002 | N/A | Rolling Release | A minimalist and user-centric distribution that requires significant manual configuration. |
+Fedora | 2003 | Red Hat Linux | Stable Release | The open-source counterpart to Red Hat Linux; designed to promote innovation. |
+Ubuntu | 2004 | Debian | Stable Release | The most widely used distribution for desktop Linux. |
+CentOS (now Rocky) | 2004 | Red Hat Enterprise Linux | Rolling Release | Originally designed to bridge the gap between Fedora and RHEL; later forked into Rocky due to a shift to a rolling release cycle. |
+openSUSE | 2005 | SUSE Linux | Stable Release | Focuses on ease of use and stability; popular in enterprise environments. |
+Kali | 2013 | Debian | Stable Release | Geared towards information security tasks such as pentesting, security research, forensics, and reverse engineering. |
 
-You can check system distribution using a few commands: `uname -a`,`cat /etc/*release*`, or `lsb_release -a`.
 
-## Common Linux Processes
-
-Understanding common Linux processes is essential for analysts make decisions about what is legitimate and what may be malicious.
-
-Things to know:
-Processes in brackets (Ex. [khtreadd]) arre kernel threads. These are directly controlled by the Linux kernel.
-Processes ending in the letter d (Ex. sshd or syslogd) are daemons. These are background processes that don't require interaction and are usually providing some kind of system service.
-
-Here are some key Linux processes and their descriptions:
-
-F S UID PID PPID C PRI NI ADDR SZ WCHAN STIME TTY TIME CMD
-4 S root 1 0 0 80 0 - 9943 - 18:00 ? 00:00:02 /usr/lib/systemd/systemd
-
-| UID             | PID | PPID | CMD                         | DESCRIPTION                                                                                                             |
-| --------------- | --- | ---- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| root            | 1   | 0    | /usr/lib/systemd/systemd    | System daemon process is responsible for managing processes and services. PID will always be 1 and PPID always 0.       |
-| root            | 2   | 0    | [kthreadd]                  | Responsible for the creation of new kernel threads. PID will always be 2 and PPID always 0.                             |
-| root/systemd-\* | \*  | 1    | /usr/lib/systemd/systemd-\* | There will be a variety of systemd services running, they will have different PIDs but they should all have a PPID of 1 |
-| root            | \*  | 1    | /usr/sbin/gdm3              | Gnome                                                                                                                   |
-| avahi           |     |      |                             |                                                                                                                         |
-| polkitd         |     |      |                             |                                                                                                                         |
-| syslog          |     |      |                             |                                                                                                                         |
-| rtkit           |     |      |                             |                                                                                                                         |
-| colord          |     |      |                             |                                                                                                                         |
-|                 |     |      |                             |                                                                                                                         |
-
-You can look at a list of running processes using the command `ps -elf`.
-
-### Important Points for Analysts
-
-- **Paths**: If the process is not located in the expected directory, it may be suspicious.
-- **System Idle Process**: This process is not harmful. It shows the percentage of time the CPU is idle.
-- **svchost.exe**: Multiple instances of this process can run simultaneously. Each instance can host different services.
-- **explorer.exe**: Responsible for the desktop and file management. Restarting this process can resolve issues with the taskbar and desktop.
-
-## Common Linux Services
-
-### Important Points for Analysts
+You can check system distribution using a few different commands: ```uname -a```,```cat /etc/*release*```, or ```lsb_release -a```.
 
 ## Linux File Systems
 
@@ -72,62 +35,145 @@ Linux systems use a variety of different file system depending on the intended u
 **XFS**: Works well with large files and works well with real-time applications, but it is at a disadvantage when storing a large number of smaller files.
 **ZFS**: Provides better scalability and data redundancy when compared to Btrfs, this comes at the cost of requiring more resources to run at sufficient speed.
 
-df, lsblk, mount, file, fstab
+Each of the following commands can provide information about the file system in different ways. ```df```, ```lsblk```, ```mount```, ```file```, ```fstab```
 
 ### Directory Structure
 
-The Linux file system is organized into a hierarchical directory structure, using `/` as the top level known as the root of the filesystem or simply root. Here are some common directories found in Linux:
+The Linux file system is organized into a hierarchical directory structure, using ```/``` as the top level known as the root of the filesystem or simply root. Here are some common directories found in Linux:
 
-| **Directory** | **Description**                                                                                                                   |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **/etc**      | Contains essential system configuration files.                                                                                    |
-| **/sbin**     | Contains system binaries that require elevated privileges to execute.                                                             |
-| **/bin**      | Contains a variety of binaries for basic shell commands and programs                                                              |
-| **/lib**      | Contains shared libraries.                                                                                                        |
-| **/dev**      | Contains special files related to devices. These files are virtual and not physically on disk.                                    |
-| **/home**     | Contains all the system users' personal data.                                                                                     |
-| **/tmp**      | Used to store temporary files. The contents of this directory are deleted when the system restarts.                               |
-| **/var**      | Short for variable, this is where programs can store tuntime information such as logging, caches, web pages, databases, and more. |
-| **/proc**     | Contains information about currently running processes and kernel parameters                                                      |
-| **/root**     | Works as the home directory for the root user.                                                                                    |
-| **/media**    | Used to access the contents of removeable media such as a USB drive.                                                              |
-| **/mnt**      | Short for mount, this directory is used when mounting a filesystem.                                                               |
-| **/usr/bin**  | Contains basic user commands.                                                                                                     |
-| **/usr/sbin** | Contains additional commands for the administrator.                                                                               |
-| **/var/log**  | Used to store logs.                                                                                                               |
+| **Directory**                            | **Description**                                                                                                                                      |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **/etc**                           | Contains essential system configuration files.                                      |
+| **/sbin**                  | Contains system binaries that require elevated privileges to execute.              |
+| **/bin**                  | Contains a variety of binaries for basic shell commands and programs                      |
+| **/lib**                      | Contains shared libraries.                                                                                              |
+| **/dev**                     | Contains special files related to devices. These files are virtual and not physically on disk.                                                    |
+| **/home**        | Contains all the system users' personal data.                                                                                                      |
+| **/tmp**               | Used to store temporary files. The contents of this directory are deleted when the system restarts.                                              |
+| **/var**  | Short for variable, this is where programs can store tuntime information such as logging, caches, web pages, databases, and more.                                               |
+| **/proc**                             | Contains information about currently running processes and kernel parameters                                                              |
+| **/root**          | Works as the home directory for the root user.                                                                                                           |
+| **/media**          | Used to access the contents of removeable media such as a USB drive.                                                                                                              |
+| **/mnt**            | Short for mount, this directory is used when mounting a filesystem.                                                                                                     |
+| **/usr**	| Contains all user-related data. This could be binaries, libraries, or installed software.
+| **/usr/bin**      | Contains basic user commands.                                                                                              |
+| **/usr/sbin**    | Contains additional commands for the administrator.                                                                    |
+| **/var/log** | Used to store logs.                                                                                                                |
 
-You can use the command `ls -latr /` to view the top level directories.
+You can use the command ```ls -latr /``` to view the top level directories.
 
 ### Additional Directories and Files to Know
 
 - **/etc/passwd**: Stores user account information.
 - **/etc/shadow**: Stores password hashes for he user accounts.
+- **/etc/group**: Stores information on the various groups on the system.
+- **/etc/sudoers**: Stores the configuration for sudo permissions.
+- **/etc/resolv.conf**: Stores DNS configuration.
+- **/etc/hosts**: Stores mappings of IP addresses to hostnames.
+- **/etc/fstab**: Configuration of file system and storage devices.
+- **/root/.bash_history**: Stores command history for the root user.
+- **/home/<user>/.bash_history**: Stores command history for the specified user.
+- **/var/www**: Common root directory for web servers.
+
+## Common Linux Processes
+
+Understanding system processes is crucial for analysts to gain insights into a system’s purpose and capabilities. While Windows provides a predictable and well-documented process list, Linux’s open-source nature introduces complexity. Customization options in Linux—due to various distributions—can make interpreting the process list challenging. However, learning common principles across mainstream Linux distributions helps analysts navigate unfamiliar processes effectively.
+
+Here are some key Linux processes and their descriptions:
+
+| UID | PID | PPID | CMD | DESCRIPTION |
+| - | - | - | - | - |
+| root | 1 | 0 | /usr/lib/systemd/systemd | System daemon process is responsible for managing processes and services. PID will always be 1 and PPID always 0. |
+| root | 2 | 0 | [kthreadd] | Responsible for the creation of new kernel threads. PID will always be 2 and PPID always 0. |
+| root/systemd-* | * | 1 | /usr/lib/systemd/systemd-* | There will be a variety of systemd services running, they will have different PIDs but they should all have a PPID of 1 |
+| root | * | 1 | /usr/sbin/gdm3 | Gnome Display Manager is a display manager that is responsible for displaying the login screen. |
+| avahi | * | 1 | avahi-daemon | Helps devices discover and communicate with each other. |
+| polkitd | * | 1 | /usr/lib/polkit-1/polkitd | Policy Kit daemon manages privileges and permissions for system-wide tasks. |
+| syslog | * | 1 | /usr/sbin/syslogd or /usr/sbin/rsyslogd | System Logging daemons that are responsible for collecting messages from various services and applications before storing them into log files. |
+| rtkit | * | 1 | /usr/libexec/rtkit-daemon | Realtime Kit deamon manages real-time scheduling for audio and multimedia applications. Reduces audio/video latency. |
+| colord | * | 1 | /usr/libexec/colord | Color Management daemon handles color calibration and profiling for devices such as monitors and printers. |
+| root | * | 1 | /usr/libexec/udisks2/udisksd | This daemon manages disk drives and storage devices. Handles the mounting and unmounting of connected drives. |
+| root | * | 1 | /usr/sbin/cron | Cron daemon schedules and runs periodic tasks know as cron jobs. These tasks can be configured to do whatever is desired. |
+| root | * | 1 | /usr/sbin/NetworkManager | This daemon manages network connections, including wired, wireless, and mobile conections. |
+| ubuntu | 500 | 1 | /usr/lib/systemd/systemd --user | This function of systemd is run when a user wants to open a session. This will manage the user-specific services, similiar to how the primary systemd process manages system-wide services. |
+| ubuntu | * | 500 | /usr/bin/dbus-daemon | This daemon provides inter-process communication, allowing applications to share data between each other. |
+| ubuntu | 1000 | 500 | /usr/libexec/gnome-terminal-server | Responsible for managing terminals started by the user. |
+| ubuntu | * | 1001 | bash | Shell used when the user opened a terminal. |
+| ubuntu | 1001 | 500 | /usr/bin/gnome-shell | GNOME processes that manages the different aspects of the graphical user interface, including window management, file browsing, and application launching. |
+| ubuntu | * | 1001 | /opt/google/chrome/chrome | Google chrome was launched by the gnome-shell process. |
+| ubuntu | * | 1001 | /snap/firefox/4336/usr/lib/firefox/firefox | Mozilla Firefox was launched by the gnome-shell process. |
+
+You can look at a list of running processes using the command ```ps -elf```.
+
+### Important Points for Analysts
+
+- **System Initialization Process**: Regardless of distribution there will be some form on system initialization process. This process will always be PID 1 and every other process will be a descendent of this process. Following the hierarchy is one way to check the authenticity of a process.
+- **Paths**: All legitimate system processes will share similiar paths. Processes that were executed outside these paths could be suspicious. The specific locations could vary based on which distribution the system is running. The examples provided above come from Ubuntu 24.04. Notice how the system processes all have a path starting with ```/usr/bin```, ```/usr/sbin```, ```/usr/libexec```, or ```/usr/lib```.
+- **Process Owner/Permissions**: By default processes inherit their permissions from the parent process, but this doesn't have to always be the case. When looking at system processes started by systemd, we can see the UID being changed to a user named after the service. This is common practice to ensure the service only has the permissions it needs. Unusual processes running with higher privileges than necessary could be an inidcation something suspicious is going on.
+- **Kernel Threads**: Processes displayed in brackets are kernel threads ([kworker]). Since these are kernel functions they are separate from the system initialization process and are managed by the kernel thread daemon ([kthreadd]).
+- **Daemons**: Daemons are background processes that are often detachted from any controlling process. This allows them to function independently in the background to provide some kind of service or management. Daemonized processes are usually indicated by the letter ```d``` appended to the end of the process name (Ex. sshd, crond, syslogd).
+
+## Common Linux Services
+
+As stated before the services running on a Linux devices is highly configureable and therefore somewhat unpredictable. However, here is an example of what you might find on an Ubuntu 24.04 desktop.
+
+| **Service** | **Description** |
+| - | - |
+| accounts-daemon.service | This service manages user account information, such as creating home directories, updating passwords, and handling user sessions. It ensures consistency across user-related data. |
+| apparmor.service | AppArmor is a security framework that restricts the capabilities of individual applications. It enforces mandatory access controls based on profiles, limiting what files, network resources, and system calls an application can access. |
+| avahi-daemon.service | Avahi provides zero-configuration networking (Zeroconf) services. It allows devices on a local network to discover each other without manual configuration. Avahi handles mDNS (multicast DNS) and DNS-SD (DNS Service Discovery).
+| bluetooth.service | This service manages Bluetooth functionality. It handles pairing, connecting, and communication with Bluetooth devices (such as headphones, keyboards, and speakers). |
+| cron.service | Cron is a time-based job scheduler. It runs scheduled tasks (cron jobs) at specified intervals. These tasks can include backups, log rotation, and other automated processes. |
+| NetworkManager.service | NetworkManager manages network connections, including wired, wireless, and mobile broadband. It handles configuration, connection state, and network device management. |
+| dmesg.service | Dmesg is a command that displays kernel ring buffer messages. The service captures and logs kernel-level events, hardware information, and system messages. |
+| rsyslog.service | Rsyslog is a system logging daemon. It collects, processes, and forwards log messages from various sources (applications, system components) to log files or remote servers. |
+| openvpn.service | OpenVPN is a popular open-source VPN (Virtual Private Network) solution. This service manages VPN connections, allowing secure communication over public networks. |
+| sshd.service | SSH (Secure Shell) is a protocol for secure remote access to servers. This service handles SSH connections, authentication, and secure shell sessions. |
+| apache.service | Apache HTTP Server (commonly known as Apache) is a web server software. This service starts and manages the Apache web server, serving web pages and handling HTTP requests. |
+| ufw.service | UFW (Uncomplicated Firewall) is a user-friendly interface for managing iptables firewall rules. This service enables or disables the firewall rules configured using UFW. |
+| ssl-cert.service | This service ensures SSL/TLS certificates are correctly configured. It handles certificate renewal and updates for services that use SSL encryption. |
+
+### Important Points for Analysts
 
 ## Linux Logging
 
-Linux has a variety of logging mechanisms available to help administrators and analysts monitor events. Understanding these logging mechanisms can help make sense of system activity
+Within the Linux ecosystem, various logging mechanisms exist to assist administrators and analysts in monitoring system events. Understanding these logging mechanisms enables a better understanding of system activity.
 
 ### Common Linux Logging Mechanisms
 
-**syslog**: Standard logging protocol used to collect messages from variour system components, applications, and services.
-**rsyslog**: Enhanced version of syslog, providing some additional features and more flexible configuration.
-**system journal**: Implemented by systemd, the system journal is a centralized logging system that stores logs in binary format.
-**auditing**: Framework that allows for monitoring and recording system events related to security, user activity, and system changes.
-**process accounting**: Tracks resource usage such as CPU time and memory for individual processes and records them.
-**kernel logging**: Contains messages generated by the Linux kernel itself. Stored in the kernel ring buffer
-**\*tmp and lastlog**: These mechanisms record users logins and sessions.
+| Mechanism | Standard Log Location | Description |
+| - | - | - |
+| syslog | **Configurable**: see below | The standard logging protocol collects messages from various system components, applications, and services. |
+| rsyslog | **Configurable**: see below | An enhanced version of syslog, rsyslog offers additional features and more flexible configuration options. |
+| system journal | /var/log/journal | Implemented by systemd, the system journal serves as a centralized logging system that stores logs in binary format. |
+| auditing | /var/log/audit/audit.log | This framework monitors and records system events related to security, user activity, and system changes. |
+| process accounting | /var/log/account/pacct | Tracks resource usage, including CPU time and memory, for individual processes and maintains records. |
+| kernel logging | /var/log/kern.log or ```dmesg``` | Kernel logging captures messages generated directly by the Linux kernel itself and stores them in the kernel ring buffer. |
+| utmp | /var/log/utmp | Maintains a real-time accounting of the current system status. It records information such as user logins, logouts, system boot time, and terminal usage. |
+| wtmp | /var/log/wtmp | Acts as a historical record of user logins and logouts. It maintains a history of all completed sessions. |
+| btmp | /var/log/btmp | Records failed login attempts (invalid login attempts). |
+| lastlog | /var/log/lastlog | Provides information about the last login time for each user. |
 
 It is important to note that syslog, rsyslog and auditd natively support remote logging. This allows configuration of the service to store the logs on a remote system.
 
-### Common Linux Log Files
+### Syslog and Rsyslog
 
-/var/log/messages
-/var/log/lastlog
-/var/log/wtmp
-/var/log/utmp
-/var/log/btmp
-/var/log/secure or /var/log/auth.log
-/var/log/audit/audit.log
-/var/log/dmesg
-/var/log/journal
-/var/log/account/pacct
+Syslog and rsyslog can log to multiple files depending on the context of the logging. It uses facilities and priorities to sort logs.
+
+Here are some files you might see syslog or rsyslog write to.
+
+| Log Location | Description |
+| - | - |
+| /var/log/messages | General message and system related stuff |
+| /var/log/auth.log | Authenication logs |
+| /var/log/kern.log | Kernel logs |
+| /var/log/cron.log | Crond logs (cron job) |
+| /var/log/maillog | Mail server logs |
+| /var/log/httpd/ | Apache access and error logs directory |
+| /var/log/nginx/ | Nginx access and error logs directory |
+| /var/log/apt/ | Apt/apt-get command history and logs directory |
+| /var/log/boot.log | System boot log |
+| /var/log/mysqld.log | MySQL database server log file |
+| /var/log/secure or /var/log/auth.log | Authentication log |
+| /var/log/utmp or /var/log/wtmp | Login records file |
+| /var/log/yum.log or /var/log/dnf.log | Yum/Dnf command log file. |
