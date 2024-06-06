@@ -111,122 +111,118 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
   return (
     <div>
       <div>Timer: {formatTime(timeRemaining)}</div>
-      <form onSubmit={handleSubmitQuiz}>
-        {questions.map((question, index) => (
-          <Card key={question.id} className="mb-4">
-            <CardHeader>
-              <CardTitle>
-                {index + 1}
-                {". "}
-                {question.question}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {question.expand.type.type === "multiple-choice" && (
-                <div className="space-y-2">
-                  {question.options.map((option) => (
-                    <div
-                      key={option}
-                      className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                        (selectedAnswers[question.id] || []).includes(option)
-                          ? "bg-gray-100 dark:bg-gray-800"
-                          : ""
-                      }`}
-                    >
-                      <Checkbox
-                        className="rounded-full"
-                        checked={(selectedAnswers[question.id] || []).includes(
-                          option,
-                        )}
-                        onCheckedChange={() =>
-                          handleAnswerSelect(question, option)
-                        }
-                      />
-                      <span>{option}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {question.expand.type.type === "select-all" && (
-                <div className="space-y-2">
-                  {question.options.map((option) => (
-                    <div
-                      key={option}
-                      className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                        (selectedAnswers[question.id] || []).includes(option)
-                          ? "bg-gray-100 dark:bg-gray-800"
-                          : ""
-                      }`}
-                    >
-                      <Checkbox
-                        checked={(selectedAnswers[question.id] || []).includes(
-                          option,
-                        )}
-                        onCheckedChange={() =>
-                          handleAnswerSelect(question, option, true)
-                        }
-                      />
-                      <span>{option}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {question.expand.type.type === "fill-in-the-blank" && (
-                <div className="space-y-2">
-                  <Input
-                    value={selectedAnswers[question.id]?.[0] || ""}
-                    onChange={(e) =>
-                      handleAnswerSelect(question, e.target.value)
-                    }
-                    placeholder="Enter your answer"
-                  />
-                </div>
-              )}
-              {question.expand.type.type === "true-false" && (
-                <div className="space-y-2">
-                  {question.options.map((option) => (
-                    <div
-                      key={option}
-                      className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                        (selectedAnswers[question.id] || []).includes(option)
-                          ? "bg-gray-100 dark:bg-gray-800"
-                          : ""
-                      }`}
-                    >
-                      <Checkbox
-                        className="rounded-full"
-                        checked={(selectedAnswers[question.id] || []).includes(
-                          option,
-                        )}
-                        onCheckedChange={() =>
-                          handleAnswerSelect(question, option)
-                        }
-                      />
-                      <span>{option}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {question.expand.type.type === "free-response" && (
-                <div className="space-y-2">
-                  <Textarea
-                    value={selectedAnswers[question.id]?.[0] || ""}
-                    onChange={(e) =>
-                      handleAnswerSelect(question, e.target.value)
-                    }
-                    placeholder="Enter your answer"
-                    rows={4}
-                  />
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+      {questions.map((question, index) => (
+        <Card key={question.id} className="mb-4">
+          <CardHeader>
+            <CardTitle>
+              {index + 1}
+              {". "}
+              {question.question}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {question.expand.type.type === "multiple-choice" && (
+              <div className="space-y-2">
+                {question.options.map((option) => (
+                  <div
+                    key={option}
+                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                      (selectedAnswers[question.id] || []).includes(option)
+                        ? "bg-gray-100 dark:bg-gray-800"
+                        : ""
+                    }`}
+                  >
+                    <Checkbox
+                      className="rounded-full"
+                      checked={(selectedAnswers[question.id] || []).includes(
+                        option,
+                      )}
+                      onCheckedChange={() =>
+                        handleAnswerSelect(question, option)
+                      }
+                    />
+                    <span>{option}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {question.expand.type.type === "select-all" && (
+              <div className="space-y-2">
+                {question.options.map((option) => (
+                  <div
+                    key={option}
+                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                      (selectedAnswers[question.id] || []).includes(option)
+                        ? "bg-gray-100 dark:bg-gray-800"
+                        : ""
+                    }`}
+                  >
+                    <Checkbox
+                      checked={(selectedAnswers[question.id] || []).includes(
+                        option,
+                      )}
+                      onCheckedChange={() =>
+                        handleAnswerSelect(question, option, true)
+                      }
+                    />
+                    <span>{option}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {question.expand.type.type === "fill-in-the-blank" && (
+              <div className="space-y-2">
+                <Input
+                  value={selectedAnswers[question.id]?.[0] || ""}
+                  onChange={(e) => handleAnswerSelect(question, e.target.value)}
+                  placeholder="Enter your answer"
+                />
+              </div>
+            )}
+            {question.expand.type.type === "true-false" && (
+              <div className="space-y-2">
+                {question.options.map((option) => (
+                  <div
+                    key={option}
+                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                      (selectedAnswers[question.id] || []).includes(option)
+                        ? "bg-gray-100 dark:bg-gray-800"
+                        : ""
+                    }`}
+                  >
+                    <Checkbox
+                      className="rounded-full"
+                      checked={(selectedAnswers[question.id] || []).includes(
+                        option,
+                      )}
+                      onCheckedChange={() =>
+                        handleAnswerSelect(question, option)
+                      }
+                    />
+                    <span>{option}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {question.expand.type.type === "free-response" && (
+              <div className="space-y-2">
+                <Textarea
+                  value={selectedAnswers[question.id]?.[0] || ""}
+                  onChange={(e) => handleAnswerSelect(question, e.target.value)}
+                  placeholder="Enter your answer"
+                  rows={4}
+                />
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      ))}
 
-        <div className="mt-8 flex justify-end">
-          <Button type="submit">Submit Quiz</Button>
-        </div>
-      </form>
+      <div className="mt-8 flex justify-end">
+        <Button onClick={() => handleSubmitQuiz(selectedAnswers)}>
+          Submit Quiz
+        </Button>
+      </div>
     </div>
   );
 }
