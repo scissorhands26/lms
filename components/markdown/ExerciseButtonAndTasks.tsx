@@ -77,7 +77,10 @@ export default function ApiButton() {
               (item: any) => {
                 if (item.id === taskId) {
                   item.completed = e.record.completed;
-                  toast("Task completed!", { type: "success" });
+                  toast(
+                    e.record.completed ? "Task completed!" : "Task updated",
+                    { type: "success" },
+                  );
                   return item;
                 } else {
                   return item;
