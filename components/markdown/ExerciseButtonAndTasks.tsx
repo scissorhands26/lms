@@ -202,9 +202,13 @@ export default function ApiButton() {
                     </pre>
                     <div className="flex flex-row items-center">
                       {data[key].completed ? (
-                        <span className="text-green-500">Completed</span>
+                        <span className="text-green-700 dark:text-green-500">
+                          Completed
+                        </span>
                       ) : (
-                        <span className="text-red-500">Not Completed</span>
+                        <span className="text-red-700 dark:text-red-500">
+                          Not Completed
+                        </span>
                       )}
                       <Popover>
                         <PopoverTrigger>
