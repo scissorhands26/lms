@@ -25,10 +25,10 @@ export async function GetExercise(exerciseID: string) {
       },
     });
 
-    if (!response.ok) {
-      console.log(`Error ${response.status}: ${response.statusText}`);
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
+    // if (!response.ok) {
+    //   console.log(`Error ${response.status}: ${response.statusText}`);
+    //   throw new Error(`Error ${response.status}: ${response.statusText}`);
+    // }
 
     const data = await response.json();
     return data;
