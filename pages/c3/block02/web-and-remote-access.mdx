@@ -1,0 +1,197 @@
+import BlockDiagram from "@/components/markdown/BlockDiagram";
+
+# Web and Remote Access
+
+## Web Protocols
+
+### Hypertext Transfer Protocol (HTTP)
+
+HTTP is a protocol that allows the fetching of resources, such as HTML documents. It is the foundation of any data exchange on the Web and it is a client-server protocol, which means requests are initiated by the recipient, usually the Web browser. A complete document is reconstructed from the different sub-documents fetched, for instance text, layout description, images, videos, scripts, and more.
+
+#### Quick Facts
+
+| Port Number | Protocol | Description     | Secure Version | Secure Port | Methods                                                         |
+| ----------- | -------- | --------------- | -------------- | ----------- | --------------------------------------------------------------- |
+| 80          | TCP      | HTTP            | HTTPS          | 443         | GET, POST, PUT, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH    |
+| 443         | TCP      | HTTPS           | -              | -           | Same as HTTP methods but over a secure connection using TLS/SSL |
+| 8080        | TCP      | HTTP Alternate  | -              | -           | Often used for testing HTTP servers or as a proxy port          |
+| 8443        | TCP      | HTTPS Alternate | -              | -           | Often used for HTTPS testing and alternate secure HTTP traffic  |
+
+#### HTTP Methods
+
+- **GET**: Requests data from a specified resource.
+- **POST**: Submits data to be processed to a specified resource.
+- **PUT**: Uploads a representation of the specified resource.
+- **DELETE**: Deletes the specified resource.
+- **PATCH**: Applies partial modifications to a resource.
+- **OPTIONS**: Returns the supported HTTP methods.
+
+There are other methods like `CONNECT`, `TRACE`, and `HEAD` but they are less commonly used.
+
+#### HTTP Status Codes
+
+HTTP status codes are standard response codes given by web servers on the Internet. The status codes are divided into five categories:
+
+- **1xx**: Informational - Request received, continuing process.
+- **2xx**: Success - The action was successfully received, understood, and accepted.
+- **3xx**: Redirection - Further action must be taken in order to complete the request.
+- **4xx**: Client Error - The request contains bad syntax or cannot be fulfilled.
+- **5xx**: Server Error - The server failed to fulfill an apparently valid request.
+
+Common status codes include:
+
+- **200 OK**: Standard response for successful HTTP requests.
+- **301 Moved Permanently**: The requested page has been permanently moved to a new location.
+- **400 Bad Request**: The server cannot or will not process the request due to an apparent client error.
+- **403 Forbidden**: The server understood the request but refuses to authorize it.
+- **404 Not Found**: The requested resource could not be found.
+- **500 Internal Server Error**: A generic error message, given when an unexpected condition was encountered.
+
+### HTTP Headers
+
+HTTP headers are the core part of HTTP requests and responses. They carry information about the client browser, the requested page, the server, and more. Headers are divided into two categories: request headers and response headers.
+
+<BlockDiagram
+  colCount={32}
+  rows={[
+    [
+      {
+        label: "Version",
+        description: "4 bits",
+        length: 4,
+        className: "dark:bg-red-700 bg-red-300",
+      },
+      {
+        label: "Header Length",
+        description: "4 bits",
+        length: 4,
+        className: "dark:bg-green-700 bg-green-300",
+      },
+      {
+        label: "Type of Service",
+        description: "8 bits",
+        length: 8,
+        className: "dark:bg-blue-700 bg-blue-300",
+      },
+      {
+        label: "Payload length",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-yellow-700 bg-yellow-300",
+      },
+    ],
+    [
+      {
+        label: "Identification",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-purple-700 bg-purple-300",
+      },
+      {
+        label: "Flags",
+        description: "3 bits",
+        length: 3,
+        className: "dark:bg-pink-700 bg-pink-300",
+      },
+      {
+        label: "Fragment Offset",
+        description: "13 bits",
+        length: 13,
+        className: "dark:bg-teal-700 bg-teal-300",
+      },
+      {
+        label: "Time To Live",
+        description: "8 bits",
+        length: 8,
+        className: "dark:bg-orange-700 bg-orange-300",
+      },
+      {
+        label: "Protocol",
+        description: "8 bits",
+        length: 8,
+        className: "dark:bg-lime-700 bg-lime-300",
+      },
+      {
+        label: "Header Checksum",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-indigo-700 bg-indigo-300",
+      },
+    ],
+    [
+      {
+        label: "Source address",
+        description: "32 bits",
+        length: 32,
+        className: "dark:bg-cyan-700 bg-cyan-300",
+      },
+    ],
+    [
+      {
+        label: "Destination address",
+        description: "32 bits",
+        length: 32,
+        className: "dark:bg-rose-700 bg-rose-300",
+      },
+    ],
+  ]}
+/>
+#### Request Headers
+
+Request headers are sent by the client to the server to provide additional information about the request. Some common request headers include:
+
+- **User-Agent**: Information about the client browser.
+- **Accept**: The media types accepted by the client.
+- **Authorization**: Credentials for authenticating the client.
+- **Cookie**: Information about cookies stored on the client.
+- **Host**: The domain name of the server.
+- **Referer**: The URL of the page that linked to the current page.
+
+### Interacting with HTTP
+
+HTTP can be interacted with using a variety of tools, such as:
+
+- **Web Browsers**: Browsers like Chrome, Firefox, and Edge are the most common way to interact with HTTP.
+- **cURL**: A command-line tool for transferring data with URL syntax.
+- **wget**: A command-line utility for downloading files from the web.
+- And many more!
+
+#### Using cURL
+
+```bash
+# Send a GET request to example.com
+curl http://example.com
+
+# Send a POST request with data
+curl -X POST -d "param1=value1&param2=value2" http://example.com
+```
+
+### HTTP in WireShark
+
+When capturing HTTP traffic in Wireshark, you can see the different HTTP requests and responses that are sent between the client and the server. This can help you understand how the HTTP protocol works and how data is transmitted over the network.
+
+### Secure Hypertext Transfer Protocol (HTTPS)
+
+HTTPS is a protocol for secure communication over a computer network which is widely used on the Internet. HTTPS consists of communication over Hypertext Transfer Protocol (HTTP) within a connection encrypted by Transport Layer Security (TLS) or its predecessor, Secure Sockets Layer (SSL).
+
+## Remote Access Protocols
+
+### Remote Access
+
+Remote access is the ability to access a computer or a network remotely. It enables users to access their computer systems from a remote location. Remote access can be set up using a local area network (LAN), wide area network (WAN) or the Internet. Remote access is useful for many reasons, such as troubleshooting, file sharing, and data retrieval.
+
+### Telnet
+
+Telnet is a network protocol that allows a user on one computer to log into another computer that is part of the same network. Once logged in, the user can execute commands on the remote computer. Telnet is a text-based protocol, which means that all communication is done using text.
+
+### Secure Shell (SSH)
+
+Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. The best known example application is for remote login to computer systems by users. SSH provides a secure channel over an unsecured network in a client-server architecture, connecting an SSH client application with an SSH server.
+
+### Remote Desktop Protocol (RDP)
+
+Remote Desktop Protocol (RDP) is a proprietary protocol developed by Microsoft, which provides a user with a graphical interface to connect to another computer over a network connection. The user employs RDP client software for this purpose, while the other computer must run RDP server software.
+
+### Windows Remote Management (WinRM)
+
+Windows Remote Management (WinRM) is a Microsoft implementation of WS-Management Protocol, a standard Simple Object Access Protocol (SOAP)-based, firewall-friendly protocol that allows hardware and operating systems, from different vendors, to interoperate. WinRM is Microsoft's implementation of WS-Management, a standard Simple Object Access Protocol (SOAP)-based, firewall-friendly protocol that allows hardware and operating systems, from different vendors, to interoperate.

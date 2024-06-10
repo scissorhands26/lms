@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import QuickCopy from "./QuickCopy";
 import { GetUser } from "./GetUser";
+import { GetExercise } from "./GetExercise";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   const [fetchURL, setFetchURL] = useState<string>(fetchUrl);
@@ -13,8 +15,21 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
   const [active, setActive] = useState<boolean>(false);
   const [instance, setInstance] = useState<any>(null);
   const [owner, setOwner] = useState<any>(null);
-  const [exerciseId, setExerciseId] = useState<any>(null);
+  const [exercise, setExercise] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
+
+  const router = useRouter();
+  const rawPathName = usePathname();
+
+  const pathName =
+    rawPathName
+      ?.split("/")
+      .pop()
+      ?.split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ") || "";
+
+  const exerciseID = "Exercise" + pathName[0] + pathName[1];
 
   function validateURL(url: string) {
     try {
@@ -30,7 +45,16 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
       const currentUser = await GetUser();
       setUser(currentUser);
     }
+    async function fetchExercise() {
+      const exercise = await GetExercise(exerciseID);
+      setExercise(exercise);
+      console.log(exercise);
+      if (exercise) {
+        setActive(true);
+      }
+    }
     fetchUser();
+    fetchExercise();
   }, []);
 
   async function getActiveSession() {
@@ -63,7 +87,7 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     try {
       var body = { owner: "nu2udn80polbnp0" };
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_CONTAINER_URL}/containers/${exercise_id}?owner=${owner}`,
+        `${process.env.NEXT_PUBLIC_CONTAINER_URL}/exercises/${exercise_id}?student=${owner}`,
         {
           method: "POST",
           headers: {
@@ -117,19 +141,19 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
     if (active) {
       getActiveSession();
     } else {
-      launchSession("exercise01", user.id);
+      launchSession(exerciseID, user.id);
     }
   }
 
   return (
     <Card className="bg-transparent">
       <CardHeader>
-        <CardTitle>Exercise 01</CardTitle>
+        <CardTitle>{exerciseID}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-center">
-          {active && !loading ? (
-            <Button onClick={() => stopSession("exercise01")}>
+          {exercise && !loading ? (
+            <Button onClick={() => stopSession(exerciseID)}>
               Stop instance
             </Button>
           ) : (
@@ -149,10 +173,10 @@ export default function ApiButton({ fetchUrl }: { fetchUrl: string }) {
             <Skeleton className="h-[72px] w-full rounded" />
           </div>
         ) : null}
-        {active && !loading ? (
+        {exercise && !loading ? (
           <div className="mt-4 rounded border border-white p-2">
-            <QuickCopy snippet={data.command} title="Command" />
-            <QuickCopy snippet={data.password} title="Password" />
+            <QuickCopy snippet={exercise.command} title="Command" />
+            <QuickCopy snippet={exercise.password} title="Password" />
           </div>
         ) : null}
       </CardContent>

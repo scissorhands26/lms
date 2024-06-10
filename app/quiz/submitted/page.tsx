@@ -6,48 +6,52 @@ function getMessage() {
   let failureMessages = [
     {
       game: "Grand Theft Auto",
-      note: "Wasted",
+      note: "Mission Accomplished",
       image: "/gta.webp",
     },
     {
       game: "Call of Duty",
-      note: "Mission Failed, We'll Get Em Next Time!",
+      note: "Mission Complete, Great Job!",
       image: "/call-of-duty.webp",
     },
     {
       game: "Oregon Trail",
-      note: "You Have Died of Dysentery",
+      note: "You Have Successfully Reached Oregon",
       image: "/oregon-trail.webp",
     },
     {
       game: "Metal Gear Solid",
-      note: "Snake? Snake! SNAKE!",
+      note: "Mission Complete, Well Done Snake!",
       image: "/mgs.webp",
     },
     {
       game: "Street Fighter",
-      note: "You Lose",
+      note: "You Win!",
       image: "/street-fighter.webp",
     },
-    { game: "XCOM", note: "Squad Wiped Out", image: "/xcom.webp" },
+    {
+      game: "XCOM",
+      note: "Mission Successful, Squad Victorious",
+      image: "/xcom.webp",
+    },
     {
       game: "Diablo",
-      note: "Your Deeds of Valor Will Be Remembered",
+      note: "You Have Defeated the Lord of Terror",
       image: "/diablo.webp",
     },
     {
       game: "Fable",
-      note: "Reload Last Checkpoint",
+      note: "Quest Complete, Hero of Albion",
       image: "/fable.webp",
     },
     {
       game: "Mass Effect",
-      note: "Critical Mission Failure",
+      note: "Mission Accomplished, Galaxy Saved",
       image: "/mass-effect.webp",
     },
     {
       game: "Borderlands",
-      note: "Fight for Your Life",
+      note: "Vault Hunter, Mission Complete",
       image: "/borderlands.webp",
     },
   ];

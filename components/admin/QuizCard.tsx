@@ -12,6 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -45,6 +54,9 @@ interface Quiz {
 interface Student {
   id: string;
   name: string;
+  rank: string;
+  last_name: string;
+  first_name: string;
 }
 
 const calculateInitialTimeRemaining = (quiz: Quiz): number => {
@@ -72,6 +84,7 @@ const FormSchema = z.object({
 export default function QuizCard({
   quiz,
   studentList,
+  quizAnswers,
 }: {
   quiz: Quiz;
   studentList: Student[];
@@ -83,7 +96,7 @@ export default function QuizCard({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      selectedStudents: studentList.map((student) => student.id), // default to all students
+      selectedStudents: studentList.map((student) => student.id),
     },
   });
 
@@ -121,11 +134,91 @@ export default function QuizCard({
   }
 
   const handleSelectAll = () => {
-    form.setValue(
-      "selectedStudents",
-      students.map((student) => student.id),
-    );
+    const currentSelected = form.getValues("selectedStudents") || [];
+    if (currentSelected.length === students.length) {
+      // All students are currently selected, so deselect all
+      form.setValue("selectedStudents", []);
+    } else {
+      // Not all students are selected, so select all
+      form.setValue(
+        "selectedStudents",
+        students.map((student) => student.id),
+      );
+    }
   };
+
+  function calculateScore(quiz: Quiz, student: Student, quizAnswers: any[]) {
+    console.log(quizAnswers, quiz, student);
+
+    // Filter quiz answers by student ID and quiz ID
+    const studentAnswers = quizAnswers.filter(
+      (answer) =>
+        answer.expand.user.id === student.id &&
+        answer.expand.quiz.id === quiz.id,
+    );
+
+    // Group answers by attempt ID
+    const attempts = studentAnswers.reduce((acc, answer) => {
+      const attemptId = answer.expand.attempt.id;
+      if (!acc[attemptId]) {
+        acc[attemptId] = [];
+      }
+      acc[attemptId].push(answer);
+      return acc;
+    }, {});
+
+    // Get an array of attempt entries and sort by creation date
+    const sortedAttempts = Object.entries(attempts).sort((a, b) => {
+      const dateA = new Date(a[1][0].expand.attempt.created);
+      const dateB = new Date(b[1][0].expand.attempt.created);
+      return dateA - dateB;
+    });
+
+    // Calculate score for each attempt
+    const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
+      let score = 0;
+      attemptAnswers.forEach((answer) => {
+        const correctOptions = answer.expand.question.correct_options;
+        if (correctOptions && Array.isArray(answer.answer)) {
+          // Check if every answer provided by the student matches a correct option
+          const isCorrect = answer.answer.every((ans) =>
+            correctOptions.includes(ans),
+          );
+          if (isCorrect) {
+            score++;
+          }
+        }
+      });
+      return score;
+    });
+
+    return scores;
+  }
+
+  function checkQuizStatus(quiz, student, quizAnswers) {
+    // Check if the quiz is currently running for the student
+    let runningSession = quizAnswers.some(
+      (answer) =>
+        answer.expand.user.id === student.id &&
+        answer.expand.quiz.id === quiz.id &&
+        !answer.expand.attempt.expired &&
+        !answer.expand.attempt.submitted,
+    );
+
+    if (runningSession) return "Running";
+
+    // Check if the student has completed the quiz
+    let quizTaken = quizAnswers.some(
+      (answer) =>
+        answer.expand.user.id === student.id &&
+        answer.expand.quiz.id === quiz.id &&
+        answer.expand.attempt.submitted,
+    );
+
+    if (quizTaken) return "Completed";
+
+    return "Not Attempted";
+  }
 
   return (
     <Card key={quiz.id}>
@@ -169,49 +262,81 @@ export default function QuizCard({
                   <DialogDescription>
                     Select students to start the quiz for:
                     <div className="mt-4">
-                      <Button type="button" onClick={handleSelectAll}>
-                        Select All Students
-                      </Button>
-                      <div className="grid grid-cols-3">
-                        {students.map((student) => (
-                          <FormField
-                            key={student.id}
-                            control={form.control}
-                            name="selectedStudents"
-                            render={({ field }) => (
-                              <FormItem
-                                key={student.id}
-                                className="flex items-center space-x-3"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value.includes(student.id)}
-                                    onCheckedChange={(checked) => {
-                                      return checked
-                                        ? field.onChange([
-                                            ...field.value,
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Select</TableHead>
+                            <TableHead>ID</TableHead>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Quiz Status</TableHead>
+                            <TableHead>Score</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {students.map((student) => (
+                            <TableRow key={student.id}>
+                              <TableCell>
+                                <FormField
+                                  key={student.id}
+                                  control={form.control}
+                                  name="selectedStudents"
+                                  render={({ field }) => (
+                                    <FormItem
+                                      key={student.id}
+                                      className="flex items-center space-x-3"
+                                    >
+                                      <FormControl>
+                                        <Checkbox
+                                          checked={field.value.includes(
                                             student.id,
-                                          ])
-                                        : field.onChange(
-                                            field.value.filter(
-                                              (id) => id !== student.id,
-                                            ),
-                                          );
-                                    }}
-                                  />
-                                </FormControl>
-                                <FormLabel className="text-sm font-normal">
-                                  {student.rank +
-                                    " " +
-                                    student.last_name +
-                                    ", " +
-                                    student.first_name}
-                                </FormLabel>
-                              </FormItem>
-                            )}
-                          />
-                        ))}
-                      </div>
+                                          )}
+                                          onCheckedChange={(checked) => {
+                                            return checked
+                                              ? field.onChange([
+                                                  ...field.value,
+                                                  student.id,
+                                                ])
+                                              : field.onChange(
+                                                  field.value.filter(
+                                                    (id) => id !== student.id,
+                                                  ),
+                                                );
+                                          }}
+                                        />
+                                      </FormControl>
+                                    </FormItem>
+                                  )}
+                                />
+                              </TableCell>
+                              <TableCell>{student.id}</TableCell>
+                              <TableCell>
+                                {student.rank} {student.last_name},{" "}
+                                {student.first_name}
+                              </TableCell>
+                              <TableCell>
+                                {checkQuizStatus(quiz, student, quizAnswers)}
+                              </TableCell>
+                              <TableCell>
+                                <TableCell>
+                                  {calculateScore(quiz, student, quizAnswers)
+                                    .map(
+                                      (score) =>
+                                        `${score}/${quiz.questions.length}`,
+                                    )
+                                    .join(" | ")}
+                                </TableCell>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                      <Button
+                        className="mt-4"
+                        type="button"
+                        onClick={handleSelectAll}
+                      >
+                        Select All
+                      </Button>
                       <FormMessage />
                     </div>
                   </DialogDescription>
@@ -220,13 +345,6 @@ export default function QuizCard({
                   </DialogFooter>
                 </form>
               </Form>
-            )}
-            {quizState && (
-              <DialogFooter>
-                <Button onClick={() => handleQuizState("stop", quiz)}>
-                  Stop Quiz
-                </Button>
-              </DialogFooter>
             )}
           </DialogContent>
         </Dialog>

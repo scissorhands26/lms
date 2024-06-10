@@ -275,7 +275,8 @@
     {
       "label": "Resolving IP Addresses Exercise",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1",
+      "link": "/c3/exercises/01-resolving-ip-addresses"
     },
     {
       "label": "Lunch",

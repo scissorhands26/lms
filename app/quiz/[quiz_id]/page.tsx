@@ -2,6 +2,8 @@ import QuestionCard from "@/components/quiz/QuestionCard";
 import getPb from "@/pb/getPb";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function Component() {
   const pb = await getPb();
 
@@ -16,12 +18,14 @@ export default async function Component() {
   });
 
   // check if quiz is expired
-  if (
-    attempt[0].expand.quiz.time_allowed <
-    new Date() - new Date(attempt[0].created)
-  ) {
-    redirect("/quiz/expired");
-  }
+  // if (
+  //   attempt[0].expand.quiz.time_allowed <
+  //   new Date() - new Date(attempt[0].created)
+  // ) {
+  //   redirect("/quiz/expired");
+  // }
+
+  if (attempt[0].expired) redirect("/quiz/expired");
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6">
