@@ -8,12 +8,12 @@ HTTP is a protocol that allows the fetching of resources, such as HTML documents
 
 #### Quick Facts
 
-| Port Number | Protocol | Description     | Secure Version | Secure Port | Methods                                                         |
-| ----------- | -------- | --------------- | -------------- | ----------- | --------------------------------------------------------------- |
-| 80          | TCP      | HTTP            | HTTPS          | 443         | GET, POST, PUT, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH    |
-| 443         | TCP      | HTTPS           | -              | -           | Same as HTTP methods but over a secure connection using TLS/SSL |
-| 8080        | TCP      | HTTP Alternate  | -              | -           | Often used for testing HTTP servers or as a proxy port          |
-| 8443        | TCP      | HTTPS Alternate | -              | -           | Often used for HTTPS testing and alternate secure HTTP traffic  |
+| Port Number | Protocol | Description     | Methods                                                         |
+| ----------- | -------- | --------------- | --------------------------------------------------------------- |
+| 80          | TCP      | HTTP            | GET, POST, PUT, DELETE, HEAD, OPTIONS, CONNECT, TRACE, PATCH    |
+| 443         | TCP      | HTTPS           | Same as HTTP methods but over a secure connection using TLS/SSL |
+| 8080        | TCP      | HTTP Alternate  | Often used for testing HTTP servers or as a proxy port          |
+| 8443        | TCP      | HTTPS Alternate | Often used for HTTPS testing and alternate secure HTTP traffic  |
 
 #### HTTP Methods
 
@@ -93,26 +93,55 @@ Remote access is the ability to access a computer or a network remotely. It enab
 
 ### Quick Facts
 
-| Method | Port | Protocol | Platform | Description                                        |
-| ------ | ---- | -------- | -------- | -------------------------------------------------- |
-| Telnet | 23   | TCP      | Any      | Text-based protocol for remote access              |
-| SSH    | 22   | TCP      | Any      | Secure protocol for remote access                  |
-| VNC    | 5900 | TCP      | Any      | Provides a Desktop GUI interface                   |
-| RDP    | 3389 | TCP      | Windows  | Provides a Desktop GUI interface                   |
-| WinRM  | 5985 | TCP      | Windows  | Microsoft implementation of WS-Management Protocol |
+| Application | Port | Protocol | Platform | Description                                        |
+| ----------- | ---- | -------- | -------- | -------------------------------------------------- |
+| Telnet      | 23   | TCP      | Any      | Text-based protocol for remote access              |
+| SSH         | 22   | TCP      | Any      | Secure protocol for remote access                  |
+| VNC         | 5900 | TCP      | Any      | Provides a Desktop GUI interface                   |
+| RDP         | 3389 | TCP      | Windows  | Provides a Desktop GUI interface                   |
+| WinRM       | 5985 | TCP      | Windows  | Microsoft implementation of WS-Management Protocol |
 
 ### Telnet
 
 Telnet is a network protocol that allows a user on one computer to log into another computer that is part of the same network. Once logged in, the user can execute commands on the remote computer. Telnet is a text-based protocol, which means that all communication is done using text.
 
+```bash
+# Connect to a remote server using Telnet
+telnet hostname port
+```
+
 ### Secure Shell (SSH)
 
 Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. The best known example application is for remote login to computer systems by users. SSH provides a secure channel over an unsecured network in a client-server architecture, connecting an SSH client application with an SSH server.
+
+```bash
+# Connect to a remote server using SSH
+ssh -p port username@hostname
+```
+
+### Virtual Network Computing (VNC)
+
+Virtual Network Computing (VNC) is a graphical desktop-sharing system that uses the Remote Frame Buffer protocol (RFB) to remotely control another computer. It transmits the keyboard and mouse events from one computer to another, relaying the graphical screen updates back in the other direction, over a network.
+
+```bash
+# Connect to a remote server using VNC
+vncviewer hostname:port
+```
 
 ### Remote Desktop Protocol (RDP)
 
 Remote Desktop Protocol (RDP) is a proprietary protocol developed by Microsoft, which provides a user with a graphical interface to connect to another computer over a network connection. The user employs RDP client software for this purpose, while the other computer must run RDP server software.
 
+```powershell
+# Connect to a remote server using RDP
+mstsc /v:hostname
+```
+
 ### Windows Remote Management (WinRM)
 
 Windows Remote Management (WinRM) is a Microsoft implementation of WS-Management Protocol, a standard Simple Object Access Protocol (SOAP)-based, firewall-friendly protocol that allows hardware and operating systems, from different vendors, to interoperate. WinRM is Microsoft's implementation of WS-Management, a standard Simple Object Access Protocol (SOAP)-based, firewall-friendly protocol that allows hardware and operating systems, from different vendors, to interoperate.
+
+```powershell
+# Run a command on a remote server using WinRM
+Invoke-Command -ComputerName hostname -ScriptBlock { Get-Process }
+```

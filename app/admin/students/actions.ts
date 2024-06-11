@@ -13,17 +13,32 @@ async function handleCreateStudent(formData: FormData) {
 
   const pb = await getPb();
 
+  function generateUsername() {
+    return rank + "_" + last_name + Math.floor(Math.random() * 1000);
+  }
+
+  function getToday() {
+    const today = new Date();
+    return today.toISOString();
+  }
+
   const data = {
+    username: generateUsername(),
+    email,
+    emailVisibility: true,
     password,
     passwordConfirm: password,
-    email,
-    last_name,
+    name: first_name + " " + last_name,
     first_name,
-    branch,
-    mos,
+    last_name,
     rank,
+    mos,
     birthdate,
-    roles: ["k4punq9hul00961"],
+    enrolled_date: getToday(),
+    courses: ["pwlhokhlenxh027"],
+    roles: "k4punq9hul00961",
+    last_login: "2022-01-01 10:00:00.123Z",
+    branch: "jrj8uvdrf4stx4d",
   };
 
   const record = await pb.collection("users").create(data);

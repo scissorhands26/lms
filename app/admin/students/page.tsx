@@ -61,17 +61,15 @@ async function getStudents() {
       mos: user.mos,
       name: user.name,
       rank: user.rank,
-      roles: user.expand?.roles,
+      role: user.expand?.roles,
       updated: user.updated,
       username: user.username,
       verified: user.verified,
     };
 
-    student.roles.forEach((role) => {
-      if (role.name === "student") {
-        students.push(student);
-      }
-    });
+    console.log(student.role);
+
+    if (student.role.name === "student") students.push(student);
   });
 
   return students;

@@ -780,7 +780,8 @@
     {
       "label": "Malware",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/malware"
     },
     {
       "label": "Break",

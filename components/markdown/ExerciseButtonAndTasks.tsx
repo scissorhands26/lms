@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import PocketBase from "pocketbase";
 import Cookies from "js-cookie";
-import { CircleHelp } from "lucide-react";
+import { CircleCheck, CircleHelp, CircleX } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -40,6 +40,7 @@ export default function ApiButton() {
       .join(" ") || "";
 
   const exerciseID = `Exercise${pathName[0]}${pathName[1]}`;
+  const prettyExerciseID = `Exercise ${pathName[0]}${pathName[1]}`;
 
   const fetchUserAndExercise = async () => {
     const currentUser = await GetUser();
@@ -155,22 +156,24 @@ export default function ApiButton() {
   return (
     <Card className="bg-transparent">
       <CardHeader>
-        <CardTitle>{exerciseID}</CardTitle>
+        <CardTitle className="flex flex-row items-center justify-between">
+          {prettyExerciseID}
+          <div className="flex items-center">
+            {exercise && !loading ? (
+              <Button onClick={stopSession}>Stop instance</Button>
+            ) : (
+              <Button onClick={launchOrGetSession} disabled={loading}>
+                {loading
+                  ? active
+                    ? "Shutting down..."
+                    : "Launching..."
+                  : "Launch instance"}
+              </Button>
+            )}
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center">
-          {exercise && !loading ? (
-            <Button onClick={stopSession}>Stop instance</Button>
-          ) : (
-            <Button onClick={launchOrGetSession} disabled={loading}>
-              {loading
-                ? active
-                  ? "Shutting down..."
-                  : "Launching..."
-                : "Launch instance"}
-            </Button>
-          )}
-        </div>
         {error && <p className="mt-2 text-red-500">{error}</p>}
         {loading && (
           <div className="mt-4 rounded border border-white p-2">
@@ -180,7 +183,16 @@ export default function ApiButton() {
         )}
         {exercise && !loading && (
           <div className="mt-4 rounded border border-white p-2">
-            <QuickCopy snippet={exercise.command} title="Command" />
+            <QuickCopy
+              snippet={(() => {
+                const parts = exercise.command.split(" ");
+                if (parts[0] === "ssh") {
+                  parts.splice(1, 0, "-o", "StrictHostKeyChecking=no");
+                }
+                return parts.join(" ");
+              })()}
+              title="Command"
+            />
             <QuickCopy snippet={exercise.password} title="Password" />
           </div>
         )}
@@ -203,19 +215,26 @@ export default function ApiButton() {
                     <div className="flex flex-row items-center">
                       {data[key].completed ? (
                         <span className="text-green-700 dark:text-green-500">
-                          Completed
+                          <CircleCheck />
                         </span>
                       ) : (
                         <span className="text-red-700 dark:text-red-500">
-                          Not Completed
+                          <CircleX />
                         </span>
                       )}
                       <Popover>
                         <PopoverTrigger>
-                          <CircleHelp className="m-2" />
+                          <CircleHelp className="m-2 text-white" />
                         </PopoverTrigger>
-                        <PopoverContent>
-                          {data[key]?.expand?.task?.hint || "N/A"}
+                        <PopoverContent className="w-80">
+                          <div className="grid gap-4">
+                            <div className="space-y-2">
+                              <h4 className="font-medium leading-none">Hint</h4>
+                              <p className="text-sm text-muted-foreground">
+                                {data[key]?.expand?.task?.hint || "N/A"}
+                              </p>
+                            </div>
+                          </div>
                         </PopoverContent>
                       </Popover>
                     </div>
