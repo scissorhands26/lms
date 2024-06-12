@@ -1,0 +1,183 @@
+import BlockDiagram from "@/components/markdown/BlockDiagram";
+
+## The OSI Model
+
+Understanding the OSI Model is fundamental for anyone involved in networking and cybersecurity. This is an overview of the OSI Model, its layers, and the significance of this framework in ensuring effective communication and troubleshooting within networks.
+
+## Introduction to the OSI Model
+
+The OSI (Open Systems Interconnection) Model is a conceptual framework used to understand and implement network protocols in seven layers. It was developed by the International Organization for Standardization (ISO) in 1984 and is still widely used today to help describe and standardize the functions of a telecommunication or computing system without regard to its underlying internal structure and technology.
+
+## The Seven Layers of the OSI Model
+
+### Layer 1: Physical Layer
+
+The Physical Layer is the first layer of the OSI Model. It is responsible for the physical connection between devices. This layer includes the hardware elements involved in the network, such as cables, switches, and network interface cards. It deals with the transmission and reception of raw bit streams over a physical medium.
+
+### Layer 2: Data Link Layer
+
+The Data Link Layer is the second layer of the OSI Model. It is responsible for node-to-node data transfer and error detection and correction. This layer ensures that data transferred across the physical layer is free of errors. It is divided into two sub-layers: the Logical Link Control (LLC) and the Media Access Control (MAC).
+
+### Layer 3: Network Layer
+
+The Network Layer is the third layer of the OSI Model. It is responsible for determining the best physical path for data to reach its destination. This layer deals with logical addressing, routing, and packet forwarding. Routers operate at this layer.
+
+### Layer 4: Transport Layer
+
+The Transport Layer is the fourth layer of the OSI Model. It provides reliable data transfer services to the upper layers. This layer is responsible for end-to-end communication and error recovery. It ensures complete data transfer. Common protocols operating at this layer include TCP (Transmission Control Protocol) and UDP (User Datagram Protocol).
+
+### Layer 5: Session Layer
+
+The Session Layer is the fifth layer of the OSI Model. It manages and controls the connections between computers. This layer is responsible for establishing, managing, and terminating connections between applications. It also synchronizes data exchange.
+
+### Layer 6: Presentation Layer
+
+The Presentation Layer is the sixth layer of the OSI Model. It translates data between the application layer and the network format. This layer is responsible for data encryption, decryption, compression, and decompression. It ensures that data is presented in a readable format for the application layer.
+
+### Layer 7: Application Layer
+
+The Application Layer is the seventh and final layer of the OSI Model. It provides network services directly to end-user applications. This layer is responsible for network services such as file transfers, email, and other network software services. Common protocols at this layer include HTTP, FTP, SMTP, and DNS.
+
+## Visual Representation of the OSI Model
+
+<BlockDiagram
+  colCount={8}
+  rows={[
+    [
+      {
+        label: "Application",
+        description: "Layer 7",
+        length: 8,
+        className: "dark:bg-red-700 bg-red-300",
+      },
+      {
+        label: "Presentation",
+        description: "Layer 6",
+        length: 8,
+        className: "dark:bg-orange-700 bg-orange-300",
+      },
+      {
+        label: "Session",
+        description: "Layer 5",
+        length: 8,
+        className: "dark:bg-yellow-700 bg-yellow-300",
+      },
+      {
+        label: "Transport",
+        description: "Layer 4",
+        length: 8,
+        className: "dark:bg-green-700 bg-green-300",
+      },
+      {
+        label: "Network",
+        description: "Layer 3",
+        length: 8,
+        className: "dark:bg-blue-700 bg-blue-300",
+      },
+      {
+        label: "Data Link",
+        description: "Layer 2",
+        length: 8,
+        className: "dark:bg-indigo-700 bg-indigo-300",
+      },
+      {
+        label: "Physical",
+        description: "Layer 1",
+        length: 8,
+        className: "dark:bg-purple-700 bg-purple-300",
+      },
+    ],
+
+]}
+/>
+
+## The TCP/IP Model
+
+Understanding the TCP/IP Model is essential for anyone involved in networking and cybersecurity. This provides an overview of the TCP/IP Model, its layers, and the importance of this framework in modern network communications.
+
+## Introduction to the TCP/IP Model
+
+The TCP/IP (Transmission Control Protocol/Internet Protocol) Model is a set of communication protocols used for the Internet and similar networks. It is named after two of its main protocols, TCP and IP, and it defines how data should be packetized, addressed, transmitted, routed, and received. Unlike the OSI Model, the TCP/IP Model has four layers.
+
+## The Four Layers of the TCP/IP Model
+
+### Layer 1: Link Layer
+
+The Link Layer is the first layer of the TCP/IP Model. It corresponds to the Physical and Data Link layers of the OSI Model. This layer is responsible for the physical transmission of data between devices on the same network. It deals with the hardware addressing and the actual medium of data transfer, such as Ethernet cables or Wi-Fi.
+
+### Layer 2: Internet Layer
+
+The Internet Layer is the second layer of the TCP/IP Model. It is responsible for logical addressing and routing. This layer ensures that data packets are sent from the source to the destination network. The primary protocol in this layer is the Internet Protocol (IP), which includes IPv4 and IPv6.
+
+### Layer 3: Transport Layer
+
+The Transport Layer is the third layer of the TCP/IP Model. It provides end-to-end communication services for applications. This layer is responsible for data integrity, error correction, and flow control. The main protocols operating at this layer are Transmission Control Protocol (TCP) and User Datagram Protocol (UDP).
+
+### Layer 4: Application Layer
+
+The Application Layer is the fourth and final layer of the TCP/IP Model. It provides application-level services and interfaces directly with the software applications. This layer includes protocols used for specific applications such as HTTP, FTP, SMTP, and DNS. It corresponds to the Application, Presentation, and Session layers of the OSI Model.
+
+## Comparison of OSI and TCP/IP Models
+
+Why do we have two models? The OSI Model is more abstract and general, while the TCP/IP Model is more specific and practical. The OSI Model includes separate Presentation and Session layers, while the TCP/IP Model combines them into the Application layer.
+
+We need both the OSI and TCP/IP models to understand network communications fully. Here are some key differences between the two models:
+
+| OSI Model                                         | TCP/IP Model                                                 |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| Seven layers                                      | Four layers                                                  |
+| Standardized by ISO                               | Standardized by IETF                                         |
+| More abstract and general                         | More specific and practical                                  |
+| Includes separate Presentation and Session layers | Combines Presentation and Session into the Application layer |
+
+## Real-world Application
+
+### Practical Use Cases
+
+- **Network Design**: Both models guide network architecture design and the selection of appropriate protocols and technologies.
+- **Troubleshooting**: Helps isolate and address network issues by identifying the problematic layer.
+- **Security**: Understanding vulnerabilities and implementing security measures at each layer.
+
+### Example Scenario
+
+When diagnosing a network issue where a user cannot access a web page:
+
+1. **Physical Layer**: Check the physical connection (cables, switches).
+2. **Data Link Layer**: Verify MAC addresses and ARP tables.
+3. **Network Layer**: Ensure proper IP configuration and routing.
+4. **Transport Layer**: Check TCP/UDP ports and firewall settings.
+5. **Application Layer**: Examine the application server and services.
+
+## Visual Representation of the TCP/IP Model
+
+<BlockDiagram
+  colCount={8}
+  rows={[
+    [
+      {
+        label: "Application",
+        description: "Layer 4",
+        length: 8,
+        className: "dark:bg-red-700 bg-red-300",
+      },
+      {
+        label: "Transport",
+        description: "Layer 3",
+        length: 8,
+        className: "dark:bg-green-700 bg-green-300",
+      },
+      {
+        label: "Internet",
+        description: "Layer 2",
+        length: 8,
+        className: "dark:bg-blue-700 bg-blue-300",
+      },
+      {
+        label: "Link",
+        description: "Layer 1",
+        length: 8,
+        className: "dark:bg-purple-700 bg-purple-300",
+      },
+    ],
+  ]}
+/>

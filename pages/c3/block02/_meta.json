@@ -1,7 +1,16 @@
 {
   "mail-and-ftp-protocols": "Mail and FTP Protocols",
   "web-and-remote-access": "Web and Remote Access",
+  "encryption": "Encryption",
+  "secure-protocols": "Secure Protocols",
+  "dns-and-dhcp": "DNS and DHCP",
+  "dns-records": "DNS Records",
+  "dns-security": "DNS Security",
+  "network-security": "Network Security",
+  "network-mapping": "Network Mapping",
+  "ipv6": "IPv6",
   "windows-fundamentals": "Windows Fundamentals",
   "linux-fundamentals": "Linux Fundamentals",
-  "malware": "Malware"
+  "malware": "Malware",
+  "attacks-and-malicious-activity": "Attacks and Malicious Activity"
 }

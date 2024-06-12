@@ -23,7 +23,7 @@ import Link from "next/link";
 async function getContent() {
   const pb = await getPb();
   const content = await pb.collection("content").getFullList({
-    sort: "-created",
+    sort: "day,lesson",
   });
 
   return content;

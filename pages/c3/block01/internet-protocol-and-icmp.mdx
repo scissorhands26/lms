@@ -1,0 +1,141 @@
+import BlockDiagram from "@/components/markdown/BlockDiagram";
+
+## Internet Protocol
+
+Internet Protocol (IP) is a fundamental protocol in the suite of internet protocols responsible for relaying segments or datagrams across network boundaries. It provides addressing and routing functions that ensure data packets are sent from the source to the correct destination.
+
+### IP Protocol Function
+
+| Function   | Description                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| Addressing | Assigns unique addresses to devices on a network, enabling proper identification and communication.            |
+| Routing    | Determines the best path for data packets to travel across interconnected networks to reach their destination. |
+
+## IP Header Structure
+
+The IP header contains several fields that are used to manage the transmission of data across the network. These fields include:
+
+- **Version**: The version of the IP protocol being used (IPv4 or IPv6).
+- **Header Length**: The length of the IP header in 32-bit words.
+- **Type of Service**: Information about the quality of service requested for the packet.
+- **Payload Length**: The length of the payload data in bytes.
+- **Identification**: A unique identifier for the packet.
+- **Flags**: Control flags used to manage packet fragmentation.
+- **Fragment Offset**: The offset of the fragment within the original packet.
+- **Time To Live**: The maximum number of hops the packet can take before being discarded.
+- **Protocol**: The protocol used in the payload data (e.g., TCP, UDP).
+- **Header Checksum**: A checksum used to verify the integrity of the header.
+- **Source Address**: The IP address of the sender.
+- **Destination Address**: The IP address of the recipient.
+
+### IP Diagram
+
+<BlockDiagram
+  colCount={32}
+  rows={[
+    [
+      {
+        label: "Version",
+        description: "4 bits",
+        length: 4,
+        className: "dark:bg-red-700 bg-red-300",
+      },
+      {
+        label: "Header Length",
+        description: "4 bits",
+        length: 4,
+        className: "dark:bg-green-700 bg-green-300",
+      },
+      {
+        label: "Type of Service",
+        description: "8 bits",
+        length: 8,
+        className: "dark:bg-blue-700 bg-blue-300",
+      },
+      {
+        label: "Payload length",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-yellow-700 bg-yellow-300",
+      },
+    ],
+    [
+      {
+        label: "Identification",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-purple-700 bg-purple-300",
+      },
+      {
+        label: "Flags",
+        description: "3 bits",
+        length: 3,
+        className: "dark:bg-pink-700 bg-pink-300",
+      },
+      {
+        label: "Fragment Offset",
+        description: "13 bits",
+        length: 13,
+        className: "dark:bg-teal-700 bg-teal-300",
+      },
+      {
+        label: "Time To Live",
+        description: "8 bits",
+        length: 8,
+        className: "dark:bg-orange-700 bg-orange-300",
+      },
+      {
+        label: "Protocol",
+        description: "8 bits",
+        length: 8,
+        className: "dark:bg-lime-700 bg-lime-300",
+      },
+      {
+        label: "Header Checksum",
+        description: "16 bits",
+        length: 16,
+        className: "dark:bg-indigo-700 bg-indigo-300",
+      },
+    ],
+    [
+      {
+        label: "Source address",
+        description: "32 bits",
+        length: 32,
+        className: "dark:bg-cyan-700 bg-cyan-300",
+      },
+    ],
+    [
+      {
+        label: "Destination address",
+        description: "32 bits",
+        length: 32,
+        className: "dark:bg-rose-700 bg-rose-300",
+      },
+    ],
+  ]}
+/>
+
+## ICMP Protocol
+
+ICMP, or internet control message protocol, is used for error reporting and diagnostic functions in IP networks. It is essential for network troubleshooting and management.
+
+### Using ICMP
+
+The `ping` command uses ICMP Echo Request and Echo Reply messages to test network connectivity.
+
+```
+# Ping and IP address
+ping 127.0.0.1
+
+# Ping a domain name
+ping google.com
+```
+
+### ICMP Message Types
+
+| Type                    | Description                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| Echo Request/Reply      | Used by the ping command to test network connectivity.                                       |
+| Destination Unreachable | Indicates that a destination cannot be reached due to various issues (e.g., protocol, port). |
+| Time Exceeded           | Sent when a packet's Time to Live (TTL) expires, commonly used in traceroute operations.     |

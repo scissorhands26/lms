@@ -259,7 +259,7 @@
       "label": "TCP/IP & OSI Model",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
-      "link": "/c3/block01/tcpip"
+      "link": "/c3/block01/osi-tcpip"
     },
     {
       "label": "Break",
@@ -391,7 +391,7 @@
       "label": "TCP and UDP",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
-      "link": "/c3/block01/tcp"
+      "link": "/c3/block01/tcp-udp"
     },
     {
       "label": "Wireshark Exercise",
@@ -552,7 +552,8 @@
     {
       "label": "Encryption Part 1",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/encryption"
     },
     {
       "label": "Break",
@@ -562,7 +563,8 @@
     {
       "label": "Encryption Part 2",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/encryption"
     },
     {
       "label": "Encryptng Files Exercise",
@@ -577,7 +579,8 @@
     {
       "label": "Secure Protocols",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/secure-protocols"
     },
     {
       "label": "Break",
@@ -609,7 +612,8 @@
     {
       "label": "DNS Overview and DHCP",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/dns-and-dhcp"
     },
     {
       "label": "Break",
@@ -619,7 +623,8 @@
     {
       "label": "DNS Records",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/dns-records"
     },
     {
       "label": "DNS Resolution Exercise",
@@ -634,7 +639,8 @@
     {
       "label": "DNS Security",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/dns-security"
     },
     {
       "label": "Break",
@@ -642,7 +648,7 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "DNS and DHCP Configuration Lab",
+      "label": "DNS/DHCP Configuration Lab",
       "length": 4,
       "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
     },
@@ -791,7 +797,8 @@
     {
       "label": "Attacks and Malicious Activity",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block02/attacks-and-malicious-activity"
     },
     {
       "label": "Malware Analysis Lab",

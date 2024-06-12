@@ -5,14 +5,15 @@
   "cnmf-work-roles": "CNMF Work Roles",
   "mitre": "MITRE ATT&CK Framework",
   "apt-ttp-analysis": "APT TTP Analysis",
-  "osi": "OSI Model",
-  "tcpip": "TCP/IP Model",
+  "osi-tcpip": "OSI and TCP/IP Model",
   "arp-mac-and-ip-addresses": "ARP, MAC, and IP Addresses",
   "bridges-switches-and-modems": "Bridges, Switches, and Modems",
-  "tcp": "Transmission Control Protocol",
-  "udp": "User Datagram Protocol",
+  "routers-and-access-points": "Routers and Access Points",
+  "subnetting-and-cidr": "Subnetting and CIDR",
+  "network-topology": "Network Topology",
+  "internet-protocol-and-icmp": "Internet Protocol and ICMP",
+  "tcp-udp": "TCP and UDP",
   "processes-and-services": "Processes and Services",
   "network-administration": "Network Administration",
-  "servers-and-services": "Servers and Services",
-  "ip": "Internet Protocol"
+  "servers-and-services": "Servers and Services"
 }
