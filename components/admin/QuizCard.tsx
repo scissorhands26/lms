@@ -261,21 +261,23 @@ export default function QuizCard({
                 >
                   <DialogDescription>
                     Select students to start the quiz for:
-                    <div className="mt-4">
+                    <div className="mt-4 items-start">
                       <Table>
                         <TableHeader>
                           <TableRow>
-                            <TableHead>Select</TableHead>
-                            <TableHead>ID</TableHead>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Quiz Status</TableHead>
-                            <TableHead>Score</TableHead>
+                            <TableHead className="m-0 p-0">Select</TableHead>
+                            <TableHead className="m-0 p-0">ID</TableHead>
+                            <TableHead className="m-0 p-0">Name</TableHead>
+                            <TableHead className="m-0 p-0">
+                              Quiz Status
+                            </TableHead>
+                            <TableHead className="m-0 p-0">Score</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
                           {students.map((student) => (
-                            <TableRow key={student.id}>
-                              <TableCell>
+                            <TableRow key={student.id} className="m-0 p-0">
+                              <TableCell className="p-2">
                                 <FormField
                                   key={student.id}
                                   control={form.control}
@@ -308,23 +310,23 @@ export default function QuizCard({
                                   )}
                                 />
                               </TableCell>
-                              <TableCell>{student.id}</TableCell>
-                              <TableCell>
+                              <TableCell className="m-0 p-0">
+                                {student.id}
+                              </TableCell>
+                              <TableCell className="m-0 p-0">
                                 {student.rank} {student.last_name},{" "}
                                 {student.first_name}
                               </TableCell>
-                              <TableCell>
+                              <TableCell className="m-0 p-0">
                                 {checkQuizStatus(quiz, student, quizAnswers)}
                               </TableCell>
-                              <TableCell>
-                                <TableCell>
-                                  {calculateScore(quiz, student, quizAnswers)
-                                    .map(
-                                      (score) =>
-                                        `${score}/${quiz.questions.length}`,
-                                    )
-                                    .join(" | ")}
-                                </TableCell>
+                              <TableCell className="m-0 p-0">
+                                {calculateScore(quiz, student, quizAnswers)
+                                  .map(
+                                    (score) =>
+                                      `${score}/${quiz.questions.length}`,
+                                  )
+                                  .join(" | ")}
                               </TableCell>
                             </TableRow>
                           ))}

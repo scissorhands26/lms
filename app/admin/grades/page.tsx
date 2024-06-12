@@ -1,32 +1,10 @@
 //@ts-nocheck
 
-import React from "react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import getPb from "@/pb/getPb";
+
 import {
   Dialog,
   DialogContent,
@@ -35,68 +13,112 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Plus } from "lucide-react";
-import getPb from "@/pb/getPb";
+import GradesTable from "@/components/admin/GradesTable";
+
+const calculateScore = (quiz, student, quizAnswers) => {
+  const studentAnswers = quizAnswers.filter(
+    (answer) =>
+      answer.expand.user.id === student.id && answer.expand.quiz.id === quiz.id,
+  );
+
+  const attempts = studentAnswers.reduce((acc, answer) => {
+    const attemptId = answer.expand.attempt.id;
+    if (!acc[attemptId]) {
+      acc[attemptId] = [];
+    }
+    acc[attemptId].push(answer);
+    return acc;
+  }, {});
+
+  const sortedAttempts = Object.entries(attempts).sort((a, b) => {
+    const dateA = new Date(a[1][0].expand.attempt.created);
+    const dateB = new Date(b[1][0].expand.attempt.created);
+    return dateA - dateB;
+  });
+
+  const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
+    let score = 0;
+    attemptAnswers.forEach((answer) => {
+      const correctOptions = answer.expand.question.correct_options;
+      if (correctOptions && Array.isArray(answer.answer)) {
+        const isCorrect = answer.answer.every((ans) =>
+          correctOptions.includes(ans),
+        );
+        if (isCorrect) {
+          score++;
+        }
+      }
+    });
+    return score;
+  });
+
+  return scores;
+};
 
 async function getGrades() {
   const pb = await getPb();
 
-  // Fetch all assignments
+  const students = await pb.collection("users").getFullList({
+    sort: "last_name",
+  });
+
   const assignments = await pb.collection("assignments").getFullList({
     sort: "-created",
     expand: "course",
   });
 
-  // Prepare a list of promises to fetch assignment answers
-  const assignmentPromises = assignments.map(async (assignment) => {
-    // Fetch all answers for the current assignment
-    const answers = await pb.collection("assignment_answers").getFullList({
-      sort: "-created",
-      filter: `assignment = "${assignment.id}"`,
-      expand: "student", // Expanding student details
-    });
-
-    // Group answers by student and calculate the grade for each student
-    const studentGrades = answers.reduce((acc, answer) => {
-      const studentId = answer.expand?.student.id;
-      if (!acc[studentId]) {
-        acc[studentId] = {
-          student_last_name: answer.expand?.student.last_name,
-          student_first_name: answer.expand?.student.first_name,
-          student_rank: answer.expand?.student.rank,
-          course_name: assignment.expand?.course.name,
-          assignment_name: assignment.name,
-          total: 0,
-          correct: 0,
-        };
-      }
-      acc[studentId].total += 1;
-      if (answer.correct) {
-        acc[studentId].correct += 1;
-      }
-      return acc;
-    }, {});
-
-    // Convert the student grades object to an array and calculate the percentage grade
-    return Object.values(studentGrades).map((student) => ({
-      student_last_name: student.student_last_name,
-      student_first_name: student.student_first_name,
-      student_rank: student.student_rank,
-      course_name: student.course_name,
-      assignment_name: student.assignment_name,
-      grade: (student.correct / student.total) * 100,
-    }));
+  const quizzes = await pb.collection("quizzes").getFullList({
+    sort: "-created",
+    expand: "course",
   });
 
-  // Wait for all promises to resolve and flatten the results
-  const results = (await Promise.all(assignmentPromises)).flat();
+  const assignmentAnswers = await pb
+    .collection("assignment_answers")
+    .getFullList({
+      sort: "-created",
+      expand: "student,assignment",
+    });
 
-  return results;
+  const quizAnswers = await pb.collection("quiz_answers").getFullList({
+    sort: "-created",
+    expand: "user,quiz,attempt,question",
+  });
+
+  const assignmentGrades = assignmentAnswers.map((answer) => {
+    const student = answer.expand.student;
+    const assignment = answer.expand.assignment;
+    const correct = answer.correct ? 1 : 0;
+    return {
+      student_id: student.id,
+      student_name: `${student.rank} ${student.last_name}, ${student.first_name}`,
+      assignment_name: assignment.name,
+      grade: (correct / 1) * 100,
+    };
+  });
+
+  const quizGrades = quizzes
+    .map((quiz) => {
+      return students.map((student) => {
+        const scores = calculateScore(quiz, student, quizAnswers);
+        const bestScore = Math.max(...scores);
+        return {
+          student_id: student.id,
+          student_name: `${student.rank} ${student.last_name}, ${student.first_name}`,
+          assignment_name: quiz.name,
+          grade: (bestScore / quiz.questions.length) * 100,
+        };
+      });
+    })
+    .flat();
+
+  const grades = [...assignmentGrades, ...quizGrades];
+
+  return { grades, students, assignments, quizzes };
 }
 
 export default async function GradesPage() {
-  const grades = await getGrades();
+  const { grades, students, assignments, quizzes } = await getGrades();
 
   return (
     <main className="flex-1 p-6">
@@ -137,78 +159,12 @@ export default async function GradesPage() {
         </Dialog>
       </div>
       <div className="mt-6 grid gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Student Grade Summary</CardTitle>
-            <CardDescription>
-              View and filter student grades by class, student, or assignment.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              <div className="flex items-center gap-4">
-                <Label htmlFor="class">Class</Label>
-                <Select defaultValue="all" id="class">
-                  <SelectTrigger>
-                    <SelectValue placeholder="All Classes" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Classes</SelectItem>
-                    <SelectItem value="math">Math</SelectItem>
-                    <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="science">Science</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Label htmlFor="student">Student</Label>
-                <Select defaultValue="all" id="student">
-                  <SelectTrigger>
-                    <SelectValue placeholder="All Students" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Students</SelectItem>
-                    <SelectItem value="john">John Doe</SelectItem>
-                    <SelectItem value="jane">Jane Smith</SelectItem>
-                    <SelectItem value="bob">Bob Johnson</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Label htmlFor="assignment">Assignment</Label>
-                <Select defaultValue="all" id="assignment">
-                  <SelectTrigger>
-                    <SelectValue placeholder="All Assignments" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Assignments</SelectItem>
-                    <SelectItem value="math-test">Math Test</SelectItem>
-                    <SelectItem value="english-essay">English Essay</SelectItem>
-                    <SelectItem value="science-lab">Science Lab</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Student</TableHead>
-                    <TableHead>Course</TableHead>
-                    <TableHead>Assignment</TableHead>
-                    <TableHead>Grade</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {grades.map((grade) => (
-                    <TableRow key={grade.id}>
-                      <TableCell>
-                        {grade.student_rank} {grade.student_last_name}
-                      </TableCell>
-                      <TableCell>{grade.course_name}</TableCell>
-                      <TableCell>{grade.assignment_name}</TableCell>
-                      <TableCell>{grade.grade}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
+        <GradesTable
+          dataGrades={grades}
+          dataStudents={students}
+          dataAssignments={assignments}
+          dataQuizzes={quizzes}
+        />
       </div>
     </main>
   );

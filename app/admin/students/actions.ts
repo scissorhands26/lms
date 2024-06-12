@@ -1,6 +1,6 @@
 import getPb from "@/pb/getPb";
 
-async function handleCreateStudent(formData: FormData) {
+export async function handleCreateStudent(formData: FormData) {
   "use server";
   const password = (formData.get("password") as string) ?? "";
   const email = (formData.get("email") as string) ?? "";
@@ -14,7 +14,7 @@ async function handleCreateStudent(formData: FormData) {
   const pb = await getPb();
 
   function generateUsername() {
-    return rank + "_" + last_name + Math.floor(Math.random() * 1000);
+    return rank + "_" + last_name + "_" + Math.floor(Math.random() * 1000);
   }
 
   function getToday() {
@@ -41,8 +41,12 @@ async function handleCreateStudent(formData: FormData) {
     branch: "jrj8uvdrf4stx4d",
   };
 
-  const record = await pb.collection("users").create(data);
-  console.log(record);
+  try {
+    const record = await pb.collection("users").create(data);
+    console.log(record);
+    return record;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 }
-
-export { handleCreateStudent };

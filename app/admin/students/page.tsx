@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -132,12 +133,7 @@ export default async function StudentsPage() {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="birthdate">Birthdate</Label>
-                  <Input
-                    id="birthdate"
-                    name="birthdate"
-                    placeholder="Enter student birthdate"
-                    type="text"
-                  />
+                  <Input id="birthdate" type="date" />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="branch">Branch</Label>
@@ -237,8 +233,6 @@ export default async function StudentsPage() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem>View Profile</DropdownMenuItem>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Enroll in Course</DropdownMenuItem>
-                      <DropdownMenuItem>Unenroll</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
