@@ -4,7 +4,7 @@ import { useConfig } from "nextra-theme-docs";
 export default {
   logo: <span>C3</span>,
   project: {
-    link: "https://localhost:3000/profile",
+    link: "https://c3.cnmfu.local/profile",
     icon: (
       <svg
         width="24"

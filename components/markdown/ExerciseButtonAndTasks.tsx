@@ -10,12 +10,19 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import PocketBase from "pocketbase";
 import Cookies from "js-cookie";
-import { CircleCheck, CircleHelp, CircleX } from "lucide-react";
+import { CircleCheck, CircleHelp, CircleX, Minus, Plus } from "lucide-react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Input } from "../ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function ApiButton() {
   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -78,10 +85,12 @@ export default function ApiButton() {
               (item: any) => {
                 if (item.id === taskId) {
                   item.completed = e.record.completed;
-                  toast(
-                    e.record.completed ? "Task completed!" : "Task updated",
-                    { type: "success" },
-                  );
+                  e.record.completed
+                    ? toast("Task completed!", { type: "success" })
+                    : toast("Task updated", {
+                        description: `Submitted Answer: ${e.record.submitted_answer}`,
+                      });
+
                   return item;
                 } else {
                   return item;
@@ -153,6 +162,29 @@ export default function ApiButton() {
 
   const stopSession = () => handleSession("DELETE", exerciseID, user.id);
 
+  async function handleSubmitAnswer(
+    event: React.FormEvent<HTMLFormElement>,
+    data: any,
+  ): Promise<void> {
+    event.preventDefault();
+    console.log(data);
+    const formData = new FormData(event.currentTarget);
+    const submittedAnswer = formData.get("answer") as string;
+
+    const update = await pb.collection("exercise_answers").update(data.id, {
+      submitted_answer: submittedAnswer,
+    });
+  }
+
+  function showDesc(index) {
+    const desc = document.getElementById(`desc-${index}`);
+    if (desc.style.display === "none") {
+      desc.style.display = "block";
+    } else {
+      desc.style.display = "none";
+    }
+  }
+
   return (
     <Card className="bg-transparent">
       <CardHeader>
@@ -176,13 +208,15 @@ export default function ApiButton() {
       <CardContent>
         {error && <p className="mt-2 text-red-500">{error}</p>}
         {loading && (
-          <div className="mt-4 rounded border border-white p-2">
+          <div className="mt-4 flex flex-col rounded border p-2 font-mono">
+            <span className="text-center text-xl">Connect</span>
             <Skeleton className="mb-2 h-[72px] w-full rounded" />
             <Skeleton className="h-[72px] w-full rounded" />
           </div>
         )}
         {exercise && !loading && (
-          <div className="mt-4 rounded border border-white p-2">
+          <div className="mt-4 flex flex-col rounded border p-2 font-mono">
+            <span className="text-center text-xl">Connect</span>
             <QuickCopy
               snippet={(() => {
                 const parts = exercise.command.split(" ");
@@ -199,44 +233,91 @@ export default function ApiButton() {
         {!loading && data && (
           <div className="mt-4">
             {Object.keys(data).map((key, index) => (
-              <div key={data[key].id} className="mt-2 rounded border p-2">
-                <div className="my-2 flex flex-col rounded-lg bg-blue-300 dark:bg-slate-900">
+              <div key={data[key].id} className="mt-2 rounded p-2">
+                <div className="my-2 flex flex-col rounded-lg">
                   <Toaster />
-
-                  <div className="rounded-t-lg bg-blue-200 px-4 dark:bg-slate-800">
-                    Question {index + 1}:{" "}
-                  </div>
-                  <div className="flex flex-row items-center justify-between">
-                    <pre className="overflow-auto">
-                      <code className="font-mono">
-                        {data[key]?.expand?.task?.question || "N/A"}
-                      </code>
-                    </pre>
-                    <div className="flex flex-row items-center">
-                      {data[key].completed ? (
-                        <span className="text-green-700 dark:text-green-500">
-                          <CircleCheck />
-                        </span>
-                      ) : (
-                        <span className="text-red-700 dark:text-red-500">
-                          <CircleX />
-                        </span>
-                      )}
-                      <Popover>
-                        <PopoverTrigger>
-                          <CircleHelp className="m-2 text-white" />
-                        </PopoverTrigger>
-                        <PopoverContent className="w-80">
-                          <div className="grid gap-4">
-                            <div className="space-y-2">
-                              <h4 className="font-medium leading-none">Hint</h4>
-                              <p className="text-sm text-muted-foreground">
-                                {data[key]?.expand?.task?.hint || "N/A"}
-                              </p>
+                  {data[key]?.expand?.task?.desc ? (
+                    <div className="mb-2 rounded-lg bg-blue-300 font-mono dark:bg-slate-900">
+                      <div className="mb-2 rounded-t-lg bg-blue-200 px-4 dark:bg-slate-800">
+                        <div className="flex flex-row justify-between">
+                          Information{" "}
+                          <span
+                            className="hover:cursor-pointer"
+                            onClick={() => showDesc(index)}
+                          >
+                            {data[key]?.expand?.task?.desc ? (
+                              <Plus />
+                            ) : (
+                              <Minus />
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="px-4">
+                        <div
+                          style={{ display: "none" }}
+                          className="markdown"
+                          id={`desc-${index}`}
+                          dangerouslySetInnerHTML={{
+                            __html: data[key]?.expand?.task?.desc || null,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                  <div className="mb-2 rounded-lg bg-blue-300 font-mono dark:bg-slate-900">
+                    <div className="rounded-t-lg bg-blue-200 px-4 dark:bg-slate-800">
+                      Question {index + 1}:{" "}
+                    </div>
+                    <div className="mt-2 flex flex-row items-center justify-between">
+                      <pre className="overflow-auto">
+                        <code className="font-mono">
+                          {data[key]?.expand?.task?.question || "N/A"}
+                        </code>
+                      </pre>
+                      <div className="flex flex-row items-center">
+                        {data[key].completed ? (
+                          <span className="text-green-700 dark:text-green-500">
+                            <CircleCheck />
+                          </span>
+                        ) : (
+                          <span className="text-red-700 dark:text-red-500">
+                            <CircleX />
+                          </span>
+                        )}
+                        <Popover>
+                          <PopoverTrigger>
+                            <CircleHelp className="m-2 text-white" />
+                          </PopoverTrigger>
+                          <PopoverContent className="w-80">
+                            <div className="grid gap-4">
+                              <div className="space-y-2 font-mono">
+                                <h4 className="font-medium leading-none">
+                                  Hint
+                                </h4>
+                                <p className="text-sm text-muted-foreground">
+                                  {data[key]?.expand?.task?.hint || "N/A"}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </PopoverContent>
-                      </Popover>
+                          </PopoverContent>
+                        </Popover>
+                      </div>
+                    </div>
+                    <div className="flex w-full p-2">
+                      <form
+                        onSubmit={(e) => handleSubmitAnswer(e, data[key])}
+                        className="w-full"
+                      >
+                        <div className="flex w-full flex-row items-center justify-between space-x-2">
+                          <Input
+                            name="answer"
+                            placeholder="Answer"
+                            className="w-full"
+                          />
+                          <Button className="w-14 ">{">>"}</Button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
