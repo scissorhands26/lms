@@ -10,7 +10,13 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import PocketBase from "pocketbase";
 import Cookies from "js-cookie";
-import { CircleCheck, CircleHelp, CircleX, Minus, Plus } from "lucide-react";
+import {
+  CircleCheck,
+  CircleHelp,
+  CircleX,
+  Minus,
+  Maximize2,
+} from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -246,7 +252,7 @@ export default function ApiButton() {
                             onClick={() => showDesc(index)}
                           >
                             {data[key]?.expand?.task?.desc ? (
-                              <Plus />
+                              <Maximize2 className="w-4" />
                             ) : (
                               <Minus />
                             )}
