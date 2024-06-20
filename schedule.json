@@ -845,7 +845,8 @@
     {
       "label": "Advanced Routing Concepts",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/advanced-routing-concepts"
     },
     {
       "label": "Break",
@@ -855,7 +856,8 @@
     {
       "label": "Enterprise Routing Protocols",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/enterprise-routing-protocols"
     },
     {
       "label": "Advanced Routing Scenarios",
@@ -892,7 +894,8 @@
     {
       "label": "Routing Configuration Part 1",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/routing-configuration-pt1"
     },
     {
       "label": "Break",
@@ -902,7 +905,8 @@
     {
       "label": "Routing Configuration Part 2",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/routing-configuration-pt2"
     },
     {
       "label": "Routing Configuration Lab",
@@ -915,9 +919,10 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Atonomous Systems and BGP",
+      "label": "Autonomous Systems and BGP",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/autonomous-systems-and-bgp"
     },
     {
       "label": "Break",
@@ -954,7 +959,8 @@
     {
       "label": "VPNs, VPSs, and TOR",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/vpns-vpss-and-tor"
     },
     {
       "label": "Lunch",
@@ -964,7 +970,8 @@
     {
       "label": "Putting It All Together",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/putting-it-all-together"
     },
     {
       "label": "Break",
@@ -991,7 +998,8 @@
     {
       "label": "Logic and Databases",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/logic-and-databases"
     },
     {
       "label": "Break",
@@ -1001,7 +1009,8 @@
     {
       "label": "Scripting and Automation",
       "length": 4,
-      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1"
+      "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
+      "link": "/c3/block03/scripting-and-automation"
     },
     {
       "label": "Optional Exercises / Office Hours",
