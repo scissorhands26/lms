@@ -1,0 +1,90 @@
+import InstructorTip from "@/components/markdown/InstructorTip";
+
+## DNS Records
+
+**DNS Record Types Overview:**
+
+- Introduction to various DNS record types (A, AAAA, CNAME, MX, TXT, etc.).
+
+### Types of DNS Records
+
+<InstructorTip tip="Ensure each student understands the importance of each record." />
+
+1. **A Record (Address Record):**
+
+   - Maps a domain name to an IPv4 address.
+   - Example: `example.com.  IN  A  192.0.2.1`
+
+2. **AAAA Record (IPv6 Address Record):**
+
+   - Maps a domain name to an IPv6 address.
+   - Example: `example.com.  IN  AAAA  2001:0db8:85a3:0000:0000:8a2e:0370:7334`
+
+3. **CNAME Record (Canonical Name Record):**
+
+   - Aliases one domain name to another.
+   - Example: `www.example.com.  IN  CNAME  example.com.`
+
+4. **MX Record (Mail Exchange Record):**
+
+   - Specifies mail servers for a domain.
+   - Example: `example.com.  IN  MX  10 mail.example.com.`
+
+5. **TXT Record (Text Record):**
+
+   - Holds arbitrary text data, often for verification purposes.
+   - Example: `example.com.  IN  TXT  "v=spf1 include:_spf.example.com ~all"`
+
+6. **NS Record (Name Server Record):**
+
+   - Indicates the authoritative name servers for a domain.
+   - Example: `example.com.  IN  NS  ns1.example.com.`
+
+7. **PTR Record (Pointer Record):**
+
+   - Maps an IP address to a domain name (reverse DNS lookup).
+   - Example: `1.2.0.192.in-addr.arpa.  IN  PTR  example.com.`
+
+8. **SRV Record (Service Record):**
+
+   - Specifies the location of services.
+   - Example: `_sip._tcp.example.com.  IN  SRV  10 60 5060 sipserver.example.com.`
+
+9. **SOA Record (Start of Authority Record):**
+   - Contains administrative information about the zone.
+   - Example: `example.com.  IN  SOA  ns1.example.com. admin.example.com. ( ... )`
+
+## Tools to Query DNS Records
+
+### Command Line
+
+Command-line tools used to query the Domain Name System (DNS) to obtain domain name or IP address mapping information.
+
+**Example Usage:**
+
+```sh
+nslookup example.com
+nslookup -type=MX example.com
+
+dig example.com
+dig example.com MX
+
+host example.com
+host -t MX example.com
+
+# Windows Only
+Resolve-DnsName -Name example.com
+Resolve-DnsName -Name example.com -Type MX
+```
+
+### Online DNS Tools
+
+Online tools used to query the Domain Name System (DNS) to obtain domain name or IP address mapping information.
+
+**Examples:**
+
+```sh
+mxtoolbox.com
+dnsstuff.com
+toolbox.googleapps.com/apps/dig
+```

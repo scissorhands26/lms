@@ -1,0 +1,124 @@
+import InstructorTip from "@/components/markdown/InstructorTip";
+
+## DNS Security (DNSSEC)
+
+DNSSEC is a suite of extensions that improve Domain Name System (DNS) security by verifying that DNS results have not been tampered with.
+
+## Types of Resource Records
+
+### RRSIG (Resource Record Signature)
+
+RRSIG is a DNS resource record used in DNSSEC to provide digital signatures for DNS resource records (RRs). Its primary purpose is to ensure the authenticity and integrity of DNS data. Here's an overview:
+
+- **Purpose**: RRSIG records are used to sign specific DNS resource records (such as `A`, `AAAA`, `MX`, `TXT`, etc.) within a DNSSEC-signed zone.
+- **Operation**: Each RRSIG record covers a particular DNS record set and is generated using the private key associated with the DNS zone.
+- **Verification**: DNS resolvers use RRSIG records along with DNSKEY records to verify the authenticity of DNS responses. If the signatures match and the DNSKEY is trusted, the DNS resolver can confirm that the DNS data has not been tampered with.
+- **Lifecycle**: RRSIG records have a validity period (specified in the record) after which they expire and must be refreshed through key rollover mechanisms.
+
+### DS (Delegation Signer)
+
+The DS (Delegation Signer) record is a DNS resource record used in DNSSEC to establish a chain of trust between parent and child zones. Here's an overview:
+
+- **Purpose**: DS records are created in the parent zone and contain cryptographic hash values (digests) of DNSKEY records from the child zone.
+- **Establishing Trust**: By including a DS record in the parent zone, the parent zone delegates trust to the child zone's DNSSEC-signed data. This allows resolvers to validate DNS responses from the child zone.
+- **Types**: DS records typically use SHA-1, SHA-256, or other hash algorithms to securely represent the child zone's DNSKEY.
+- **Propagation**: DS records need to be updated whenever there is a change in the child zone's DNSKEY (e.g., during key rollover).
+
+### DNSKEY
+
+DNSKEY is a DNS resource record used to store public cryptographic keys for DNSSEC-signed zones. Here's an overview:
+
+- **Public/Private Key Pair**: Each DNSKEY record represents a public key used for verifying DNSSEC signatures.
+- **Key Types**: DNSKEY records can be of different types, such as ZSK (Zone Signing Key) and KSK (Key Signing Key), each serving different roles in the DNSSEC infrastructure.
+- **Usage**: DNS resolvers use DNSKEY records to validate RRSIG records attached to DNS resource records in a DNSSEC-signed zone.
+- **Security**: DNSKEY records are critical for establishing the authenticity and integrity of DNS data and are subject to secure key management practices.
+
+### NSEC (Next Secure Record)
+
+NSEC is a DNS resource record used in DNSSEC to provide authenticated denial of existence for DNS records. Here's an overview:
+
+- **Purpose**: NSEC records are used to prove that a specific DNS record does not exist in a DNSSEC-signed zone.
+- **Record Types**: NSEC records cover a range of consecutive DNS records in a zone and include a list of existing record types within that range.
+- **Verification**: DNS resolvers use NSEC records to verify that no other DNS records exist between two specified records (e.g., proving that no `example.com` exists between `aaa.example.com` and `bbb.example.com`).
+- **Limitations**: NSEC records reveal the entire zone's structure, which can potentially be used for zone enumeration attacks.
+
+### NSEC3 (Next Secure Record v3)
+
+NSEC3 is an enhancement of NSEC used in DNSSEC to provide authenticated denial of existence while adding some cryptographic protection. Here's an overview:
+
+- **Enhanced Security**: NSEC3 hashes the owner names of DNS records to obscure the exact names of existing records.
+- **Hashed Owner Names**: Instead of listing plain-text owner names, NSEC3 records include hashed owner names, making zone enumeration attacks more challenging.
+- **Verification**: DNS resolvers use NSEC3 records to verify that no other DNS records exist between two hashed owner names.
+- **Algorithm**: NSEC3 uses a secure cryptographic hash function (e.g., SHA-1, SHA-256) to hash owner names, improving security compared to plain NSEC.
+
+### NSEC3PARAM (v3 Parameters)
+
+NSEC3PARAM is a DNS resource record used to store parameters for NSEC3 records in DNSSEC-signed zones. Here's an overview:
+
+- **Parameters**: NSEC3PARAM records specify configuration parameters for generating hashed owner names in NSEC3 records.
+- **Salt**: NSEC3PARAM records may include a salt value used in the hash function to further obscure owner names, enhancing security against pre-computed attacks.
+- **Algorithm**: Specifies the cryptographic hash algorithm used (e.g., SHA-1, SHA-256) for hashing owner names in NSEC3 records.
+- **Usage**: DNS resolvers use NSEC3PARAM records to configure how NSEC3 records are generated and verified for authenticated denial of existence.
+
+## DNSSEC Signing Overview
+
+DNSSEC (Domain Name System Security Extensions) is designed to add security to the DNS protocol by enabling DNS responses to be validated for authenticity and integrity. Here’s an overview of how DNSSEC signs DNS zones:
+
+1. **Key Generation:**
+
+   - DNSSEC uses cryptographic keys to sign DNS records.
+   - **DNSKEY Pair**: A DNSKEY pair consists of a public key and a private key.
+   - **Public Key**: The public key is used by DNS resolvers to verify the authenticity of DNS records signed with the corresponding private key.
+   - **Private Key**: The private key is kept securely and is used to create digital signatures for DNS records.
+
+2. **Zone Signing:**
+
+   - Once the DNSKEY pair is generated, the next step is to sign the DNS records in the zone file.
+   - **RRSIG Records**: For each DNS record in the zone file, a corresponding RRSIG (Resource Record Signature) record is created.
+   - **Purpose**: RRSIG records contain digital signatures generated using the zone's private key. These signatures ensure that DNS responses can be verified as authentic by DNS resolvers.
+
+3. **Key Distribution:**
+   - After signing the zone with DNSSEC, the DNS administrator needs to distribute the public DNSKEY to DNS resolvers.
+   - **DS Record**: If the DNSSEC-signed zone is a subzone (child zone), a Delegation Signer (DS) record is created and sent to the parent zone's DNS administrator.
+   - **Establish Trust**: The DS record establishes a chain of trust between the parent zone (which signs the DS record with its private key) and the child zone (which signs its DNS records with its private key).
+
+### Benefits of DNSSEC Signing
+
+- **Data Integrity**: Ensures DNS responses have not been tampered with in transit (e.g., DNS cache poisoning).
+- **Authentication**: Verifies that DNS responses come from authorized DNS servers.
+- **Security**: Protects against various DNS-based attacks, enhancing overall internet security.
+
+DNSSEC signing involves careful management of cryptographic keys and coordination with DNS administrators of parent zones to establish a secure chain of trust. It's an essential security measure for domains aiming to provide secure and trustworthy DNS resolutions.
+
+### DNSSEC Validation Process
+
+The DNSSEC validation process includes the following stages:
+
+1. **DNS Client Query:**
+
+   - A DNS client sends a DNS query to a recursive DNS server.
+   - Optional: The DNS client can indicate that it's DNSSEC-aware (DO=1).
+
+2. **Recursive DNS Server Query to Root and TLD Servers:**
+
+   - The recursive DNS server sends a DNS query to the root and top-level domain (TLD) DNS servers.
+   - Optional: The recursive DNS server can indicate that it's DNSSEC-aware (DO=1).
+
+3. **Root and TLD Servers Response:**
+
+   - The root and TLD servers return a DNS response to the recursive DNS server providing the IP address of the authoritative DNS server for the zone.
+   - Optional: Authoritative servers for the parent zone can indicate that the child zone is signed using DNSSEC and includes a secure delegation (DS record).
+
+4. **Recursive DNS Server Query to Authoritative DNS Server:**
+
+   - The recursive DNS server sends a DNS query to the authoritative DNS server for the zone.
+   - Optional: The recursive DNS server can indicate that it's DNSSEC-aware (DO=1) and capable of validating signed resource records (CD=1) to be sent in the response.
+
+5. **Authoritative DNS Server Response:**
+
+   - The authoritative DNS server returns a DNS response to the recursive DNS server, providing the resource record data.
+   - Optional: The authoritative DNS server can include DNSSEC signatures in the form of RRSIG records in the DNS response, for use in validation.
+
+6. **Recursive DNS Server Response to DNS Client:**
+   - The recursive DNS server returns a DNS response to the DNS client, providing the resource record data.
+   - Optional: The recursive DNS server can indicate whether or not the DNS response was validated (AD=1) using DNSSEC.

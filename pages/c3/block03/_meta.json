@@ -1,3 +1,11 @@
 {
-  "malware": "Malware"
+  "advanced-routing-concepts": "Advanced Routing Concepts",
+  "enterprise-routing-protocols": "Enterprise Routing Protocols",
+  "routing-configuration-pt1": "Routing Configuration Pt. 1",
+  "routing-configuration-pt2": "Routing Configuration Pt. 2",
+  "autonomous-systems-and-bgp": "Autonomous Systems and BGP",
+  "vpns-vpss-and-tor": "VPNs, VPSs, and Tor",
+  "putting-it-all-together": "Putting It All Together",
+  "logic-and-databases": "Logic and Databases",
+  "scripting-and-automation": "Scripting and Automation"
 }
