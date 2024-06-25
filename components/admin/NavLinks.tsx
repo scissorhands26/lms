@@ -3,7 +3,15 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import { BookOpen, Clipboard, Cog, Home, Pencil, User } from "lucide-react";
+import {
+  BookOpen,
+  Clipboard,
+  Cog,
+  Computer,
+  Home,
+  Pencil,
+  User,
+} from "lucide-react";
 
 export function NavLinks() {
   const pathname = usePathname();
@@ -45,14 +53,14 @@ export function NavLinks() {
       </Link>
       <Link
         className={`link ${
-          pathname === "/admin/assignments"
+          pathname === "/admin/exercises"
             ? "flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
             : "flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
         }`}
-        href="/admin/assignments"
+        href="/admin/exercises"
       >
-        <Clipboard className="h-4 w-4" />
-        Assignments
+        <Computer className="h-4 w-4" />
+        Exercises
       </Link>
       <Link
         className={`link ${

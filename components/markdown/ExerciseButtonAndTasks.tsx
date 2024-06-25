@@ -14,6 +14,7 @@ import {
   CircleCheck,
   CircleHelp,
   CircleX,
+  Circle,
   Minus,
   Maximize2,
 } from "lucide-react";
@@ -59,7 +60,9 @@ export default function ApiButton() {
     const currentUser = await GetUser();
     setUser(currentUser);
 
+    console.log(exerciseID);
     const exerciseData = await GetExercise(exerciseID);
+
     setExercise(exerciseData);
     if (exerciseData) {
       setActive(true);
@@ -91,6 +94,7 @@ export default function ApiButton() {
               (item: any) => {
                 if (item.id === taskId) {
                   item.completed = e.record.completed;
+                  item.submitted_answer = e.record.submitted_answer;
                   e.record.completed
                     ? toast("Task completed!", { type: "success" })
                     : toast("Task updated", {
@@ -191,6 +195,39 @@ export default function ApiButton() {
     }
   }
 
+  const statusIcon = (data) => {
+    if (data.submitted_answer === "" && !data.completed) {
+      return (
+        <span className="text-gray-700 dark:text-gray-500">
+          <Circle />
+        </span>
+      );
+    }
+
+    if (data.submitted_answer !== "" && !data.completed) {
+      return (
+        <span className="text-red-700 dark:text-red-500">
+          <CircleX />
+        </span>
+      );
+    }
+
+    if (data.submitted_answer !== "" && data.completed) {
+      return (
+        <span className="text-green-700 dark:text-green-500">
+          <CircleCheck />
+        </span>
+      );
+    }
+
+    // Optionally handle cases where data.completed is true and submitted_answer is empty
+    return null;
+  };
+
+  const RenderIcon = ({ data }) => {
+    return statusIcon(data);
+  };
+
   return (
     <Card className="bg-transparent">
       <CardHeader>
@@ -282,15 +319,9 @@ export default function ApiButton() {
                         </code>
                       </pre>
                       <div className="flex flex-row items-center">
-                        {data[key].completed ? (
-                          <span className="text-green-700 dark:text-green-500">
-                            <CircleCheck />
-                          </span>
-                        ) : (
-                          <span className="text-red-700 dark:text-red-500">
-                            <CircleX />
-                          </span>
-                        )}
+                        <div key={key}>
+                          <RenderIcon data={data[key]} />
+                        </div>
                         <Popover>
                           <PopoverTrigger>
                             <CircleHelp className="m-2 text-white" />

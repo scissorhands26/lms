@@ -164,6 +164,8 @@
   color: white;
   padding: 0.25rem;
   border-radius: 0.25rem;
+  text-wrap: normal;
+  max-width: 100%;
 }
 
 .markdown img {

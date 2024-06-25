@@ -1,0 +1,107 @@
+## Subnets
+
+Subnetting is the process of dividing a larger network into smaller, more manageable segments known as subnets. This practice allows for efficient allocation of IP addresses and enhances network resource management.
+
+The first step in creating a subnet is determining the number of hosts it needs to support. For this example, we will design a subnet to accommodate a maximum of 254 hosts.
+
+### Dividing Our IP Address
+
+An IPv4 address is 32 bits long. To support 254 hosts on a subnet, we require at least 8 bits (256 in decimal) for host addresses, leaving the remaining 24 bits for the network address.
+
+Consider the network address 192.168.1.0 in binary format:
+
+`11000000.10101000.00000001.00000000`
+
+To create our subnet, we'll split this IP address into two parts:
+
+- **Network Bits**: The first 24 bits, which represent the network portion.
+- **Host Bits**: The last 8 bits, which represent the host portion.
+
+So, for the network address 192.168.1.0, the split is as follows:
+
+- **Network Bits**: 11000000.10101000.00000001 (192.168.1)
+- **Host Bits**: 00000000 (.0)
+
+### Network mask
+
+To tell the computer which portion of the IP address is the network and which portion is the host, we use a network mask (also known as a subnet mask or bit mask). The network mask is a 32-bit binary sequence that matches the format of an IP address, with dots separating every 8 bits.
+
+For our example:
+
+- **Network Address**: 11000000.10101000.00000001.00000000 (192.168.1.0)
+- **Network Mask**: 11111111.11111111.11111111.00000000 (255.255.255.0)
+
+The network mask identifies which bits of the IP address are used for the network portion (denoted by 1s) and which bits are used for the host portion (denoted by 0s).
+
+### Useable Addresses
+
+We have now defined our network address 192.168.1.0 and our network mask 255.255.255.0. This provides us with the addresses 192.168.1.0 - 192.168.1.255. It is important to keep in mind that not all of these addresses are useable.
+
+#### Network Address
+
+The first address of a subnet is designated as the network address and cannot be assigned to a host on the network
+
+#### Broadcast Address
+
+The last address of a subnet is designated as the broadcast address and cannot be assigned to a host on the network.
+
+With that in mind if we take our 8 bits or 256 and subtract 2, we are left with 254 number available for us you use.
+
+### Classful Routing
+
+Although mostly obsolete today, understanding classful routing provides important context and foundational knowledge for modern networking.
+
+Classful routing was the original method used for inter-network communication and routing in IP networks. It worked by dividing the IP space into predefined classes (A, B, C, D, and E). We will focus on A, B and C.
+
+#### Class A
+
+- **Range**: 1.0.0.0 to 126.0.0.0
+- **Network Bits**: First 8 bits (1st octet)
+- **Host Bits**: Remaining 24 bits (3 octets)
+- **Subnet Mask**: 255.0.0.0 (/8)
+- **Hosts per Network**: Supports up to 16,777,214 hosts
+- **Usage**: Designed for very large networks
+- **Private Range**: 10.0.0.0 - 10.255.255.255
+
+#### Class B
+
+- **Range**: 128.0.0.0 to 191.255.0.0
+- **Network Bits**: First 16 bits (1st and 2nd octets)
+- **Host Bits**: Remaining 16 bits (last 2 octets)
+- **Subnet Mask**: 255.255.0.0 (/16)
+- **Hosts per Network**: Supports up to 65,534 hosts
+- **Usage**: Intended for medium-sized networks
+- **Private Range**: 172.16.0.0 - 172.31.255.255
+
+#### Class C
+
+- **Range**: 192.0.0.0 to 223.255.255.0
+- **Network Bits**: First 24 bits (1st, 2nd, and 3rd octets)
+- **Host Bits**: Remaining 8 bits (4th octet)
+- **Subnet Mask**: 255.255.255.0 (/24)
+- **Hosts per Network**: Supports up to 254 hosts
+- **Usage**: Designed for small networks
+- **Private Range**: 192.168.0.0 - 192.168.255.255
+
+Its inability to support scaling makes it inefficient and wasteful and therefore was replaced by classless routing.
+
+It is useful to know the private ranges since they are still reserved for use in private networks. This means these address are not routeable on the internet and instead are used within a private LAN.
+
+### Classless Inter-Domain Routing
+
+Enables the creation of subnets with different sizes by allowing flexible allocation of subnet and host bits. This concept is known as Variable-Length Subnet Masking (VLSM).
+
+We can go back a look at our original network address 192.168.1.0. This time we only need the network to support 2 hosts. Even the smallest classful routing subnet would be unnecessarily large. We are going to use 30 bits for network and 2 for the hosts.
+
+- **Network Address**: 11000000.10101000.00000001.00000000 (192.168.1.0)
+- **Network Mask**: 11111111.11111111.11111111.11111100 (255.255.255.252)
+
+This gives us 4 unique addresses:
+
+- **Network Address**: 11000000.10101000.00000001.000000 | 00 (192.168.1.0)
+- **Host 1**: 11000000.10101000.00000001.000000 | 01 (192.168.1.1)
+- **Host 2**: 11000000.10101000.00000001.000000 | 10 (192.168.1.2)
+- **Broadcast Address**: 11000000.10101000.00000001.000000 | 11 (192.168.1.3)
+
+CIDR also implemented another format for writing an IP address to make it simpler for people to read. This is known as CIDR notation and is done by simply appending a `/` and the number of network bits to the end of the address.
+`192.168.1.0/30`

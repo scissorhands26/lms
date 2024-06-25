@@ -177,6 +177,7 @@ export default function QuizCard({
     // Calculate score for each attempt
     const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
       let score = 0;
+      console.log(attemptAnswers);
       attemptAnswers.forEach((answer) => {
         const correctOptions = answer.expand.question.correct_options;
         if (correctOptions && Array.isArray(answer.answer)) {

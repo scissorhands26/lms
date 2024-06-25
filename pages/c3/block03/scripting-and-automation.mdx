@@ -1,0 +1,106 @@
+# Scripting and Automation Cyber Crash Course
+
+## Workflow Automation
+- Regular tasks can often be automated to save time and effort.
+- **Examples of automation:**
+  - **Excel functions:** Automate calculations and data processing using formulas, pivot tables, and conditional formatting.
+  - **Command line tools:** Automate data retrieval from web services, perform batch file operations, and process text files.
+  - **API scripts:** Automate creation, retrieval, or updating of information through API calls, enabling integration with web services and applications.
+
+## Automation Tools
+- Automation tools are widely available and can range from simple to complex.
+- Automating even a portion of a process can save considerable time.
+- **Tools include:**
+  - **Productivity tools:**
+    - **Excel:** Utilize functions, macros, and Visual Basic for Applications (VBA) to automate repetitive tasks and complex calculations.
+    - **PowerPoint:** Create slideshows programmatically, update slides with new data, and automate repetitive presentation tasks using VBA.
+    - **Word:** Automate document formatting, template creation, and repetitive text manipulation tasks using macros and VBA.
+    - **Power Automate:** Create automated workflows between your favorite apps and services to synchronize files, get notifications, collect data, and more.
+    - **PowerBI:** Automate data refreshes, report generation, and dashboard updates using built-in automation features and custom scripts.
+  - **Command line tools:**
+    - **`curl`:** Transfer data from or to a server using various protocols (HTTP, HTTPS, FTP, etc.).
+    - **`jq`:** Command-line JSON processor that allows you to slice, filter, map, and transform JSON data.
+    - **`sed` / `awk`:** Stream editors and pattern scanning/processing languages used for text manipulation and data extraction.
+  - **Scripting languages:**
+    - **bash:** Unix shell and command language for writing simple scripts to automate command execution on Unix-like systems.
+    - **PowerShell:** Task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.
+    - **Batch (Windows cmd):** Simple scripting language for Windows command line to automate basic tasks and command sequences.
+    - **Python:** High-level programming language known for its readability and versatility, used for scripting, web development, data analysis, and more.
+
+## Scripting
+- Scripting involves writing a series of commands in a programming or scripting language.
+- Scripts can use existing system executables and built-in commands of the scripting language.
+
+### Types of Scripting
+- **Bash Scripts:** 
+  - Use system executables (`curl`, `grep`, `cat`, etc.) and built-in bash commands.
+  - Support logic and control flow mechanisms like loops and conditionals.
+  - Example: 
+    ```bash
+    #!/bin/bash
+    echo "Creating directory"
+    mkdir new_directory
+    find . -name "*.txt" -exec mv {} new_directory \;
+    gzip new_directory/*.txt
+    ```
+- **PowerShell Scripts:** 
+  - Use system executables and provide robust interaction with libraries, logic, and control flow.
+  - Integrates with Windows management infrastructure (e.g., WMI, COM objects).
+  - Example:
+    ```powershell
+    Write-Output "Creating directory"
+    New-Item -ItemType Directory -Path "new_directory"
+    Get-ChildItem -Filter *.txt | Move-Item -Destination "new_directory"
+    Get-ChildItem "new_directory\*.txt" | Compress-Archive -DestinationPath "new_directory\archive.zip"
+    ```
+- **Batch Scripts:** 
+  - Use system executables and built-in commands.
+  - Suitable for simple automation tasks in Windows environments.
+  - Example:
+    ```batch
+    @echo off
+    echo Creating directory
+    mkdir new_directory
+    forfiles /M *.txt /C "cmd /c move @file new_directory"
+    forfiles /P new_directory /M *.txt /C "cmd /c gzip @file"
+    ```
+- **Python Scripts:** 
+  - Use libraries rather than system executables, offering a wide range of functionalities.
+  - Ideal for complex automation tasks, data manipulation, and web interactions.
+  - Example:
+    ```python
+    import requests
+    import json
+
+    response = requests.get('https://api.example.com/data')
+    data = response.json()
+    for item in data:
+        print(item['name'])
+    ```
+
+## Benefits of Scripting
+- Scripting can automate complex tasks and provide more control than built-in automation features of tools like Excel.
+- Initial investment in effort can lead to significant time savings in the long run.
+- **Common uses:**
+  - **bash, batch, and PowerShell:** Automate groups of commands you might run regularly, such as system maintenance, file manipulation, and data processing.
+  - **Python:** Handle tasks like file manipulation, web scraping, data analysis, API interaction, and complex automation workflows.
+
+## Resources
+- **Excel Automation:**
+  - [Excel Functions](https://support.microsoft.com/en-us/excel)
+  - [Excel Macros](https://support.microsoft.com/en-us/office/quick-start-create-a-macro-7392a96b-4300-47b8-9723-5bf04f4f7c8a)
+  - [VBA in Excel](https://docs.microsoft.com/en-us/office/vba/api/overview/excel)
+- **Command Line Tools:**
+  - [curl](https://curl.se/docs/manual.html)
+  - [jq](https://stedolan.github.io/jq/manual/)
+  - [sed](https://www.gnu.org/software/sed/manual/sed.html)
+  - [awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+- **Scripting Languages:**
+  - [Bash Scripting](https://www.gnu.org/software/bash/manual/bash.html)
+  - [PowerShell Scripting](https://docs.microsoft.com/en-us/powershell/)
+  - [Batch Scripting](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
+  - [Python](https://www.python.org/doc/)
+  - [Python Requests Library](https://docs.python-requests.org/en/latest/)
+  - [Python JSON Library](https://docs.python.org/3/library/json.html)
+
+*Cyber Crash Course provides foundational knowledge of workflow automation and scripting for efficient task management and process optimization.*

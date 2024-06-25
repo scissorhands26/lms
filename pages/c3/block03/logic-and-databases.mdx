@@ -1,0 +1,230 @@
+# Logic and Databases Cyber Crash Course
+
+## What is a Database?
+- A database is an organized collection of structured information or data, typically stored electronically.
+- **Key characteristics:**
+  - **Storage:** Information is stored in a specific file format, which includes metadata (data about the data) and the actual data.
+  - **Types of data:**
+    - **Strings:** Text data, such as names, addresses, and descriptions.
+    - **Numbers:** Numerical data, such as prices, quantities, and measurements.
+    - **Binary blobs:** Binary large objects, such as images, videos, and other files.
+
+## Why Use a Database?
+- Databases provide a rigid structure, comparable to a table or spreadsheet with rows and columns.
+- **Advantages:**
+  - **Fast and efficient searches:** Quickly retrieve specific information using indexed data.
+  - **Easy relation of information:** Enables complex queries to relate different pieces of data. For example:
+    - Finding all residents in a city aged 25-50.
+    - Retrieving all phone numbers in a city, grouped by area code.
+  - **Scalable:** Efficiently handle large datasets. Example: SQLite can manage up to 140 terabytes of data.
+
+## Types of Databases
+- **Commonly used databases and their file extensions:**
+  - **Relational Databases:**
+    - **Oracle:** `.dbf` - A robust, enterprise-level database known for handling large volumes of data.
+    - **MySQL:** `.idb`, `.myd` - An open-source relational database management system widely used for web applications.
+    - **PostgreSQL:** `.sql` - An advanced open-source relational database with strong support for complex queries and large data volumes.
+  - **NoSQL Databases:**
+    - **MongoDB:** `.ns.0`, `.1`, etc. - A NoSQL database that uses JSON-like documents with optional schemas.
+    - **CouchDB:** Uses JSON to store data, JavaScript for MapReduce indexes, and regular HTTP for its API.
+  - **Embedded Databases:**
+    - **SQLite:** `.sqlite`, `.sqlite3`, `.db` - A lightweight, disk-based database that's self-contained and easy to use.
+  - **Enterprise Databases:**
+    - **Microsoft SQL Server:** `.mdf`, `.ndf` - A relational database management system developed by Microsoft, known for its scalability and integration with other Microsoft products.
+  - **Mobile/Embedded Databases:**
+    - **PocketBase:** `.db` - A small, versatile database designed for embedded systems and mobile applications.
+
+## Interacting with Databases
+- Interaction varies based on the database type; some use SQL, others use more flexible formats like JSON, XML, or YAML.
+- **Structured Query Language (SQL):**
+  - The standard language for relational databases.
+  - Allows you to create, read, update, and delete (CRUD) data.
+  - Examples include SELECT, INSERT, UPDATE, DELETE.
+- **NoSQL Databases:**
+  - Often use JSON for data storage and retrieval.
+  - Designed for flexibility and scalability, handling unstructured data.
+- **Schema Understanding:**
+  - Knowing the structure of your data is crucial for effective querying.
+  - Schema defines how data is organized, including tables, fields, and relationships.
+  
+### MySQL Table Schema Example
+  ```sql
+  CREATE TABLE customers (
+      cust_id INT PRIMARY KEY,
+      first_name VARCHAR(50),
+      last_name VARCHAR(50),
+      email VARCHAR(100),
+      age INT,
+      occupation VARCHAR(50)
+  );
+  ```
+  - **Explanation:**
+    - `cust_id INT PRIMARY KEY`: Defines a unique identifier for each customer.
+    - `first_name VARCHAR(50)`, `last_name VARCHAR(50)`: Define text fields for the customer's first and last names, with a maximum length of 50 characters.
+    - `email VARCHAR(100)`: Defines a text field for the customer's email, with a maximum length of 100 characters.
+    - `age INT`: Defines a numerical field for the customer's age.
+    - `occupation VARCHAR(50)`: Defines a text field for the customer's occupation, with a maximum length of 50 characters.
+
+### MongoDB Document Schema Example
+  ```json
+  {
+      "cust_id": 1,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "age": 30,
+      "occupation": "Engineer"
+  }
+  ```
+  - **Explanation:**
+    - **JSON format:** Documents are stored in a JSON-like format, allowing for flexibility in the types of data stored.
+    - `cust_id`: Unique identifier for the customer.
+    - `first_name`, `last_name`: Text fields for the customer's first and last names.
+    - `email`: Text field for the customer's email.
+    - `age`: Numerical field for the customer's age.
+    - `occupation`: Text field for the customer's occupation.
+
+## The Logic of Databases
+- Queries retrieve information using schema identifiers.
+- **Simple queries:** 
+  - Basic data retrieval.
+  - Example:
+    ```mysql
+    SELECT cust_id FROM customers
+    ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({}, { cust_id: 1, _id: 0 })
+    ```
+- **Complex queries:** Combine multiple queries using logic operators to filter and manipulate data.
+
+### Logic Operators
+- **AND (`&&`)**: Results are returned only if all conditions are met.
+  - **Example:** Retrieve customers who are doctors and aged 37.
+    ```sql
+    SELECT * FROM customers WHERE occupation = 'Doctor' AND age = 37;
+    ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({ occupation: 'Doctor', age: 37 })
+    ```
+- **OR (`||`)**: Results are returned if at least one condition is met.
+  - **Example:** Retrieve customers who are musicians or named John Doe.
+    ```sql
+    SELECT * FROM customers WHERE occupation = 'Musician' OR name = 'John Doe';
+    ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({ $or: [ { occupation: 'Musician' }, { name: 'John Doe' } ] })
+    ```
+- **NOT (`!`)**: Results are returned if the condition is false.
+  - **Example:** Retrieve customers who are not engineers.
+    ```sql
+    SELECT * FROM customers WHERE NOT occupation = 'Engineer';
+    ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({ occupation: { $ne: 'Engineer' } })
+    ```
+- **Combining operators:** Complex queries using multiple conditions.
+  - **Example:** Retrieve doctors who are not aged 45 or customers named Evan Green.
+    ```sql
+    SELECT * FROM customers WHERE (occupation = 'Doctor' AND NOT age = 45) OR name = 'Evan Green';
+    ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({
+      $or: [
+        { occupation: 'Doctor', age: { $ne: 45 } },
+        { name: 'Evan Green' }
+      ]
+    })
+    ```
+
+### Complex Queries
+- **Example 1:** Retrieve customers who are either engineers or doctors, aged between 30 and 50, and live in a specific city.
+  ```sql
+  SELECT * FROM customers
+  WHERE (occupation = 'Engineer' OR occupation = 'Doctor')
+  AND age BETWEEN 30 AND 50
+  AND city = 'New York';
+  ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({
+      $and: [
+        { $or: [ { occupation: 'Engineer' }, { occupation: 'Doctor' } ] },
+        { age: { $gte: 30, $lte: 50 } },
+        { city: 'New York' }
+      ]
+    })
+    ```
+- **Example 2:** Retrieve customers who have made purchases above a certain amount and have a specified membership status.
+  ```sql
+  SELECT * FROM customers
+  INNER JOIN purchases ON customers.cust_id = purchases.cust_id
+  WHERE purchases.amount > 1000
+  AND customers.membership_status = 'Gold';
+  ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.aggregate([
+      {
+        $lookup: {
+          from: 'purchases',
+          localField: 'cust_id',
+          foreignField: 'cust_id',
+          as: 'customer_purchases'
+        }
+      },
+      { $unwind: '$customer_purchases' },
+      {
+        $match: {
+          'customer_purchases.amount': { $gt: 1000 },
+          membership_status: 'Gold'
+        }
+      }
+    ])
+    ```
+- **Example 3:** Retrieve customers who have not made any purchases in the last year.
+  ```sql
+  SELECT * FROM customers
+  WHERE cust_id NOT IN (
+      SELECT cust_id FROM purchases
+      WHERE purchase_date > DATE_SUB(NOW(), INTERVAL 1 YEAR)
+  );
+  ```
+  - **Equivalent NoSQL Query (MongoDB):**
+    ```json
+    db.customers.find({
+      cust_id: {
+        $nin: db.purchases.distinct('cust_id', {
+          purchase_date: { $gt: new Date(Date.now() - 365*24*60*60*1000) }
+        })
+      }
+    })
+    ```
+
+## Benefits of Databases
+- **Structured Data Storage:** Data is organized in a consistent, logical manner.
+- **Eff
+
+icient Data Retrieval:** Indexing and querying capabilities ensure quick access to needed information.
+- **Complex Query Support:** Ability to perform advanced searches and data manipulation.
+- **Scalability:** Databases can handle large volumes of data efficiently.
+
+## Resources
+- **Database Basics:**
+  - [What is a Database?](https://www.oracle.com/database/what-is-database/)
+  - [Database Management Systems (DBMS)](https://www.ibm.com/cloud/learn/dbms)
+- **SQL:**
+  - [SQL Tutorial](https://www.w3schools.com/sql/)
+  - [MySQL Documentation](https://dev.mysql.com/doc/)
+  - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+- **NoSQL:**
+  - [MongoDB Documentation](https://docs.mongodb.com/)
+  - [CouchDB Documentation](https://docs.couchdb.org/en/stable/)
+- **SQLite:**
+  - [SQLite Documentation](https://www.sqlite.org/docs.html)
+- **Microsoft SQL Server:**
+  - [SQL Server Documentation](https://docs.microsoft.com/en-us/sql/sql-server/)

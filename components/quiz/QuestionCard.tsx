@@ -8,12 +8,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { submitQuiz, updateAnswerInDB } from "@/app/quiz/actions";
+import Timer from "./Timer";
 
 export default function QuestionCard({ questions, attempt, answers }: any) {
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [timeRemaining, setTimeRemaining] = useState(
+  const [timeRemaining, setTimeRemaining] = useState(null); // Set to null initially
+  const [originalTime, setOriginalTime] = useState(
     attempt.expand.quiz.time_allowed,
-  );
+  ); // Set to null initially
   const router = useRouter();
 
   useEffect(() => {
@@ -23,41 +25,15 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
       initialAnswers[answer.question] = answer.answer;
     });
     setSelectedAnswers(initialAnswers);
-    calculateTimeLeft(
-      attempt.expand.quiz.time_allowed,
-      timeRemaining,
-      attempt.created,
-    );
-  }, [answers]);
+    calculateTimeLeft(attempt.expand.quiz.time_allowed, attempt.created);
+  }, [answers, attempt]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining((prevTime) => {
-        if (prevTime <= 1) {
-          clearInterval(timer);
-          handleExpiredQuiz(selectedAnswers); // Submit the quiz (time expired
-          router.push("/quiz/expired"); // Redirect to the root page
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [router]);
-
-  function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-  }
-
-  function calculateTimeLeft(time_allowed, timeRemaining, attempt_started) {
-    const timeElapsed = Math.floor(
-      (new Date() - new Date(attempt_started)) / 1000,
-    );
+  function calculateTimeLeft(time_allowed, attempt_started) {
+    const startTime = new Date(attempt_started).getTime();
+    const currentTime = new Date().getTime();
+    const timeElapsed = Math.floor((currentTime - startTime) / 1000);
     const timeLeft = time_allowed - timeElapsed;
-    setTimeRemaining(timeLeft);
+    setTimeRemaining(timeLeft > 0 ? timeLeft : 0);
   }
 
   const handleAnswerSelect = (question, answer, isMultiSelect = false) => {
@@ -97,20 +73,26 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
     }
   }
 
-  async function handleExpiredQuiz(answers) {
+  async function handleExpiredQuiz() {
     // Submit the quiz (time expired)
-    await submitQuiz(attempt, answers, false);
+    await submitQuiz(attempt, selectedAnswers, false);
     router.push("/quiz/expired");
   }
 
-  async function handleSubmitQuiz(answers) {
-    await submitQuiz(attempt, answers, true);
+  async function handleSubmitQuiz() {
+    await submitQuiz(attempt, selectedAnswers, true);
     router.push("/quiz/submitted");
   }
 
   return (
     <div>
-      <div>Timer: {formatTime(timeRemaining)}</div>
+      {timeRemaining !== null && (
+        <Timer
+          originalTime={originalTime}
+          timeRemaining={timeRemaining}
+          onTimeExpired={handleExpiredQuiz}
+        />
+      )}
       {questions.map((question, index) => (
         <Card key={question.id} className="mb-4">
           <CardHeader>
@@ -126,20 +108,22 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
                 {question.options.map((option) => (
                   <div
                     key={option}
-                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                    className={`flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
                       (selectedAnswers[question.id] || []).includes(option)
-                        ? "bg-gray-100 dark:bg-gray-800"
+                        ? "cursor-pointer bg-gray-100 dark:bg-gray-800"
                         : ""
                     }`}
+                    onClick={() => handleAnswerSelect(question, option)}
                   >
                     <Checkbox
                       className="rounded-full"
                       checked={(selectedAnswers[question.id] || []).includes(
                         option,
                       )}
-                      onCheckedChange={() =>
-                        handleAnswerSelect(question, option)
-                      }
+                      onCheckedChange={(e) => {
+                        e.stopPropagation(); // Stop event from propagating to the div
+                        handleAnswerSelect(question, option);
+                      }}
                     />
                     <span>{option}</span>
                   </div>
@@ -151,19 +135,21 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
                 {question.options.map((option) => (
                   <div
                     key={option}
-                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer${
                       (selectedAnswers[question.id] || []).includes(option)
-                        ? "bg-gray-100 dark:bg-gray-800"
+                        ? "cursor-pointer bg-gray-100 dark:bg-gray-800"
                         : ""
                     }`}
+                    onClick={() => handleAnswerSelect(question, option, true)}
                   >
                     <Checkbox
                       checked={(selectedAnswers[question.id] || []).includes(
                         option,
                       )}
-                      onCheckedChange={() =>
-                        handleAnswerSelect(question, option, true)
-                      }
+                      onCheckedChange={(e) => {
+                        e.stopPropagation(); // Stop event from propagating to the div
+                        handleAnswerSelect(question, option, true);
+                      }}
                     />
                     <span>{option}</span>
                   </div>
@@ -184,20 +170,22 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
                 {question.options.map((option) => (
                   <div
                     key={option}
-                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                    className={`flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer${
                       (selectedAnswers[question.id] || []).includes(option)
-                        ? "bg-gray-100 dark:bg-gray-800"
+                        ? "cursor-pointer bg-gray-100 dark:bg-gray-800"
                         : ""
                     }`}
+                    onClick={() => handleAnswerSelect(question, option)}
                   >
                     <Checkbox
                       className="rounded-full"
                       checked={(selectedAnswers[question.id] || []).includes(
                         option,
                       )}
-                      onCheckedChange={() =>
-                        handleAnswerSelect(question, option)
-                      }
+                      onCheckedChange={(e) => {
+                        e.stopPropagation(); // Stop event from propagating to the div
+                        handleAnswerSelect(question, option);
+                      }}
                     />
                     <span>{option}</span>
                   </div>
@@ -219,9 +207,7 @@ export default function QuestionCard({ questions, attempt, answers }: any) {
       ))}
 
       <div className="mt-8 flex justify-end">
-        <Button onClick={() => handleSubmitQuiz(selectedAnswers)}>
-          Submit Quiz
-        </Button>
+        <Button onClick={handleSubmitQuiz}>Submit Quiz</Button>
       </div>
     </div>
   );
