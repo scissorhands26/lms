@@ -32,7 +32,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { startQuiz, stopQuiz } from "@/app/admin/quizzes/actions";
+import { startExam, stopExam } from "@/app/admin/exams/actions";
 import {
   Form,
   FormControl,
@@ -42,7 +42,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-interface Quiz {
+interface Exam {
   id: string;
   name: string;
   questions: number;
@@ -59,11 +59,11 @@ interface Student {
   first_name: string;
 }
 
-const calculateInitialTimeRemaining = (quiz: Quiz): number => {
-  const startedTime = new Date(quiz.started).getTime();
+const calculateInitialTimeRemaining = (exam: Exam): number => {
+  const startedTime = new Date(exam.started).getTime();
   const currentTime = new Date().getTime();
   const timeElapsed = (currentTime - startedTime) / 1000;
-  return Math.max(Math.round(quiz.time_allowed - timeElapsed), 0);
+  return Math.max(Math.round(exam.time_allowed - timeElapsed), 0);
 };
 
 const formatTime = (seconds: number): string => {
@@ -81,16 +81,16 @@ const FormSchema = z.object({
   }),
 });
 
-export default function QuizCard({
-  quiz,
+export default function ExamCard({
+  exam,
   studentList,
-  quizAnswers,
+  examAnswers,
 }: {
-  quiz: Quiz;
+  exam: Exam;
   studentList: Student[];
 }) {
   const [timer, setTimer] = useState<number | null>(null);
-  const [quizState, setQuizState] = useState(quiz.running);
+  const [examState, setExamState] = useState(exam.running);
   const [students, setStudents] = useState<Student[]>(studentList);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -101,8 +101,8 @@ export default function QuizCard({
   });
 
   useEffect(() => {
-    if (quizState) {
-      const initialTimeRemaining = calculateInitialTimeRemaining(quiz);
+    if (examState) {
+      const initialTimeRemaining = calculateInitialTimeRemaining(exam);
       setTimer(initialTimeRemaining);
 
       const interval = setInterval(() => {
@@ -117,16 +117,16 @@ export default function QuizCard({
 
       return () => clearInterval(interval);
     }
-  }, [quizState]);
+  }, [examState]);
 
-  async function handleQuizState(state: string, quiz: Quiz) {
+  async function handleExamState(state: string, exam: Exam) {
     const selectedStudents = form.getValues("selectedStudents");
     if (state === "start") {
-      await startQuiz({ quiz, selectedStudents }); // Pass quiz and selected students
-      setQuizState(true);
+      await startExam({ exam, selectedStudents }); // Pass exam and selected students
+      setExamState(true);
     } else if (state === "stop") {
-      await stopQuiz(quiz);
-      setQuizState(false);
+      await stopExam(exam);
+      setExamState(false);
     } else {
       console.error("Invalid state");
     }
@@ -147,12 +147,14 @@ export default function QuizCard({
     }
   };
 
-  function calculateScore(quiz: Quiz, student: Student, quizAnswers: any[]) {
-    // Filter quiz answers by student ID and quiz ID
-    const studentAnswers = quizAnswers.filter(
+  function calculateScore(exam: Exam, student: Student, examAnswers: any[]) {
+    console.log(examAnswers, exam, student);
+
+    // Filter exam answers by student ID and exam ID
+    const studentAnswers = examAnswers.filter(
       (answer) =>
         answer.expand.user.id === student.id &&
-        answer.expand.quiz.id === quiz.id,
+        answer.expand.exam.id === exam.id,
     );
 
     // Group answers by attempt ID
@@ -175,6 +177,7 @@ export default function QuizCard({
     // Calculate score for each attempt
     const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
       let score = 0;
+      console.log(attemptAnswers);
       attemptAnswers.forEach((answer) => {
         const correctOptions = answer.expand.question.correct_options;
         if (correctOptions && Array.isArray(answer.answer)) {
@@ -193,47 +196,47 @@ export default function QuizCard({
     return scores;
   }
 
-  function checkQuizStatus(quiz, student, quizAnswers) {
-    // Check if the quiz is currently running for the student
-    let runningSession = quizAnswers.some(
+  function checkExamStatus(exam, student, examAnswers) {
+    // Check if the exam is currently running for the student
+    let runningSession = examAnswers.some(
       (answer) =>
         answer.expand.user.id === student.id &&
-        answer.expand.quiz.id === quiz.id &&
+        answer.expand.exam.id === exam.id &&
         !answer.expand.attempt.expired &&
         !answer.expand.attempt.submitted,
     );
 
     if (runningSession) return "Running";
 
-    // Check if the student has completed the quiz
-    let quizTaken = quizAnswers.some(
+    // Check if the student has completed the exam
+    let examTaken = examAnswers.some(
       (answer) =>
         answer.expand.user.id === student.id &&
-        answer.expand.quiz.id === quiz.id &&
+        answer.expand.exam.id === exam.id &&
         answer.expand.attempt.submitted,
     );
 
-    if (quizTaken) return "Completed";
+    if (examTaken) return "Completed";
 
     return "Not Attempted";
   }
 
   return (
-    <Card key={quiz.id}>
+    <Card key={exam.id}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="font-mono text-sm font-medium">
-          {quizState
+          {examState
             ? timer !== null
               ? formatTime(timer)
               : "--:--:--"
-            : formatTime(quiz.time_allowed)}
+            : formatTime(exam.time_allowed)}
         </CardTitle>
         <Pencil className="h-4 w-4 text-gray-500 dark:text-gray-400" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{quiz.name}</div>
+        <div className="text-2xl font-bold">{exam.name}</div>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          {quiz.questions.length} questions
+          {exam.questions.length} questions
         </p>
       </CardContent>
       <CardFooter>
@@ -243,22 +246,22 @@ export default function QuizCard({
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Manage Quiz</DialogTitle>
+              <DialogTitle>Manage Exam</DialogTitle>
             </DialogHeader>
-            {quizState ? (
+            {examState ? (
               <DialogDescription>
-                The quiz is currently running.
+                The exam is currently running.
               </DialogDescription>
             ) : (
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(() =>
-                    handleQuizState("start", quiz),
+                    handleExamState("start", exam),
                   )}
                   className="space-y-8"
                 >
                   <DialogDescription>
-                    Select students to start the quiz for:
+                    Select students to start the exam for:
                     <div className="mt-4 items-start">
                       <Table>
                         <TableHeader>
@@ -267,7 +270,7 @@ export default function QuizCard({
                             <TableHead className="m-0 p-0">ID</TableHead>
                             <TableHead className="m-0 p-0">Name</TableHead>
                             <TableHead className="m-0 p-0">
-                              Quiz Status
+                              Exam Status
                             </TableHead>
                             <TableHead className="m-0 p-0">Score</TableHead>
                           </TableRow>
@@ -316,13 +319,13 @@ export default function QuizCard({
                                 {student.first_name}
                               </TableCell>
                               <TableCell className="m-0 p-0">
-                                {checkQuizStatus(quiz, student, quizAnswers)}
+                                {checkExamStatus(exam, student, examAnswers)}
                               </TableCell>
                               <TableCell className="m-0 p-0">
-                                {calculateScore(quiz, student, quizAnswers)
+                                {calculateScore(exam, student, examAnswers)
                                   .map(
                                     (score) =>
-                                      `${score}/${quiz.questions.length}`,
+                                      `${score}/${exam.questions.length}`,
                                   )
                                   .join(" | ")}
                               </TableCell>
@@ -341,7 +344,7 @@ export default function QuizCard({
                     </div>
                   </DialogDescription>
                   <DialogFooter>
-                    <Button type="submit">Start Quiz</Button>
+                    <Button type="submit">Start Exam</Button>
                   </DialogFooter>
                 </form>
               </Form>

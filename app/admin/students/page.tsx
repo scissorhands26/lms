@@ -66,6 +66,7 @@ async function getStudents() {
       updated: user.updated,
       username: user.username,
       verified: user.verified,
+      birthdate: user.birthdate,
     };
 
     console.log(student.role);
@@ -162,19 +163,6 @@ export default async function StudentsPage() {
                     type="text"
                   />
                 </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="courses">Courses</Label>
-                  <Input
-                    id="courses"
-                    name="courses"
-                    placeholder="Enter student course"
-                    type="text"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="enrolled-date">Enrolled Date</Label>
-                  <Input id="enrolled-date" type="date" />
-                </div>
                 <Button className="w-full" type="submit">
                   Add Student
                 </Button>
@@ -188,9 +176,11 @@ export default async function StudentsPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
+              <TableHead>Branch</TableHead>
+              <TableHead>MOS</TableHead>
+              <TableHead>Age</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Courses</TableHead>
-              <TableHead>Enrolled Date</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -209,9 +199,22 @@ export default async function StudentsPage() {
                       </AvatarFallback>
                     </Avatar>
                     <span className="font-medium">
-                      {student.rank + " " + student.last_name}
+                      {student.rank +
+                        " " +
+                        student.last_name +
+                        ", " +
+                        student.first_name}
                     </span>
                   </div>
+                </TableCell>
+                <TableCell>{student.branch.name}</TableCell>
+                <TableCell>{student.mos}</TableCell>
+                <TableCell>
+                  {
+                    // convert birthdate to age
+                    new Date().getFullYear() -
+                      new Date(student.birthdate).getFullYear()
+                  }
                 </TableCell>
                 <TableCell>{student.email}</TableCell>
                 <TableCell>
@@ -221,7 +224,6 @@ export default async function StudentsPage() {
                     </Badge>
                   ))}
                 </TableCell>
-                <TableCell>{student.enrolled_date}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -231,7 +233,6 @@ export default async function StudentsPage() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>View Profile</DropdownMenuItem>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

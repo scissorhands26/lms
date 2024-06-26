@@ -60,7 +60,7 @@ export default function AttemptCard({ attempt, exerciseID }: any) {
               <div className="flex justify-between space-x-4">
                 <div className="space-y-1">
                   <h4 className="text-sm font-semibold">Container Info</h4>
-                  <p className="text-sm">{attempt.container_info.command}</p>
+                  <p className="text-sm">{attempt.container_info?.command}</p>
                   <div className="flex items-center pt-2">
                     <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
                     <span className="text-xs text-muted-foreground">

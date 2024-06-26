@@ -137,7 +137,8 @@ export default function ApiButton() {
       });
 
       if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
+	let response_json = await response.json()
+        throw new Error(`Error ${response.status}: ${response_json.detail}`);
       }
 
       const json = await response.json();
@@ -154,6 +155,7 @@ export default function ApiButton() {
         setData(null);
       }
     } catch (error: any) {
+      console.log(error)
       setError(error.message || "Failed to fetch data");
       setData(null);
       setActive(false);

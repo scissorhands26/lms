@@ -85,10 +85,10 @@
     - `occupation`: Text field for the customer's occupation.
 
 ## The Logic of Databases
-- Queries retrieve information using schema identifiers.
+- Queries retrieve information using schema identifiers. For example, you might query information about `cust_id` or `first_name`. You couldn't try to query something like `cust_address`, because it was not specified in the schema.
 - **Simple queries:** 
   - Basic data retrieval.
-  - ** Example MySQL Query:**
+  - **Example MySQL Query:** Retrieves all `cust_id` from the `customers` table
     ```mysql
     SELECT cust_id FROM customers
     ```
@@ -96,8 +96,6 @@
     ```json
     db.customers.find({}, { cust_id: 1, _id: 0 })
     ```
-- **Complex queries:** Combine multiple queries using logic operators to filter and manipulate data.
-
 ### Logic Operators
 - **AND (`&&`)**: Results are returned only if all conditions are met.
   - **Example:** Retrieve customers who are doctors and aged 37.
@@ -140,8 +138,7 @@
       ]
     })
     ```
-
-### Complex Queries
+### Examples of Complex Queries
 - **Example 1:** Retrieve customers who are either engineers or doctors, aged between 30 and 50, and live in a specific city.
   ```sql
   SELECT * FROM customers
@@ -149,16 +146,16 @@
   AND age BETWEEN 30 AND 50
   AND city = 'New York';
   ```
-  - **Equivalent NoSQL Query (MongoDB):**
-    ```json
-    db.customers.find({
-      $and: [
-        { $or: [ { occupation: 'Engineer' }, { occupation: 'Doctor' } ] },
-        { age: { $gte: 30, $lte: 50 } },
-        { city: 'New York' }
-      ]
-    })
-    ```
+- **Equivalent NoSQL Query (MongoDB):**
+```json
+db.customers.find({
+$and: [
+{ $or: [ { occupation: 'Engineer' }, { occupation: 'Doctor' } ] },
+{ age: { $gte: 30, $lte: 50 } },
+{ city: 'New York' }
+]
+})
+```
 - **Example 2:** Retrieve customers who have made purchases above a certain amount and have a specified membership status.
   ```sql
   SELECT * FROM customers
@@ -166,26 +163,26 @@
   WHERE purchases.amount > 1000
   AND customers.membership_status = 'Gold';
   ```
-  - **Equivalent NoSQL Query (MongoDB):**
-    ```json
-    db.customers.aggregate([
-      {
-        $lookup: {
-          from: 'purchases',
-          localField: 'cust_id',
-          foreignField: 'cust_id',
-          as: 'customer_purchases'
-        }
-      },
-      { $unwind: '$customer_purchases' },
-      {
-        $match: {
-          'customer_purchases.amount': { $gt: 1000 },
-          membership_status: 'Gold'
-        }
-      }
-    ])
-    ```
+- **Equivalent NoSQL Query (MongoDB):**
+```json
+db.customers.aggregate([
+{
+$lookup: {
+  from: 'purchases',
+  localField: 'cust_id',
+  foreignField: 'cust_id',
+  as: 'customer_purchases'
+}
+},
+{ $unwind: '$customer_purchases' },
+{
+$match: {
+  'customer_purchases.amount': { $gt: 1000 },
+  membership_status: 'Gold'
+}
+}
+])
+```
 - **Example 3:** Retrieve customers who have not made any purchases in the last year.
   ```sql
   SELECT * FROM customers
@@ -194,22 +191,20 @@
       WHERE purchase_date > DATE_SUB(NOW(), INTERVAL 1 YEAR)
   );
   ```
-  - **Equivalent NoSQL Query (MongoDB):**
-    ```json
-    db.customers.find({
-      cust_id: {
-        $nin: db.purchases.distinct('cust_id', {
-          purchase_date: { $gt: new Date(Date.now() - 365*24*60*60*1000) }
-        })
-      }
-    })
-    ```
+- **Equivalent NoSQL Query (MongoDB):**
+```json
+db.customers.find({
+cust_id: {
+$nin: db.purchases.distinct('cust_id', {
+  purchase_date: { $gt: new Date(Date.now() - 365*24*60*60*1000) }
+})
+}
+})
+```
 
 ## Benefits of Databases
 - **Structured Data Storage:** Data is organized in a consistent, logical manner.
-- **Eff
-
-icient Data Retrieval:** Indexing and querying capabilities ensure quick access to needed information.
+- **Efficient Data Retrieval:** Indexing and querying capabilities ensure quick access to needed information.
 - **Complex Query Support:** Ability to perform advanced searches and data manipulation.
 - **Scalability:** Databases can handle large volumes of data efficiently.
 

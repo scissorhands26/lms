@@ -1,130 +1,164 @@
 //@ts-nocheck
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import getPb from "@/pb/getPb";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
-import GradesTable from "@/components/admin/GradesTable";
+import GradesWrapper from "@/components/admin/GradesWrapper";
 
-const calculateScore = (quiz, student, quizAnswers) => {
-  const studentAnswers = quizAnswers.filter(
-    (answer) =>
-      answer.expand.user.id === student.id && answer.expand.quiz.id === quiz.id,
-  );
+async function getQuizGrades() {
+  const pb = await getPb();
 
-  const attempts = studentAnswers.reduce((acc, answer) => {
-    const attemptId = answer.expand.attempt.id;
-    if (!acc[attemptId]) {
-      acc[attemptId] = [];
+  const records = await pb
+    .collection("quiz_summary")
+    .getFullList({ expand: "user_id,quiz_attempt_id" });
+
+  console.log(records[0]);
+
+  const sortedGrades = records.reduce((acc, entry) => {
+    const {
+      id,
+      user_id,
+      user_first_name,
+      user_last_name,
+      user_rank,
+      quiz_id,
+      quiz_name,
+      quiz_attempt_id,
+      question,
+      options,
+      correct_options,
+      answer,
+      correct,
+      expand,
+    } = entry;
+
+    const user_expanded = expand.user_id;
+
+    if (!acc[quiz_id]) {
+      acc[quiz_id] = {
+        quiz_id,
+        quiz_name,
+        user: {
+          user_id,
+          user_first_name,
+          user_last_name,
+          user_rank,
+          user_expanded,
+        },
+        attempts: {},
+      };
     }
-    acc[attemptId].push(answer);
+
+    if (!acc[quiz_id].attempts[quiz_attempt_id]) {
+      acc[quiz_id].attempts[quiz_attempt_id] = {
+        quiz_attempt_id,
+        quiz_attempt_date: expand.quiz_attempt_id.created,
+        attempt_expand: expand.quiz_attempt_id,
+        questions: [],
+      };
+    }
+
+    acc[quiz_id].attempts[quiz_attempt_id].questions.push({
+      id,
+      question,
+      options,
+      correct_options,
+      answer,
+      correct,
+    });
+
     return acc;
   }, {});
 
-  const sortedAttempts = Object.entries(attempts).sort((a, b) => {
-    const dateA = new Date(a[1][0].expand.attempt.created);
-    const dateB = new Date(b[1][0].expand.attempt.created);
-    return dateA - dateB;
-  });
+  const result = Object.values(sortedGrades).map((quiz) => ({
+    ...quiz,
+    attempts: Object.values(quiz.attempts),
+  }));
 
-  const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
-    let score = 0;
-    attemptAnswers.forEach((answer) => {
-      const correctOptions = answer.expand.question.correct_options;
-      if (correctOptions && Array.isArray(answer.answer)) {
-        const isCorrect = answer.answer.every((ans) =>
-          correctOptions.includes(ans),
-        );
-        if (isCorrect) {
-          score++;
-        }
-      }
-    });
-    return score;
-  });
+  return result;
+}
 
-  return scores;
-};
-
-async function getGrades() {
+async function getExamGrades() {
   const pb = await getPb();
 
-  const students = await pb.collection("users").getFullList({
-    sort: "last_name",
-  });
+  const records = await pb
+    .collection("exam_summary")
+    .getFullList({ expand: "user_id,exam_attempt_id" });
 
-  const assignments = await pb.collection("assignments").getFullList({
-    sort: "-created",
-    expand: "course",
-  });
+  console.log(records[0]);
 
-  const quizzes = await pb.collection("quizzes").getFullList({
-    sort: "-created",
-    expand: "course",
-  });
+  const sortedGrades = records.reduce((acc, entry) => {
+    const {
+      id,
+      user_id,
+      user_first_name,
+      user_last_name,
+      user_rank,
+      exam_id,
+      exam_name,
+      exam_attempt_id,
+      question,
+      options,
+      correct_options,
+      answer,
+      correct,
+      expand,
+    } = entry;
 
-  const assignmentAnswers = await pb
-    .collection("assignment_answers")
-    .getFullList({
-      sort: "-created",
-      expand: "student,assignment",
+    const user_expanded = expand.user_id;
+
+    if (!acc[exam_id]) {
+      acc[exam_id] = {
+        exam_id,
+        exam_name,
+        user: {
+          user_id,
+          user_first_name,
+          user_last_name,
+          user_rank,
+          user_expanded,
+        },
+        attempts: {},
+      };
+    }
+
+    if (!acc[exam_id].attempts[exam_attempt_id]) {
+      acc[exam_id].attempts[exam_attempt_id] = {
+        exam_attempt_id,
+        exam_attempt_date: expand.exam_attempt_id.created,
+        attempt_expand: expand.exam_attempt_id,
+        questions: [],
+      };
+    }
+
+    acc[exam_id].attempts[exam_attempt_id].questions.push({
+      id,
+      question,
+      options,
+      correct_options,
+      answer,
+      correct,
     });
 
-  const quizAnswers = await pb.collection("quiz_answers").getFullList({
-    sort: "-created",
-    expand: "user,quiz,attempt,question",
-  });
+    return acc;
+  }, {});
 
-  const assignmentGrades = assignmentAnswers.map((answer) => {
-    const student = answer.expand.student;
-    const assignment = answer.expand.assignment;
-    const correct = answer.correct ? 1 : 0;
-    return {
-      student_id: student.id,
-      student_name: `${student.rank} ${student.last_name}, ${student.first_name}`,
-      assignment_name: assignment.name,
-      grade: (correct / 1) * 100,
-    };
-  });
+  const result = Object.values(sortedGrades).map((exam) => ({
+    ...exam,
+    attempts: Object.values(exam.attempts),
+  }));
 
-  const quizGrades = quizzes
-    .map((quiz) => {
-      return students.map((student) => {
-        const scores = calculateScore(quiz, student, quizAnswers);
-        const bestScore = Math.max(...scores);
-        return {
-          student_id: student.id,
-          student_name: `${student.rank} ${student.last_name}, ${student.first_name}`,
-          assignment_name: quiz.name,
-          grade: (bestScore / quiz.questions.length) * 100,
-        };
-      });
-    })
-    .flat();
-
-  const grades = [...assignmentGrades, ...quizGrades];
-
-  return { grades, students, assignments, quizzes };
+  return result;
 }
 
 export default async function GradesPage() {
-  const { grades, students, assignments, quizzes } = await getGrades();
+  const quizGrades = await getQuizGrades();
+  const examGrades = await getExamGrades();
 
   return (
     <main className="flex-1 p-6">
+      {/* <pre>{JSON.stringify(grades, null, 4)}</pre> */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Grades</h1>
-        <Dialog>
+        {/* <Dialog>
           <DialogTrigger asChild>
             <Button size="sm">
               <Plus className="mr-2 h-4 w-4" />
@@ -142,11 +176,8 @@ export default async function GradesPage() {
                   <Input id="student-name" placeholder="Enter student name" />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="assignment-name">Assignment Name</Label>
-                  <Input
-                    id="assignment-name"
-                    placeholder="Enter assignment name"
-                  />
+                  <Label htmlFor="exam-name">Assignment Name</Label>
+                  <Input id="exam-name" placeholder="Enter exam name" />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="grade">Grade</Label>
@@ -156,15 +187,10 @@ export default async function GradesPage() {
               </form>
             </DialogDescription>
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
       </div>
       <div className="mt-6 grid gap-6">
-        <GradesTable
-          dataGrades={grades}
-          dataStudents={students}
-          dataAssignments={assignments}
-          dataQuizzes={quizzes}
-        />
+        <GradesWrapper quizGrades={quizGrades} examGrades={examGrades} />
       </div>
     </main>
   );

@@ -9,14 +9,16 @@ import {
   DropdownMenuContent,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BookOpen, Search } from "lucide-react";
 import { NavLinks } from "@/components/admin/NavLinks";
 import getPb from "@/pb/getPb";
 
-export default async function QuizLayout({
+export default async function ProfileLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const pb = await getPb();
+
   const user = await pb.authStore.model;
 
   return (
@@ -33,26 +35,23 @@ export default async function QuizLayout({
                 size="icon"
                 variant="ghost"
               >
-                <img
-                  alt="Avatar"
-                  className="rounded-full"
-                  height="32"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                  width="32"
-                />
+                <Avatar>
+                  <AvatarImage
+                    src={`${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/users/${user?.id}/${user?.avatar}`}
+                  />
+                  <AvatarFallback>{user.rank}</AvatarFallback>
+                </Avatar>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{user.first_name}</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                {user.rank + " " + user.last_name}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/profile">Profile</Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

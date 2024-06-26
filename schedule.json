@@ -336,7 +336,8 @@
     {
       "label": "Subnetting and CIDR Worksheet",
       "length": 4,
-      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1"
+      "className": "dark:bg-indigo-700 bg-indigo-300 text-xs p-1",
+      "link": "/c3/exercises/03-subnetting-and-cidr"
     },
     {
       "label": "Lunch",

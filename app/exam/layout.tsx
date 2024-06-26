@@ -11,14 +11,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BookOpen, Search } from "lucide-react";
 import { NavLinks } from "@/components/admin/NavLinks";
-import getPb from "@/pb/getPb";
 
-export default async function QuizLayout({
+export default function QuizLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const pb = await getPb();
-  const user = await pb.authStore.model;
-
   return (
     <div className="min-h-screen w-full">
       <div className="flex flex-col">
@@ -48,7 +44,7 @@ export default async function QuizLayout({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{user.first_name}</DropdownMenuLabel>
+              <DropdownMenuLabel>Admin</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />

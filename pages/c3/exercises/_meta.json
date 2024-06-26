@@ -1,3 +1,5 @@
 {
-  "01-resolving-ip-addresses": "01: Resolving IP Addresses"
+  "01-resolving-ip-addresses": "01: Resolving IP Addresses",
+  "02-dns-resolution": "02: DNS Resolution",
+  "03-subnetting-and-cidr": "03: Subnetting and CIDR"
 }

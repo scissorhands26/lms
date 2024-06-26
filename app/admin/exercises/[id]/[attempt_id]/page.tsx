@@ -73,7 +73,9 @@ export default async function AttemptPage({ params }: any) {
           Attempt: {attempt.attempt}
         </div>
         <div className="rounded-xl border bg-slate-900 p-2">
-          {attempt.container_info.command}
+          {attempt.container_info?.command
+            ? attempt.container_info.command
+            : "No container"}
         </div>
       </div>
       <Table>

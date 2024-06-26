@@ -71,7 +71,7 @@ export default function ApiButton() {
         setActive(false);
       }
     } catch (error: any) {
-      setError(error.message || "Failed to fetch data");
+      setError(error.detail || "Failed to fetch data");
       setData(null);
       setActive(false);
     } finally {
