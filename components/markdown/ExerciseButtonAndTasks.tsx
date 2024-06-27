@@ -116,6 +116,11 @@ export default function ApiButton() {
 
   useEffect(() => {
     fetchUserAndExercise();
+    async function fetchUser() {
+      const currentUser = await GetUser();
+      setUser(currentUser);
+    }
+    fetchUser();
     return () => {
       // Unsubscribe from all real-time updates when the component unmounts
       pb.collection("exercise_answers").unsubscribe("*");
@@ -137,7 +142,7 @@ export default function ApiButton() {
       });
 
       if (!response.ok) {
-	let response_json = await response.json()
+        let response_json = await response.json();
         throw new Error(`Error ${response.status}: ${response_json.detail}`);
       }
 
@@ -155,7 +160,7 @@ export default function ApiButton() {
         setData(null);
       }
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
       setError(error.message || "Failed to fetch data");
       setData(null);
       setActive(false);
@@ -262,16 +267,7 @@ export default function ApiButton() {
         {exercise && !loading && (
           <div className="mt-4 flex flex-col rounded border p-2 font-mono">
             <span className="text-center text-xl">Connect</span>
-            <QuickCopy
-              snippet={(() => {
-                const parts = exercise.command.split(" ");
-                if (parts[0] === "ssh") {
-                  parts.splice(1, 0, "-o", "StrictHostKeyChecking=no");
-                }
-                return parts.join(" ");
-              })()}
-              title="Command"
-            />
+            <QuickCopy snippet={exercise?.command} title="Command" />
             <QuickCopy snippet={exercise.password} title="Password" />
           </div>
         )}
@@ -298,7 +294,7 @@ export default function ApiButton() {
                           </span>
                         </div>
                       </div>
-                      <div className="px-4">
+                      <div className="px-4 pb-2">
                         <div
                           style={{ display: "none" }}
                           className="markdown"
@@ -311,53 +307,58 @@ export default function ApiButton() {
                     </div>
                   ) : null}
                   <div className="mb-2 rounded-lg bg-blue-300 font-mono dark:bg-slate-900">
-                    <div className="rounded-t-lg bg-blue-200 px-4 dark:bg-slate-800">
-                      Question {index + 1}:{" "}
+                    <div className="rounded-t-lg bg-blue-200 pl-4 pr-2 dark:bg-slate-800">
+                      <div className="flex flex-row items-center justify-between">
+                        Task {index + 1}:{" "}
+                        <div className="flex flex-row items-center">
+                          <div key={key}>
+                            <RenderIcon data={data[key]} />
+                          </div>
+                          <Popover>
+                            <PopoverTrigger>
+                              <CircleHelp className="m-2 text-white" />
+                            </PopoverTrigger>
+                            <PopoverContent className="w-80">
+                              <div className="grid gap-4">
+                                <div className="space-y-2 font-mono">
+                                  <h4 className="font-medium leading-none">
+                                    Hint
+                                  </h4>
+                                  <p className="text-sm text-muted-foreground">
+                                    {data[key]?.expand?.task?.hint || "N/A"}
+                                  </p>
+                                </div>
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+                        </div>
+                      </div>
                     </div>
+
                     <div className="mt-2 flex flex-row items-center justify-between">
-                      <pre className="overflow-auto">
+                      <div className="px-4 pb-2">
                         <code className="font-mono">
                           {data[key]?.expand?.task?.question || "N/A"}
                         </code>
-                      </pre>
-                      <div className="flex flex-row items-center">
-                        <div key={key}>
-                          <RenderIcon data={data[key]} />
-                        </div>
-                        <Popover>
-                          <PopoverTrigger>
-                            <CircleHelp className="m-2 text-white" />
-                          </PopoverTrigger>
-                          <PopoverContent className="w-80">
-                            <div className="grid gap-4">
-                              <div className="space-y-2 font-mono">
-                                <h4 className="font-medium leading-none">
-                                  Hint
-                                </h4>
-                                <p className="text-sm text-muted-foreground">
-                                  {data[key]?.expand?.task?.hint || "N/A"}
-                                </p>
-                              </div>
-                            </div>
-                          </PopoverContent>
-                        </Popover>
                       </div>
                     </div>
-                    <div className="flex w-full p-2">
-                      <form
-                        onSubmit={(e) => handleSubmitAnswer(e, data[key])}
-                        className="w-full"
-                      >
-                        <div className="flex w-full flex-row items-center justify-between space-x-2">
-                          <Input
-                            name="answer"
-                            placeholder="Answer"
-                            className="w-full"
-                          />
-                          <Button className="w-14 ">{">>"}</Button>
-                        </div>
-                      </form>
-                    </div>
+                    {data[key]?.expand?.task?.requires_submission && (
+                      <div className="flex w-full px-2 pb-2">
+                        <form
+                          onSubmit={(e) => handleSubmitAnswer(e, data[key])}
+                          className="w-full"
+                        >
+                          <div className="flex w-full flex-row items-center justify-between space-x-2">
+                            <Input
+                              name="answer"
+                              placeholder="Answer"
+                              className="w-full"
+                            />
+                            <Button className="w-14 ">{">>"}</Button>
+                          </div>
+                        </form>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
