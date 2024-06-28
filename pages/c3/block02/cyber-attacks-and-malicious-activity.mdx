@@ -1,0 +1,104 @@
+# Cyber Attacks and Malicious Activities
+
+Malicious activities in the context of cybersecurity refer to any actions or behaviors performed by individuals or groups with the intent to cause harm, steal information, disrupt operations, or compromise the integrity and confidentiality of computer systems, networks, devices, or digital data.
+
+These malicious actors often employ various tactics, techniques, and procedures (TTPs) to achieve their objectives, which may include exploiting vulnerabilities in software or hardware, using social engineering techniques, executing denial-of-service attacks, or introducing malware into the victim's system.
+
+## Cyber Attack Motivations.
+
+- **Financial Gain**: Malware campaigns aimed at stealing financial information or conducting fraudulent transactions are often driven by the desire for monetary profit.
+- **Cyber Espionage**: State-sponsored actors or other groups with political motivations may engage in cyber espionage to gather intelligence on individuals, organizations, or countries.
+- **Cyber Terrorism**: Malicious cyber actors may seek to disrupt the operations of critical infrastructure systems, such as power grids, transportation networks, or industrial control systems, in order to cause damage or create chaos.
+- **Competitive advantage**: Business competitors may engage in corporate espionage to gain an unfair advantage over their rivals by stealing trade secrets, intellectual property, or other valuable information.
+- **Ideological Motivations**: Some malicious actors may be motivated by political, religious, or social beliefs and seek to promote their cause or disrupt the activities of those they oppose.
+
+## Cyber Kill Chain
+
+The Cyber Kill Chain is a conceptual model developed by Lockheed Martin to illustrate the sequence of stages that adversaries typically go through when planning and executing a cyber attack. The model is designed to help cybersecurity professionals understand the processes used by attackers, so they can better detect, prevent, and respond to security threats.
+
+## Seven Stages of the Cyber Kill Chain
+
+Reconnaissance: This stage involves gathering information about the target system or network.
+
+- **OSINT (Open Source Intelligence)**: Collecting data from social media, corporate websites, forums, and public repositories (like GitHub) to gain insights into the organization's infrastructure and employees.
+- **Social Engineering**: Creating a fabricated scenario or impersonating someone in authority to extract information from employees. Sending deceptive emails to entice individuals into revealing confidential information or credentials.
+- **Scanning and Enumeration**: Probing a system or network to gather information about its structure, components, and settings.
+
+Weaponization: During this phase, attackers create or acquire the necessary tools, scripts, or exploits that will be used in the attack. They may also develop custom payloads tailored to bypass security controls.
+
+- **Custom Malware Development**: Writing malicious software specifically tailored to exploit identified vulnerabilities in the target’s system.
+- **Modify Existing Exploit**: Utilizing pre-made exploits available on the internet and tailoring it to fit the attacker's needs.
+- **Scripts**: Writing scripts to automate tasks that can compromise security settings or spread malware.
+
+Delivery: In this stage, attackers deliver the weaponized payload to the target system or network.
+
+- **Malicious Links or Attachments**: Distributing harmful links or file attachments via email, messages, or online platforms.
+- **Public-Facing Applications**: Uploading a payload to vulnerable applications or services exposed to the internet.
+
+Exploitation: This is where the actual attack takes place. The attacker executes the delivered payload, which exploits vulnerabilities in the target system's software or hardware to gain initial access.
+
+- **Exploit Public Facing Applications**: Attacker leverages the internet-facing open applications using software or a command to gain unauthorized access
+- **External Remote Services**: Attacker takes advantage of the external-facing remote devices that are accessible to the internet like VPN gateway, firewalls, and routers to compromise the target system.
+- **Phishing**: Adversary targets a person or an organization and electronically delivers an email containing malware.
+- **Drive-by Compromise**: System gets compromised when the user visits a malicious website during normal browsing activity.
+- **Valid Accounts**: Adversaries obtain and exploit credentials of existing accounts like default, domain, cloud, or user accounts that have privileges within a targeted system or network.
+- **Trusted Relationship**: Adversaries leveraging the trusted relationship between entities to gain unauthorized access to their intended victims.
+
+Installation: Once initial access is achieved, attackers install various tools and malware on the compromised system to maintain persistence and establish a foothold within the network.
+
+- **Remote Access Trojans (RATs)**: Tool that allows attackers to remotely control the system. RATs can use system tools or have their own built-in tools.
+- **Rootkit**: Tool that provides access to the system while actively hiding it's presence using more advanced capabilities.
+- **Network Monitoring Tool**: Monitors traffic on the network to help the attacker understand the network topology and possibly find more targets.
+- **Backdoor**: These allow attackers to bypass standard authentication mechanisms and maintain persistent access to the infected system, even after it has been cleaned of other malware components.
+- **Web shell**: These scripting tools allow attackers to remotely execute commands on the infected system's web server, enabling them to perform various actions such as file uploads, data exfiltration, and privilege escalation.
+- **Malware**: Attacker might install different types of malware depending on their objective.
+
+Command & Control (C2): In this stage, attackers establish communication channels between the infected systems and their own command-and-control servers to receive further instructions, updates, and manage the attack.
+
+- **Application Layer Protocols**: C2 servers might communicate using application layer protocols to avoid detection by blending in. Examples include web, file transfer, and mail protocols.
+- **Proxy/Tunneling**: Adversaries might use proxies or tunnel through victim systems within to avoid detection and obfuscate their infrastructure.
+- **Traffic Signaling**: Malware might use signaling to hide open ports used for persistence or command and control. An example of this is port knocking, where an adversary or C2 server sends a sequence of predefined connections to closed ports in order to have the malware open a port.
+- **Peer-to-Peer (P2P) Command and Control Networks**: Decentralized systems that rely on direct communication between infected devices instead of relying on a centralized server.
+
+Actions on Objectives: This is where the attacker achieves their intended goals, which can vary widely based on their objectives.
+
+- \*\*Elevate Privileges: Attackers may try to elevate their user privileges on the compromised system, granting them greater access to sensitive information and allowing them to execute more powerful commands.
+- \*\*Lateral Movement: Once they have gained access to a single system within an organization's network, attackers may attempt to move laterally to other systems and networks in order to expand their access and discover additional valuable information.
+- \*\*Extract Sensitive Data: Malicious actors may attempt to steal valuable information from the compromised system, such as financial records, personally identifiable information (PII), intellectual property, or to gather intelligence.
+- \*\*Modify or Destroy Data: Malicious actors may alter, corrupt, or delete critical data stored on the compromised system in order to cause financial losses or disrupt operations.
+
+### Case Study 1: WannaCry Ransomware Attack (2017)
+
+The WannaCry ransomware attack was a global cyberattack that affected numerous organizations in various industries, including healthcare, telecommunications, and transportation. The attack followed the Cyber Kill Chain stages as follows:
+
+Reconnaissance: Prior to the attack, North Korea-linked hacker group Lazarus Group exploited vulnerabilities in Microsoft Windows systems to gain initial access.
+
+Weaponization: Using the exploit "EternalBlue," the attackers developed a ransomware payload that encrypted files on infected systems and demanded payment in bitcoin for decryption.
+
+Delivery: The WannaCry ransomware was delivered through phishing emails with malicious attachments or via compromised websites hosting the exploit kit.
+
+Exploitation: Upon execution, the ransomware payload exploited a vulnerability in the Server Message Block (SMB) protocol of Windows systems to spread rapidly across networks.
+
+Installation: Once initial access was achieved, the ransomware installed itself on compromised systems and began encrypting files.
+
+Command & Control (C2): The WannaCry malware did not rely on C2 servers for communication; instead, it used a "kill switch" domain as a mechanism to prevent further infection. If this domain was unreachable, the ransomware would continue spreading.
+
+Actions on Objectives: After file encryption, the ransomware displayed a message demanding payment in bitcoin within 3 days or all encrypted files would be permanently deleted.
+
+### Case Study 2: SolarWinds Orion Supply Chain Attack (2020)
+
+The SolarWinds Orion supply chain attack was a sophisticated cyberattack that compromised numerous US government agencies and private companies. The attack followed the Cyber Kill Chain stages as follows:
+
+Reconnaissance: Russian state-sponsored hackers targeted the software update mechanism of SolarWinds' network monitoring platform, Orion.
+
+Weaponization: Using a custom backdoor called "Sunburst," attackers embedded their malicious code within legitimate software updates provided by SolarWinds.
+
+Delivery: As part of their regular maintenance routine, customers unknowingly installed the compromised software update on their systems, granting the attackers initial access.
+
+Exploitation: Upon execution, the Sunburst malware exploited vulnerabilities in the Windows operating system to gain elevated privileges and establish persistence within the infected networks.
+
+Installation: The attackers installed various tools and additional malware on compromised systems, enabling them to move laterally across the network and steal sensitive data from targeted organizations.
+
+Command & Control (C2): To maintain communication with the infected systems, the attackers established connections to their own command-and-control servers using a combination of HTTP/HTTPS, DNS tunneling, and custom protocols.
+
+Actions on Objectives: The primary goal of this attack was likely intelligence gathering for espionage purposes. The compromised organizations reported unauthorized access attempts, data theft, and potential manipulation of information within their networks.

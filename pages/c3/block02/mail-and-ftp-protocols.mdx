@@ -1,0 +1,113 @@
+import InstructorTip from "@/components/markdown/InstructorTip";
+
+## FTP
+
+File Transfer Protocol (FTP) is a standard network protocol used to transfer files between a client and a server over the Internet or a local area network (LAN). FTP is one of the earliest protocols developed for this purpose and operates on the application layer of the OSI model.
+
+Key Components and Functionality of FTP:
+
+- **Client-Server Model**: FTP follows a client-server architecture where the client initiates a connection to the server to request file transfers.
+- **Control and Data Connections**: Control Connection is used to send commands and receive responses and it typically uses port 21. Data Connection is used to transfer the actual files the port used for data transfer can vary depending on the mode (Active or Passive).
+- **Modes of Operation**: In active mode the client opens a random port and informs the server. The server then initiates the data connection to the client's specified port. In passive mode the server opens a random port and informs the client. The client then initiates the data connection to the server's specified port. This mode is generally more firewall-friendly.
+
+Common FTP Commands:
+
+- **USER**: Sends the username to the server.
+- **PASS**: Sends the password for authentication.
+- **LIST**: Lists files and directories in the current directory.
+- **RETR**: Retrieves (downloads) a file from the server.
+- **STOR**: Stores (uploads) a file to the server.
+- **DELE**: Deletes a file from the server.
+- **MKD**: Makes a new directory on the server.
+- **RMD**: Removes a directory on the server.
+
+- **Authentication**: FTP requires a username and password to connect to the server. Anonymous FTP allows users to connect without a specific user account, often by using "anonymous" as the username.
+- **Text and Binary Transfers**: FTP can transfer both text files (ASCII mode) and binary files (Binary mode). It's important to choose the correct mode to ensure files are not corrupted during transfer.
+- **Security Concerns**: Transfers data, including usernames and passwords, in plaintext, making it susceptible to interception and man-in-the-middle attacks.
+
+## Mail Protocols
+
+### POP3
+
+Post Office Protocol version 3 (POP3) is a standard mail protocol used to retrieve emails from a mail server to a local email client. Designed to support offline email access, POP3 allows users to download emails from the server to their local device, often removing the emails from the server after download, although some configurations can keep copies on the server.
+
+Key Features and Functions of POP3:
+
+- **Client-Server Model**: POP3 operates on a client-server model where the email client fetches messages from the mail server. The server maintains emails until they are downloaded by the client.
+- **Default Port**: POP3 typically uses port 110
+- **Secure Port**: Can use SSL/TLS on port 995.
+- **Simple Communication**: POP3 is designed to be a simple protocol with minimal state information maintained on the server, making it easier to implement but somewhat less feature-rich compared to other protocols.
+- **Offline Access**: Once emails are downloaded, they can be accessed offline without requiring an active internet connection.
+
+Typical Workflow:
+
+- **Connection**: The client connects to the POP3 server.
+- **Authentication**: The client authenticates using a username and password through the USER and PASS commands.
+- **Transaction**: During this phase, the client issues commands to retrieve emails:
+
+Common POP3 Commands:
+
+- **STAT**: Displays the number of messages and total size of the mailbox.
+- **LIST**: Provides a list of messages and their sizes.
+- **RETR**: Retrieves a specific message.
+- **DELE**: Deletes a specified message (typically executed after successful retrieval).
+- **QUIT**: Ends the session, optionally instructing the server to delete messages marked for deletion.
+
+### SMTP
+
+Simple Mail Transfer Protocol (SMTP) is a standard communication protocol for sending emails across the Internet. SMTP is primarily responsible for transmitting outgoing mail from email clients to email servers and between email servers.
+
+Key Features and Functions of SMTP:
+
+- **Client-Server Model**: SMTP operates on a client-server model. The client (typically an email client or another email server) sends emails to the SMTP server, which then relays them to the recipient's mail server.
+- **Default Port**: SMTP typically uses port 25 for standard communication between mail servers.
+- **Submission Port**: Port 587 is often used for email submission from clients to servers, supporting authentication and encryption.
+- **Secure Port**: Port 465 is used for SMTP over SSL/TLS, providing encrypted communication.
+
+Typical Workflow:
+
+- **Connection**: The client connects to the SMTP server.
+- **Handshake**: The client sends a greeting command (HELO or EHLO).
+- **Sender and Recipient Specification**: The client specifies the sender's and recipient's addresses using MAIL FROM and RCPT TO commands.
+- **Content Transmission**: The client sends the email content using the DATA command.
+- **Connection Termination**: The session is terminated using the QUIT command.
+
+Common SMTP Commands:
+
+- **HELO or EHLO**: Initiates the conversation; EHLO is the extended version supporting more features.
+- **MAIL FROM**: Specifies the sender's email address.
+- **RCPT TO**: Indicates the recipient's email address.
+- **DATA**: Signals the start of the email content, followed by the message body and ending with a single period (.) on a line by itself.
+- **QUIT**: Closes the connection.
+
+### IMAP
+
+Internet Message Access Protocol (IMAP) is a standard email protocol used to retrieve and manage emails from a mail server, allowing users to access and manipulate their email messages as though they were stored locally on their device. Unlike POP3, IMAP enables users to maintain email storage on the server, providing greater flexibility and synchronization across multiple devices.
+
+Key Features and Functions of IMAP:
+
+- **Client-Server Model**: IMAP operates on a client-server model where the email client retrieves email data from the mail server while maintaining the primary storage of emails on the server.
+- **Default Port**: IMAP typically uses port 143 for standard communication.
+- **Secure Port**: For secure communication, IMAP over SSL/TLS uses port 993.
+- **Synchronization**: IMAP supports two-way synchronization between the client and server, keeping emails and folders consistent across multiple devices. Changes made on one device are reflected on all others.
+- **Selective Retrieval**: Allows users to download headers, email bodies, or attachments separately, which is useful for conserving bandwidth or retrieving only necessary information.
+- **Inbox Organization**: Users can create, rename, delete, and manage folders or mailboxes directly on the server.
+- **Flags**: Supports marking emails with flags (e.g., read/unread, flagged for follow-up) for easier organization and management.
+
+Typical Workflow:
+
+- **Connection**: The client establishes a connection to the IMAP server.
+- **Authentication**: The client authenticates using the LOGIN command with a username and password.
+- **Mailbox Selection**: The client selects a mailbox (e.g., INBOX) using the SELECT command.
+- **Message Retrieval**: The client can fetch specific messages or parts of messages using the FETCH command, such as headers, bodies, or attachments.
+- **Disconnection**: The session is terminated using the LOGOUT command, ensuring the server and client states are synchronized.
+
+Common IMAP Commands:
+
+- **LOGIN**: Authenticates the user.
+- **SELECT**: Selects a mailbox to access its messages.
+- **FETCH**: Retrieves specific message parts or entire messages.
+- **STORE**: Sets flags on messages to indicate their status.
+- **SEARCH**: Searches the mailbox for messages that match certain criteria.
+- **EXPUNGE**: Removes messages marked for deletion.
+- **LOGOUT**: Ends the session.

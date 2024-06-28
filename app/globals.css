@@ -225,3 +225,23 @@
 .markdown .lang-python {
   font-family: "Fira Code", monospace;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.scrolling-message {
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.scrolling-message span {
+  display: inline-block;
+  animation: scroll 30s linear infinite; /* Adjust the duration as needed */
+}

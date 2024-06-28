@@ -785,10 +785,10 @@
       "className": "dark:bg-pink-700 bg-pink-300 text-xs p-1"
     },
     {
-      "label": "Malware",
+      "label": "Attacks and Malicious Activity",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
-      "link": "/c3/block02/malware"
+      "link": "/c3/block02/cyber-attacks-and-malicious-activity"
     },
     {
       "label": "Break",
@@ -796,10 +796,10 @@
       "className": "dark:bg-cyan-700 bg-cyan-300 text-xs p-1"
     },
     {
-      "label": "Attacks and Malicious Activity",
+      "label": "Malware",
       "length": 4,
       "className": "dark:bg-blue-700 bg-blue-300 text-xs p-1",
-      "link": "/c3/block02/attacks-and-malicious-activity"
+      "link": "/c3/block02/malware"
     },
     {
       "label": "Malware Analysis Lab",

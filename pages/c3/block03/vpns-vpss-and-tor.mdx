@@ -1,0 +1,83 @@
+## Virtual Private Network (VPN)
+
+A Virtual Private Network (VPN) is a technology that creates a secure and encrypted connection over a less secure network, such as the internet. VPNs are commonly used to enhance online privacy, secure data transmissions, and enable remote access to corporate networks.
+
+### Encryption
+
+A VPN encrypts data before it is transmitted over the internet, ensuring that the information remains confidential and cannot be intercepted or read by unauthorized parties.
+
+Common Encryption Protocols:
+AES (Advanced Encryption Standard)
+TLS (Transport Layer Security)
+
+### Data Tunneling
+
+Data is encapsulated within secure tunnels, which protect the content of communication as it travels across public or untrusted networks.
+
+Common Tunneling Protocols:
+PPTP (Point-to-Point Tunneling Protocol)
+L2TP (Layer 2 Tunneling Protocol)
+OpenVPN
+IKEv2/IPsec (Internet Key Exchange, version 2 / Internet Protocol Security)
+
+### How a VPN Works
+
+- **Client Software**: The user installs VPN client software on their device.
+- **Connection Establishment**: The client software connects to the VPN server using secure protocols.
+- **Encryption**: The VPN client and server negotiate encryption keys and establish an encrypted tunnel.
+- **Data Transmission**: All internet traffic from the user's device is encrypted and routed through the tunnel to the VPN server.
+- **Server Routing**: The VPN server decrypts the traffic and forwards it to the intended destination on the internet. The responses follow the same path back to the user's device, ensuring secure communication.
+- **Endpoints**: Endpoints will only see the VPN server's IP address as the source for the traffic.
+
+### Disadvantages
+
+Performance Impact: Encryption and routing can introduce latency and reduce internet speeds.
+Trust Issues: Users must trust their VPN provider with their data, making it essential to choose reputable services with transparent policies.
+
+## Virtual Private Server (VPS)
+
+A VPS is a virtualized server that emulates a dedicated physical server within a larger, shared physical server. It provides users with the experience of having a dedicated server but at a lower cost. Each VPS operates its own operating system (OS) and can be independently rebooted. VPS hosting is a popular choice for businesses and individuals who need more control and resources than what traditional shared hosting offers but without the expense of a dedicated server.
+
+### Important Features
+
+- **Operating System**: The owner can choose and install the operating system of their choice.
+- **Scalability**: Resources such as CPU, RAM, and storage can easily be scaled up or down based on needs.
+- **Security and Isolation**: Virtualization technology allows each VPS to run in it's own isolated environment, improving security.
+- **Rapid Deployment**: Depending on the requirements of a VPS they can potentially be provisioned and ready to use within minutes.
+- **Location**: Physical and logical location of the VPS can usually be determined during creation.
+
+### How a VPS Works
+
+- **Physical Server Setup**: A powerful physical server is set up, which will host multiple virtual servers.
+- **Virtualization Layer Installation**: A hypervisor is installed on the physical server to create and manage virtual instances.
+- **VPS Creation**: Virtual servers are created by the hypervisor, each with its own dedicated resources and operating system installation.
+- **User Access**: Users are provided with root/admin access to their respective VPS, allowing them to perform administrative tasks, install software, and configure the server as needed.
+
+### Disadvantages
+
+Technical Knowledge Required: Managing a VPS requires a certain degree of technical expertise, especially for server maintenance, security, and optimizations.
+Resource Limits: While more robust than shared hosting, a VPS still shares the underlying physical hardware with other VPS instances, which can sometimes lead to resource contention if the physical server is overcommitted.
+
+## The Onion Router (Tor)
+
+Tor is a privacy-focused, decentralized network designed to enable anonymous communication over the internet. It routes internet traffic through a series of volunteer-operated servers, known as nodes or relays, to conceal the user's location, identity, and online activity from surveillance and traffic analysis.
+
+### Features
+
+- **Anonymity**: Data is encrypted multiple times and sent through a series of network nodes, each decrypting a layer to reveal the next node.
+- **Decentralization**: The network is created by thousands of volunteers worldwide making it more resilient to attacks. No central point of control also enahnces security.
+- **Onion Routing**: The last node in the path is known as the exit node. This node sends the traffic to it's final destination.
+- **Hidden Services**: Allows services to be hosted without revealing their IP addresses to ensure anonymity for both sides of the communication.
+
+### How Tor Works:
+
+- **Client Setup**: The user installs the Tor Browser or another Tor-compatible application.
+- **Path Establishment**: The Tor client selects three relays (entry node, middle node, and exit node) to form a circuit. Each relay only knows its immediate predecessor and successor, but not the entire path.
+- **Layered Encryption**: The client encrypts data in layers corresponding to each relay in the path.
+- **Relay Hopping**: The encrypted data is sent through the entry node, which decrypts the outer layer and forwards the remaining encrypted data to the middle node. This process continues until the data reaches the exit node, which decrypts the final layer and sends the data to the intended destination.
+- **Response Routing**: Responses from the destination follow the same path back through the relays, maintaining the encryption until it reaches the original client.
+
+### Disadvantages
+
+Performance: Tor can be significantly slower than standard internet connections due to the multiple relays and layers of encryption involved in routing traffic.
+Exit Node Vulnerability: While the data within the Tor network is encrypted, traffic leaving the exit node to the final destination can be monitored if it is not encrypted end-to-end.

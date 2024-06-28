@@ -1,0 +1,75 @@
+1. Difference between routing and routed protocol:
+
+   Routing Protocol:
+   Purpose: Routing protocols are used by routers to exchange routing information and dynamically update routing tables. Their primary function is to determine the best path for data packets to reach their destination across an internetwork (a collection of interconnected networks).
+   Examples: Common routing protocols include RIP (Routing Information Protocol), OSPF (Open Shortest Path First), EIGRP (Enhanced Interior Gateway Routing Protocol), and BGP (Border Gateway Protocol).
+   Characteristics:
+   Dynamic Updates: Routing protocols automatically update routing tables based on changes in the network topology, such as link failures or new network connections.
+   Path Selection: They determine the optimal path by evaluating metrics such as hop count, bandwidth, delay, and reliability.
+
+   Routed Protocol:
+   Purpose: Routed protocols define the format and addressing of data packets used for communication between devices across different networks.
+   Examples: IP (Internet Protocol) is the predominant routed protocol used in modern internetworks. Other examples include IPv6 (the next-generation IP addressing standard) and IPX (Internetwork Packet Exchange, primarily used in legacy Novell NetWare environments).
+   Characteristics:
+   Packet Structure: Routed protocols specify how data packets are structured, including header fields such as source and destination IP addresses, protocol version, and data payload.
+   Interoperability: Devices using different routed protocols can communicate as long as they understand the packet format and addressing rules defined by the protocol.
+
+2. Interior vs Exterior routing:
+
+   Interior Routing (IGP - Interior Gateway Protocol):
+   Purpose: Interior routing protocols are used within a single autonomous system (AS) or network domain to exchange routing information between routers.
+   Examples: OSPF (Open Shortest Path First), EIGRP (Enhanced Interior Gateway Routing Protocol), and RIP (Routing Information Protocol) are common IGPs.
+   Characteristics:
+   Topology Awareness: IGPs are aware of the internal topology of the network and calculate routes based on metrics (such as link cost in OSPF) within that domain.
+   Scalability: Designed to operate efficiently within a single administrative domain, IGPs are well-suited for enterprise networks and service provider infrastructures.
+
+   Exterior Routing (EGP - Exterior Gateway Protocol):
+   Purpose: Exterior routing protocols facilitate communication and route exchange between different autonomous systems (ASes) or networks operated by distinct organizations.
+   Examples: BGP (Border Gateway Protocol) is the predominant exterior routing protocol used on the Internet and between large-scale networks.
+   Characteristics:
+   Inter-AS Communication: EGPs manage routing information between different ASes, allowing for the exchange of reachability information across organizational boundaries.
+   Policy-Based Routing: BGP supports complex routing policies, enabling organizations to control how traffic is routed based on criteria such as network performance, cost, and policy agreements.
+
+3. Static and Dynamic Routing:
+
+   Static Routing:
+   Purpose: Static routing involves manually configuring the routing table on routers to specify the paths that data packets should take from source to destination.
+   Characteristics:
+   Configuration: Network administrators manually enter static routes into router configurations, specifying the next-hop IP address or outgoing interface for each destination network.
+   Predictability: Static routes provide predictable paths, which can simplify network management and troubleshooting in small, stable networks.
+   Limitations: Lack of automatic adaptation to network changes such as link failures or traffic load balancing. Maintenance overhead increases as the network scales.
+
+   Dynamic Routing:
+   Purpose: Dynamic routing protocols automate the process of updating routing tables based on real-time changes in network topology and traffic conditions.
+   Characteristics:
+   Automated Updates: Dynamic routing protocols exchange routing updates between routers, allowing them to dynamically calculate and adapt to the best paths for data forwarding.
+   Scalability: Well-suited for large and dynamic networks, dynamic routing protocols scale efficiently as networks grow or undergo topology changes.
+   Efficiency: Enhances network resilience by quickly adapting to failures or congested links, ensuring optimal traffic routing and minimizing downtime.
+
+4. STP (Spanning Tree Protocol):
+
+   Purpose:
+   Loop Prevention: STP prevents loops in Ethernet networks by dynamically disabling redundant paths and ensuring a loop-free topology.
+   Functionality:
+   Root Bridge Election: STP elects a root bridge based on the lowest Bridge ID (combination of priority and MAC address).
+   Path Selection: Each switch determines the shortest path to the root bridge and blocks redundant links to prevent loops.
+   Topology Changes: STP dynamically adjusts network topology in response to changes such as link failures or new connections, ensuring network stability.
+
+   Types:
+   Standard STP (802.1D): Original spanning tree protocol with slower convergence times.
+   Rapid STP (802.1w): Faster convergence variant of STP, reducing network downtime and improving performance.
+   Multiple STP (802.1s MSTP): Allows for multiple spanning tree instances, each handling different VLANs, optimizing network resource utilization.
+
+5. MPLS (Multiprotocol Label Switching):
+
+   Purpose:
+   Traffic Management: MPLS is a flexible and scalable technique for directing and managing network traffic flows, providing efficiency and quality of service (QoS) capabilities.
+   Functionality:
+   Label Switching: MPLS routers apply labels to data packets, allowing for fast and efficient packet forwarding based on labels rather than IP headers.
+   Traffic Engineering: Enables network administrators to control traffic routing paths, prioritize certain traffic types, and optimize network resource utilization.
+   VPN Support: MPLS can create virtual private networks (VPNs) by segregating traffic flows within a service provider's network, enhancing security and privacy.
+
+   Components:
+   Label Switch Routers (LSRs): MPLS-enabled routers that perform label swapping and forwarding based on MPLS labels.
+   Label Distribution Protocol (LDP): Used to distribute MPLS labels among routers within an MPLS network, ensuring consistent label mappings.
+   MPLS VPNs: Provides secure and efficient VPN services over MPLS networks, separating customer traffic while utilizing shared infrastructure resources.

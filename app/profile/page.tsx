@@ -13,16 +13,18 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="mb-5 flex w-full flex-row items-center justify-between">
+    <div className="flex flex-col items-center justify-center space-y-6 p-6">
+      <div className="mb-6 flex w-full items-center justify-between">
         <div>
-          <h1 className="text-2xl">
-            {user.rank + " " + user.last_name + ", " + user.first_name}
+          <h1 className="text-3xl font-bold">
+            {user.rank} {user.last_name}, {user.first_name}
           </h1>
-          {user && <p>User ID: {user.id}</p>}
+          {user && <p className="text-gray-600">User ID: {user.id}</p>}
         </div>
         <form action={handleLogout}>
-          <Button>Logout</Button>
+          <Button className="bg-red-500 text-white hover:bg-red-600">
+            Logout
+          </Button>
         </form>
       </div>
       <UploadImageForm user={user} />
