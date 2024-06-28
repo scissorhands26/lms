@@ -5,16 +5,16 @@ import { useState } from "react";
 
 export default function UploadImageForm({ user }: any) {
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState<any>(null);
 
-  const handleDrop = (event) => {
+  const handleDrop = (event: any) => {
     event.preventDefault();
     const droppedFile = event.dataTransfer.files[0];
     setFile(droppedFile);
     setPreview(URL.createObjectURL(droppedFile));
   };
 
-  const handleFileSelect = (event) => {
+  const handleFileSelect = (event: any) => {
     const selectedFile = event.target.files?.[0] || null;
     setFile(selectedFile);
     setPreview(URL.createObjectURL(selectedFile));

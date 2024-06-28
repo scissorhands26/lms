@@ -13,7 +13,7 @@ export default async function Exam() {
   const pb = await getPb();
 
   const unlockedExamzes = await pb.collection("exam_attempts").getFullList({
-    filter: `user = "${pb.authStore.model.id}" && submitted = false && expired = false`,
+    filter: `user = "${pb.authStore.model?.id}" && submitted = false && expired = false`,
     expand: "exam,exam.questions",
   });
 

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -34,23 +33,22 @@ export default function QuizGradesTable({ dataGrades }: any) {
   const [grades, setGrades] = useState(dataGrades);
   const [studentFilter, setStudentFilter] = useState("");
 
-  const filteredGrades = grades.filter((grade) => {
-    const studentMatch = grade.user.user_last_name
+  const filteredGrades = grades.filter((grade: any) => {
+    const studentMatch = grade.user_last_name
       .toLowerCase()
       .includes(studentFilter.toLowerCase());
     return studentMatch;
   });
 
-  function calculateGrade(grade: any) {
-    const totalQuestions = grade.questions.length;
-    const correctQuestions = grade.questions.filter(
+  function calculateGrade(attempt: any) {
+    const totalQuestions = attempt.questions.length;
+    const correctQuestions = attempt.questions.filter(
       (question: any) => question.correct,
     ).length;
     return (
       <span>
-        {correctQuestions} / {totalQuestions}
-        {" || "}
-        {((correctQuestions / totalQuestions) * 100).toFixed(2)}
+        {correctQuestions} / {totalQuestions} (
+        {((correctQuestions / totalQuestions) * 100).toFixed(2)}%)
       </span>
     );
   }
@@ -73,13 +71,6 @@ export default function QuizGradesTable({ dataGrades }: any) {
               value={studentFilter}
               onChange={(e) => setStudentFilter(e.target.value)}
             />
-            {/* <Label htmlFor="assignment-filter">Assignment</Label>
-            <Input
-              id="assignment-filter"
-              placeholder="Filter by assignment name"
-              value={assignmentFilter}
-              onChange={(e) => setAssignmentFilter(e.target.value)}
-            /> */}
           </div>
           <Table>
             <TableHeader>
@@ -92,18 +83,18 @@ export default function QuizGradesTable({ dataGrades }: any) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredGrades.map((grade, index) => (
+              {filteredGrades.map((grade: any, index: any) => (
                 <TableRow key={index}>
                   <TableCell>
-                    {grade.user.user_rank +
+                    {grade.user_rank +
                       " " +
-                      grade.user.user_last_name +
+                      grade.user_last_name +
                       ", " +
-                      grade.user.user_first_name}
+                      grade.user_first_name}
                   </TableCell>
                   <TableCell>{grade.quiz_name}</TableCell>
                   <TableCell>
-                    {calculateGrade(grade.attempts[grade.attempts.length - 1])}%
+                    {calculateGrade(grade.attempts[grade.attempts.length - 1])}
                   </TableCell>
                   <TableCell>{grade.attempts.length}</TableCell>
                   <TableCell className="items-right">
@@ -127,7 +118,7 @@ export default function QuizGradesTable({ dataGrades }: any) {
                                   {formatTime(attempt.quiz_attempt_date)}
                                 </span>
                               </div>
-                              <p>{calculateGrade(attempt)}%</p>
+                              <p>{calculateGrade(attempt)}</p>
                             </div>
                           ))}
                         </div>
@@ -140,7 +131,6 @@ export default function QuizGradesTable({ dataGrades }: any) {
           </Table>
         </div>
       </CardContent>
-      {/* <pre> {JSON.stringify(grades, null, 4)} </pre> */}
     </Card>
   );
 }

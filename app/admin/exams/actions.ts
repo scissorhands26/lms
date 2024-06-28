@@ -50,7 +50,7 @@ export async function startExam({ exam, selectedStudents }: StartExamData) {
     createdAttempts.map(async (attempt) => {
       console.log("Attempt:", attempt);
       await Promise.all(
-        examRecord.questions.map((question) => {
+        examRecord.questions.map((question: any) => {
           const data = {
             question: question,
             exam: exam.id,

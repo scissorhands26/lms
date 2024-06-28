@@ -29,7 +29,7 @@ export default function ExerciseTasks() {
   async function getTasks() {
     const user = await GetUser();
 
-    const url = `${process.env.NEXT_PUBLIC_CONTAINER_URL}/exercises/tasks/${exerciseID}/${user.id}`;
+    const url = `${process.env.NEXT_PUBLIC_CONTAINER_URL}/exercises/tasks/${exerciseID}/${user?.id}`;
     const response = await fetch(url, {
       headers: { accept: "application/json" },
     });
@@ -48,7 +48,7 @@ export default function ExerciseTasks() {
       try {
         const data = await getTasks();
         setData(data);
-      } catch (err) {
+      } catch (err: any) {
         setError(err.message);
       }
     }

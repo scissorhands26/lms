@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import { ChatLayout } from "@/components/chat/chat-layout";
 import Cookies from "js-cookie";
-import { Button } from "@/components/ui/button"; // Make sure to import your Button component if you have one
+import { Button } from "@/components/ui/button";
 import PocketBase from "pocketbase";
 import { Chat } from "./chat";
 import { MessageCircleOff, MessageCirclePlus } from "lucide-react";
 
 export default function ChatWindow() {
   const [chat, setChat] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
+  const [messages, setMessages] = useState<any>([]);
+  const [user, setUser] = useState<any>(null);
   const layout = Cookies.get("react-resizable-panels:layout");
   const defaultLayout = layout ? JSON.parse(layout) : undefined;
   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -39,7 +39,7 @@ export default function ChatWindow() {
           console.log(e.action);
           console.log(e.record);
           // Optionally handle real-time updates
-          setMessages((prevMessages) => [...prevMessages, e.record]);
+          setMessages((prevMessages: any) => [...prevMessages, e.record]);
         },
         {
           expand: "user",
@@ -56,7 +56,7 @@ export default function ChatWindow() {
     };
   }, []);
 
-  async function createChatMessage(message: string) {
+  async function createChatMessage(message: string, file: File | null) {
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const pb_cookie: any = Cookies.get("pb_auth");
     pb.authStore.loadFromCookie(pb_cookie);
@@ -70,19 +70,21 @@ export default function ChatWindow() {
       ", " +
       pb.authStore.model?.first_name;
 
-    const data = {
-      message: message,
-      user: pb.authStore.model?.id,
-      datetime: new Date(),
-      name: userName,
-    };
+    const formData = new FormData();
+    formData.append("message", message);
+    formData.append("user", pb.authStore.model?.id);
+    formData.append("datetime", new Date().toISOString());
+    formData.append("name", userName);
 
-    const record = await pb.collection("chat").create(data);
-    // setMessages((prevMessages) => [...prevMessages, record]);
+    if (file) {
+      formData.append("file", file);
+    }
+
+    const record = await pb.collection("chat").create(formData);
   }
 
   return (
-    <div className="fixed bottom-4 right-4">
+    <div className="fixed bottom-4 right-4 z-50">
       <Button
         className="mb-2 bg-blue-500 text-white hover:bg-blue-600"
         onClick={() => setChat(!chat)}

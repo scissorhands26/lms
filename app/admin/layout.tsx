@@ -14,6 +14,7 @@ import { NavLinks } from "@/components/admin/NavLinks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import getPb from "@/pb/getPb";
 import { redirect } from "next/navigation";
+import ChatWindow from "@/components/chat/ChatWindow";
 
 export default async function AdminLayout({
   children,
@@ -22,7 +23,7 @@ export default async function AdminLayout({
 
   const user = await pb.authStore.model;
 
-  if (user.roles === "k4punq9hul00961") {
+  if (user?.roles === "k4punq9hul00961") {
     redirect("/not-an-admin");
   }
 
@@ -74,15 +75,19 @@ export default async function AdminLayout({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{user.rank + " " + user.last_name}</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                {user?.rank + " " + user?.last_name}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href="/profile">Profile</Link></DropdownMenuItem>
+                <Link href="/profile">Profile</Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
           {children}
+          <ChatWindow />
         </main>
       </div>
     </div>

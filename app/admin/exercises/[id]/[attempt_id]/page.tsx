@@ -23,13 +23,15 @@ async function getAttempt(exerciseID: string, attemptID: string) {
   const pb = await getPb();
   pb.autoCancellation(false);
 
-  const tasks = await pb.collection("exercise_tasks").getFullList({
+  const tasks: any = await pb.collection("exercise_tasks").getFullList({
     filter: `exercise = "${exerciseID}"`,
   });
 
-  const attempt = await pb.collection("exercise_attempts").getOne(attemptID, {
-    expand: "student",
-  });
+  const attempt: any = await pb
+    .collection("exercise_attempts")
+    .getOne(attemptID, {
+      expand: "student",
+    });
 
   const fetchRecordsForAttempt = async () => {
     const records = await pb.collection("exercise_answers").getFullList({
@@ -41,7 +43,7 @@ async function getAttempt(exerciseID: string, attemptID: string) {
   const answers = await fetchRecordsForAttempt();
 
   // Move completed and submitted_answer to the respective task
-  const tasksWithAnswers = tasks.map((task) => {
+  const tasksWithAnswers = tasks.map((task: any) => {
     const answer = answers.find((answer) => answer.task === task.id);
     return {
       ...task,
@@ -67,13 +69,13 @@ export default async function AttemptPage({ params }: any) {
     <div>
       <div className="mb-2 grid grid-cols-3 items-center gap-2 text-center">
         <div className="rounded-xl border bg-slate-900 p-2">
-          {attempt.expand.student.rank} {attempt.expand.student.last_name}
+          {attempt.expand?.student.rank} {attempt.expand?.student.last_name}
         </div>
         <div className="rounded-xl border bg-slate-900 p-2">
           Attempt: {attempt.attempt}
         </div>
         <div className="rounded-xl border bg-slate-900 p-2">
-          {attempt.container_info?.command
+          {attempt?.container_info?.command
             ? attempt.container_info.command
             : "No container"}
         </div>
@@ -89,7 +91,7 @@ export default async function AttemptPage({ params }: any) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {attempt.tasks.map((task) => (
+          {attempt.tasks.map((task: any) => (
             <TableRow key={task.id}>
               <TableCell>
                 <div className="flex items-center gap-2">

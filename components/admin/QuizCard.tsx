@@ -42,24 +42,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-interface Quiz {
-  id: string;
-  name: string;
-  questions: number;
-  running: boolean;
-  started: string;
-  time_allowed: number;
-}
-
-interface Student {
-  id: string;
-  name: string;
-  rank: string;
-  last_name: string;
-  first_name: string;
-}
-
-const calculateInitialTimeRemaining = (quiz: Quiz): number => {
+const calculateInitialTimeRemaining = (quiz: any): number => {
   const startedTime = new Date(quiz.started).getTime();
   const currentTime = new Date().getTime();
   const timeElapsed = (currentTime - startedTime) / 1000;
@@ -86,17 +69,18 @@ export default function QuizCard({
   studentList,
   quizAnswers,
 }: {
-  quiz: Quiz;
-  studentList: Student[];
+  quiz: any;
+  studentList: any;
+  quizAnswers: any;
 }) {
   const [timer, setTimer] = useState<number | null>(null);
   const [quizState, setQuizState] = useState(quiz.running);
-  const [students, setStudents] = useState<Student[]>(studentList);
+  const [students, setStudents] = useState<any>(studentList);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      selectedStudents: studentList.map((student) => student.id),
+      selectedStudents: studentList.map((student: any) => student.id),
     },
   });
 
@@ -119,7 +103,7 @@ export default function QuizCard({
     }
   }, [quizState]);
 
-  async function handleQuizState(state: string, quiz: Quiz) {
+  async function handleQuizState(state: string, quiz: any) {
     const selectedStudents = form.getValues("selectedStudents");
     if (state === "start") {
       await startQuiz({ quiz, selectedStudents }); // Pass quiz and selected students
@@ -142,12 +126,12 @@ export default function QuizCard({
       // Not all students are selected, so select all
       form.setValue(
         "selectedStudents",
-        students.map((student) => student.id),
+        students.map((student: any) => student.id),
       );
     }
   };
 
-  function calculateScore(quiz: Quiz, student: Student, quizAnswers: any[]) {
+  function calculateScore(quiz: any, student: any, quizAnswers: any[]) {
     // Filter quiz answers by student ID and quiz ID
     const studentAnswers = quizAnswers.filter(
       (answer) =>
@@ -167,19 +151,22 @@ export default function QuizCard({
 
     // Get an array of attempt entries and sort by creation date
     const sortedAttempts = Object.entries(attempts).sort((a, b) => {
+      // @ts-ignore
       const dateA = new Date(a[1][0].expand.attempt.created);
+      // @ts-ignore
       const dateB = new Date(b[1][0].expand.attempt.created);
+      // @ts-ignore
       return dateA - dateB;
     });
 
     // Calculate score for each attempt
-    const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
+    const scores = sortedAttempts.map(([attemptId, attemptAnswers]: any) => {
       let score = 0;
-      attemptAnswers.forEach((answer) => {
+      attemptAnswers.forEach((answer: any) => {
         const correctOptions = answer.expand.question.correct_options;
         if (correctOptions && Array.isArray(answer.answer)) {
           // Check if every answer provided by the student matches a correct option
-          const isCorrect = answer.answer.every((ans) =>
+          const isCorrect = answer.answer.every((ans: any) =>
             correctOptions.includes(ans),
           );
           if (isCorrect) {
@@ -193,10 +180,10 @@ export default function QuizCard({
     return scores;
   }
 
-  function checkQuizStatus(quiz, student, quizAnswers) {
+  function checkQuizStatus(quiz: any, student: any, quizAnswers: any) {
     // Check if the quiz is currently running for the student
     let runningSession = quizAnswers.some(
-      (answer) =>
+      (answer: any) =>
         answer.expand.user.id === student.id &&
         answer.expand.quiz.id === quiz.id &&
         !answer.expand.attempt.expired &&
@@ -207,7 +194,7 @@ export default function QuizCard({
 
     // Check if the student has completed the quiz
     let quizTaken = quizAnswers.some(
-      (answer) =>
+      (answer: any) =>
         answer.expand.user.id === student.id &&
         answer.expand.quiz.id === quiz.id &&
         answer.expand.attempt.submitted,
@@ -273,7 +260,7 @@ export default function QuizCard({
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {students.map((student) => (
+                          {students.map((student: any) => (
                             <TableRow key={student.id} className="m-0 p-0">
                               <TableCell className="p-2">
                                 <FormField

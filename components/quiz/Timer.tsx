@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FollowerPointerCard } from "@/components/ui/following-pointer";
 
-export default function Timer({ originalTime, timeRemaining, onTimeExpired }) {
+export default function Timer({
+  originalTime,
+  timeRemaining,
+  onTimeExpired,
+}: any) {
   const [remainingTime, setRemainingTime] = useState(timeRemaining);
   const [showDecrement, setShowDecrement] = useState(false);
   const [flashDamage, setFlashDamage] = useState(false);
@@ -34,7 +38,7 @@ export default function Timer({ originalTime, timeRemaining, onTimeExpired }) {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setRemainingTime((prevTime) => {
+      setRemainingTime((prevTime: any) => {
         if (prevTime <= 1) {
           clearInterval(timer);
           onTimeExpired();
@@ -53,7 +57,7 @@ export default function Timer({ originalTime, timeRemaining, onTimeExpired }) {
   function handleClick() {
     if (ammo > 0) {
       setAmmo((prevAmmo) => prevAmmo - 1);
-      setRemainingTime((prevTime) => {
+      setRemainingTime((prevTime: any) => {
         const newTime = prevTime - 10 > 0 ? prevTime - 10 : 0;
         if (newTime <= 1) {
           onTimeExpired();
@@ -71,7 +75,7 @@ export default function Timer({ originalTime, timeRemaining, onTimeExpired }) {
     }
   }
 
-  function formatTime(seconds) {
+  function formatTime(seconds: any) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;

@@ -16,7 +16,7 @@ async function getExercise(id: string) {
     expand: "student",
   });
 
-  const fetchRecordsForAttempt = async (attempt) => {
+  const fetchRecordsForAttempt = async (attempt: any) => {
     const records = await pb.collection("exercise_answers").getFullList({
       filter: `attempt = "${attempt.id}"`,
     });
@@ -36,6 +36,7 @@ async function getExercise(id: string) {
   const attemptsWithAnswers = await fetchAllRecords(); // Await the completion of fetching all records
 
   const runningAttempts = attemptsWithAnswers.filter(
+    // @ts-ignore
     (attempt) => attempt.running,
   );
 

@@ -1,6 +1,11 @@
+import ChatWindow from "@/components/chat/ChatWindow";
+
+<ChatWindow />
+
 # Scripting and Automation Cyber Crash Course
 
 ## Workflow Automation
+
 - Regular tasks can often be automated to save time and effort.
 - **Examples of automation:**
   - **Excel functions:** Automate calculations and data processing using formulas, pivot tables, and conditional formatting.
@@ -8,6 +13,7 @@
   - **API scripts:** Automate creation, retrieval, or updating of information through API calls, enabling integration with web services and applications.
 
 ## Automation Tools
+
 - Automation tools are widely available and can range from simple to complex.
 - Automating even a portion of a process can save considerable time.
 - **Tools include:**
@@ -28,14 +34,16 @@
     - **Python:** High-level programming language known for its readability and versatility, used for scripting, web development, data analysis, and more.
 
 ## Scripting
+
 - Scripting involves writing a series of commands in a programming or scripting language.
 - Scripts can use existing system executables and built-in commands of the scripting language.
 
 ### Types of Scripting
-- **Bash Scripts:** 
+
+- **Bash Scripts:**
   - Use system executables (`curl`, `grep`, `cat`, etc.) and built-in bash commands.
   - Support logic and control flow mechanisms like loops and conditionals.
-  - Example: 
+  - Example:
     ```bash
     #!/bin/bash
     echo "Creating directory"
@@ -43,7 +51,7 @@
     find . -name "*.txt" -exec mv {} new_directory \;
     gzip new_directory/*.txt
     ```
-- **PowerShell Scripts:** 
+- **PowerShell Scripts:**
   - Use system executables and provide robust interaction with libraries, logic, and control flow.
   - Integrates with Windows management infrastructure (e.g., WMI, COM objects).
   - Example:
@@ -53,7 +61,7 @@
     Get-ChildItem -Filter *.txt | Move-Item -Destination "new_directory"
     Get-ChildItem "new_directory\*.txt" | Compress-Archive -DestinationPath "new_directory\archive.zip"
     ```
-- **Batch Scripts:** 
+- **Batch Scripts:**
   - Use system executables and built-in commands.
   - Suitable for simple automation tasks in Windows environments.
   - Example:
@@ -64,10 +72,12 @@
     forfiles /M *.txt /C "cmd /c move @file new_directory"
     forfiles /P new_directory /M *.txt /C "cmd /c gzip @file"
     ```
-- **Python Scripts:** 
+- **Python Scripts:**
+
   - Use libraries rather than system executables, offering a wide range of functionalities.
   - Ideal for complex automation tasks, data manipulation, and web interactions.
   - Example:
+
     ```python
     import requests
     import json
@@ -79,6 +89,7 @@
     ```
 
 ## Benefits of Scripting
+
 - Scripting can automate complex tasks and provide more control than built-in automation features of tools like Excel.
 - Initial investment in effort can lead to significant time savings in the long run.
 - **Common uses:**
@@ -86,6 +97,7 @@
   - **Python:** Handle tasks like file manipulation, web scraping, data analysis, API interaction, and complex automation workflows.
 
 ## Resources
+
 - **Excel Automation:**
   - [Excel Functions](https://support.microsoft.com/en-us/excel)
   - [Excel Macros](https://support.microsoft.com/en-us/office/quick-start-create-a-macro-7392a96b-4300-47b8-9723-5bf04f4f7c8a)
@@ -103,4 +115,4 @@
   - [Python Requests Library](https://docs.python-requests.org/en/latest/)
   - [Python JSON Library](https://docs.python.org/3/library/json.html)
 
-*Cyber Crash Course provides foundational knowledge of workflow automation and scripting for efficient task management and process optimization.*
+_Cyber Crash Course provides foundational knowledge of workflow automation and scripting for efficient task management and process optimization._

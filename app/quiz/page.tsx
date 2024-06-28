@@ -13,7 +13,7 @@ export default async function Quiz() {
   const pb = await getPb();
 
   const unlockedQuizzes = await pb.collection("quiz_attempts").getFullList({
-    filter: `user = "${pb.authStore.model.id}" && submitted = false && expired = false`,
+    filter: `user = "${pb.authStore.model?.id}" && submitted = false && expired = false`,
     expand: "quiz,quiz.questions",
   });
 

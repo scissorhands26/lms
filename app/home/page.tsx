@@ -56,6 +56,17 @@ export default async function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/aar">
+          <Card>
+            <CardHeader>
+              <CardTitle>AAR</CardTitle>
+              <CardDescription>Submit Course Comment</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Click Here</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </main>
   );

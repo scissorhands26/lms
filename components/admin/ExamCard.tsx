@@ -42,24 +42,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-interface Exam {
-  id: string;
-  name: string;
-  questions: number;
-  running: boolean;
-  started: string;
-  time_allowed: number;
-}
-
-interface Student {
-  id: string;
-  name: string;
-  rank: string;
-  last_name: string;
-  first_name: string;
-}
-
-const calculateInitialTimeRemaining = (exam: Exam): number => {
+const calculateInitialTimeRemaining = (exam: any): number => {
   const startedTime = new Date(exam.started).getTime();
   const currentTime = new Date().getTime();
   const timeElapsed = (currentTime - startedTime) / 1000;
@@ -86,12 +69,13 @@ export default function ExamCard({
   studentList,
   examAnswers,
 }: {
-  exam: Exam;
-  studentList: Student[];
+  exam: any;
+  studentList: any[];
+  examAnswers: any[];
 }) {
   const [timer, setTimer] = useState<number | null>(null);
   const [examState, setExamState] = useState(exam.running);
-  const [students, setStudents] = useState<Student[]>(studentList);
+  const [students, setStudents] = useState<any[]>(studentList);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -119,7 +103,7 @@ export default function ExamCard({
     }
   }, [examState]);
 
-  async function handleExamState(state: string, exam: Exam) {
+  async function handleExamState(state: string, exam: any) {
     const selectedStudents = form.getValues("selectedStudents");
     if (state === "start") {
       await startExam({ exam, selectedStudents }); // Pass exam and selected students
@@ -147,7 +131,7 @@ export default function ExamCard({
     }
   };
 
-  function calculateScore(exam: Exam, student: Student, examAnswers: any[]) {
+  function calculateScore(exam: any, student: any, examAnswers: any[]) {
     console.log(examAnswers, exam, student);
 
     // Filter exam answers by student ID and exam ID
@@ -169,20 +153,23 @@ export default function ExamCard({
 
     // Get an array of attempt entries and sort by creation date
     const sortedAttempts = Object.entries(attempts).sort((a, b) => {
+      // @ts-ignore
       const dateA = new Date(a[1][0].expand.attempt.created);
+      // @ts-ignore
       const dateB = new Date(b[1][0].expand.attempt.created);
+      // @ts-ignore
       return dateA - dateB;
     });
 
     // Calculate score for each attempt
-    const scores = sortedAttempts.map(([attemptId, attemptAnswers]) => {
+    const scores = sortedAttempts.map(([attemptId, attemptAnswers]: any) => {
       let score = 0;
       console.log(attemptAnswers);
-      attemptAnswers.forEach((answer) => {
+      attemptAnswers.forEach((answer: any) => {
         const correctOptions = answer.expand.question.correct_options;
         if (correctOptions && Array.isArray(answer.answer)) {
           // Check if every answer provided by the student matches a correct option
-          const isCorrect = answer.answer.every((ans) =>
+          const isCorrect = answer.answer.every((ans: any) =>
             correctOptions.includes(ans),
           );
           if (isCorrect) {
@@ -196,10 +183,10 @@ export default function ExamCard({
     return scores;
   }
 
-  function checkExamStatus(exam, student, examAnswers) {
+  function checkExamStatus(exam: any, student: any, examAnswers: any) {
     // Check if the exam is currently running for the student
     let runningSession = examAnswers.some(
-      (answer) =>
+      (answer: any) =>
         answer.expand.user.id === student.id &&
         answer.expand.exam.id === exam.id &&
         !answer.expand.attempt.expired &&
@@ -210,7 +197,7 @@ export default function ExamCard({
 
     // Check if the student has completed the exam
     let examTaken = examAnswers.some(
-      (answer) =>
+      (answer: any) =>
         answer.expand.user.id === student.id &&
         answer.expand.exam.id === exam.id &&
         answer.expand.attempt.submitted,

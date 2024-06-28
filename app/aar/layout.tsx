@@ -9,18 +9,17 @@ import {
   DropdownMenuContent,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BookOpen, Search } from "lucide-react";
 import { NavLinks } from "@/components/admin/NavLinks";
 import getPb from "@/pb/getPb";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatWindow from "@/components/chat/ChatWindow";
 
-export default async function HomeLayout({
+export default async function QuizLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const pb = await getPb();
-
-  const user = await pb.authStore.model;
+  const user = pb.authStore.model;
 
   return (
     <div className="min-h-screen w-full">
@@ -42,18 +41,13 @@ export default async function HomeLayout({
                   />
                   <AvatarFallback>{user?.rank}</AvatarFallback>
                 </Avatar>
-
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>
-                {user?.rank + " " + user?.last_name}
-              </DropdownMenuLabel>
+              <DropdownMenuLabel>{user?.first_name}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href="/profile">Profile</Link>
-              </DropdownMenuItem>
+              <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

@@ -70,6 +70,7 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                   <Link
                     href="#"
                     className={cn(
+                      // @ts-ignore
                       buttonVariants({ variant: link.variant, size: "icon" }),
                       "h-11 w-11 md:h-16 md:w-16",
                       link.variant === "grey" &&
@@ -101,6 +102,7 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
               key={index}
               href="#"
               className={cn(
+                // @ts-ignore
                 buttonVariants({ variant: link.variant, size: "xl" }),
                 link.variant === "grey" &&
                   "shrink dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",

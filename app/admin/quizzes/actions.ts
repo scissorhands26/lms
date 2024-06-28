@@ -49,7 +49,7 @@ export async function startQuiz({ quiz, selectedStudents }: StartQuizData) {
   await Promise.all(
     createdAttempts.map(async (attempt) => {
       await Promise.all(
-        quizRecord.questions.map((question) => {
+        quizRecord.questions.map((question: any) => {
           const data = {
             question: question,
             quiz: quiz.id,

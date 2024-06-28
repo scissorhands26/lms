@@ -17,7 +17,7 @@ export default async function QuizLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const pb = await getPb();
-  const user = await pb.authStore.model;
+  const user = pb.authStore.model;
 
   return (
     <div className="min-h-screen w-full">
@@ -48,7 +48,7 @@ export default async function QuizLayout({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{user.first_name}</DropdownMenuLabel>
+              <DropdownMenuLabel>{user?.first_name}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />

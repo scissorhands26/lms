@@ -19,7 +19,7 @@ export default async function ProfileLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const pb = await getPb();
 
-  const user = await pb.authStore.model;
+  const user = pb.authStore.model;
 
   return (
     <div className="min-h-screen w-full">
@@ -39,14 +39,14 @@ export default async function ProfileLayout({
                   <AvatarImage
                     src={`${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/users/${user?.id}/${user?.avatar}`}
                   />
-                  <AvatarFallback>{user.rank}</AvatarFallback>
+                  <AvatarFallback>{user?.rank}</AvatarFallback>
                 </Avatar>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>
-                {user.rank + " " + user.last_name}
+                {user?.rank + " " + user?.last_name}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>

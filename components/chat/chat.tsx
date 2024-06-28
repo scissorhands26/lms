@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 interface ChatProps {
-  messages?: Message[];
+  messages?: any[];
   selectedUser: UserData;
   isMobile: boolean;
   createChatMessage: any;
@@ -19,13 +19,13 @@ export function Chat({
   isMobile,
   createChatMessage,
 }: ChatProps) {
-  const [messagesState, setMessages] = useState(messages || []);
+  const [messagesState, setMessages] = useState<any>(messages || []);
   const [user, setUser] = useState();
 
-  const sendMessage = (newMessage: Message) => {
+  function sendMessage(newMessage: any, file: any) {
     setMessages([...messagesState, newMessage]);
-    createChatMessage(newMessage.message);
-  };
+    createChatMessage(newMessage.message, file);
+  }
 
   useEffect(() => {
     setMessages(messages);
@@ -69,6 +69,7 @@ export function Chat({
       <ChatList
         messages={messagesState}
         selectedUser={selectedUser}
+        // @ts-ignore
         sendMessage={sendMessage}
         isMobile={isMobile}
         createChatMessage={createChatMessage}

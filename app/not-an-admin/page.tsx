@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 export default function NotAnAdmin() {
   const [step, setStep] = useState(0);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<any>();
   const [shameWall, setShameWall] = useState([]);
   const [keypresses, setKeypresses] = useState(["▢"]);
 
@@ -29,9 +29,9 @@ export default function NotAnAdmin() {
   useEffect(() => {
     const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39];
     let konamiCodePosition = 0;
-    let konamiTimeout;
+    let konamiTimeout: any;
 
-    const handleKeyDown = async (event) => {
+    const handleKeyDown = async (event: any) => {
       clearTimeout(konamiTimeout);
       setKeypresses((prev) => [...prev, event.key].slice(-1));
 
@@ -70,7 +70,7 @@ export default function NotAnAdmin() {
     const user = await GetUser();
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/admin_logs/records?filter=(user='${user.id}')`,
+      `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/admin_logs/records?filter=(user='${user?.id}')`,
       {
         method: "GET",
         headers: {
@@ -81,7 +81,7 @@ export default function NotAnAdmin() {
 
     const response = await res.json();
 
-    const promises = response.items.map((log) =>
+    const promises = response.items.map((log: any) =>
       fetch(
         `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/admin_logs/records/${log.id}`,
         {
@@ -96,12 +96,12 @@ export default function NotAnAdmin() {
 
     await Promise.all(promises);
     const updatedShame = await getShame();
-    setShameWall(updatedShame.items.filter((item) => !item.hidden));
+    setShameWall(updatedShame.items.filter((item: any) => !item.hidden));
 
     return response;
   }
 
-  async function logShame(data) {
+  async function logShame(data: any) {
     await fetch(
       `${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/collections/admin_logs/records`,
       {
@@ -126,7 +126,7 @@ export default function NotAnAdmin() {
     );
 
     const response = await res.json();
-    setShameWall(response.items.filter((item) => !item.hidden));
+    setShameWall(response.items.filter((item: any) => !item.hidden));
     return response;
   }
 
@@ -232,8 +232,8 @@ export default function NotAnAdmin() {
             {step === 2 && (
               <div className="mt-4 text-gray-300">
                 <p className="text-xl">
-                  Are you really sure? You're not supposed to be looking at the
-                  admin dashboard.
+                  Are you really sure? You&apos;re not supposed to be looking at
+                  the admin dashboard.
                 </p>
                 <div className="mt-2 space-x-4">
                   <button

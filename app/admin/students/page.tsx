@@ -30,6 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 
 import { Badge } from "@/components/ui/badge";
@@ -41,7 +42,7 @@ async function getStudents() {
 
   const users = await pb.collection("users").getFullList({
     sort: "-created",
-    expand: "roles,courses,branch",
+    expand: "roles,courses",
   });
 
   const students: any[] = [];
@@ -50,7 +51,7 @@ async function getStudents() {
     const student = {
       age: user.age,
       avatar: user.avatar,
-      branch: user.expand?.branch,
+      branch: user.branch,
       courses: user.expand?.courses,
       created: user.created,
       email: user.email || "Not found",
@@ -134,7 +135,7 @@ export default async function StudentsPage() {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="birthdate">Birthdate</Label>
-                  <Input id="birthdate" type="date" />
+                  <Input id="birthdate" type="date" name="birthdate" />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="branch">Branch</Label>
@@ -163,9 +164,11 @@ export default async function StudentsPage() {
                     type="text"
                   />
                 </div>
-                <Button className="w-full" type="submit">
-                  Add Student
-                </Button>
+                <DialogClose asChild>
+                  <Button className="w-full" type="submit">
+                    Add Student
+                  </Button>
+                </DialogClose>
               </form>
             </DialogDescription>
           </DialogContent>
@@ -207,7 +210,7 @@ export default async function StudentsPage() {
                     </span>
                   </div>
                 </TableCell>
-                <TableCell>{student.branch.name}</TableCell>
+                <TableCell>{student.branch}</TableCell>
                 <TableCell>{student.mos}</TableCell>
                 <TableCell>
                   {

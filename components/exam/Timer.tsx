@@ -2,12 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-export default function Timer({ originalTime, timeRemaining, onTimeExpired }) {
+export default function Timer({
+  originalTime,
+  timeRemaining,
+  onTimeExpired,
+}: any) {
   const [remainingTime, setRemainingTime] = useState(timeRemaining);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setRemainingTime((prevTime) => {
+      setRemainingTime((prevTime: any) => {
         if (prevTime <= 1) {
           clearInterval(timer);
           onTimeExpired();
@@ -20,7 +24,7 @@ export default function Timer({ originalTime, timeRemaining, onTimeExpired }) {
     return () => clearInterval(timer);
   }, [onTimeExpired]);
 
-  function formatTime(seconds) {
+  function formatTime(seconds: any) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;

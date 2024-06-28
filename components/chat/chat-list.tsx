@@ -4,13 +4,14 @@ import React, { useRef, useEffect } from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import ChatBottombar from "./chat-bottombar";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 interface ChatListProps {
   selectedUser: any;
   sendMessage: (newMessage: Message) => void;
   isMobile: boolean;
   createChatMessage: any;
-  messages: Message[];
+  messages: any[];
 }
 
 export function ChatList({
@@ -86,22 +87,29 @@ export function ChatList({
                   </Avatar>
                 )}
                 <div
-                  className={
+                  className={`flex max-w-xs flex-col rounded-md p-2 ${
                     message.expand.user.branch === "Army"
-                      ? "flex max-w-xs flex-col rounded-md bg-green-900 p-2" // Army
-                      : message.expand.user.branch === "Navy" // Navy
-                        ? "flex max-w-xs flex-col rounded-md bg-blue-900 p-2"
-                        : message.expand.user.branch === "Air Force" // Air Force
-                          ? "flex max-w-xs flex-col rounded-md bg-gray-900 p-2"
-                          : message.expand.user.branch === "Marines" // Marines
-                            ? "flex max-w-xs flex-col rounded-md bg-red-900 p-2"
-                            : "flex max-w-xs flex-col rounded-md bg-accent p-2"
-                  }
+                      ? "bg-green-900"
+                      : message.expand.user.branch === "Navy"
+                        ? "bg-blue-900"
+                        : message.expand.user.branch === "Air Force"
+                          ? "bg-gray-900"
+                          : message.expand.user.branch === "Marines"
+                            ? "bg-red-900"
+                            : "bg-accent"
+                  } ${message.expand.user.roles === "gwmmfjponodgguw" ? "border-2 border-yellow-500" : ""}`}
                 >
                   <span className="text-xs font-bold text-white">
                     {message.name}
                   </span>
                   <span className="text-sm text-white">{message.message}</span>
+                  {message.file && (
+                    <img
+                      width={300}
+                      alt={message.file}
+                      src={`${process.env.NEXT_PUBLIC_POCKETBASE_URL}/api/files/chat/${message.id}/${message.file}`}
+                    ></img>
+                  )}
                   <span className="text-xs text-gray-400">
                     {formatTime(message.created)}
                   </span>

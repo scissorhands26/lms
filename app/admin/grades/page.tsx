@@ -10,8 +10,6 @@ async function getQuizGrades() {
     .collection("quiz_summary")
     .getFullList({ expand: "user_id,quiz_attempt_id" });
 
-  console.log(records[0]);
-
   const sortedGrades = records.reduce((acc, entry) => {
     const {
       id,
@@ -36,19 +34,23 @@ async function getQuizGrades() {
       acc[quiz_id] = {
         quiz_id,
         quiz_name,
-        user: {
-          user_id,
-          user_first_name,
-          user_last_name,
-          user_rank,
-          user_expanded,
-        },
+        users: {},
+      };
+    }
+
+    if (!acc[quiz_id].users[user_id]) {
+      acc[quiz_id].users[user_id] = {
+        user_id,
+        user_first_name,
+        user_last_name,
+        user_rank,
+        user_expanded,
         attempts: {},
       };
     }
 
-    if (!acc[quiz_id].attempts[quiz_attempt_id]) {
-      acc[quiz_id].attempts[quiz_attempt_id] = {
+    if (!acc[quiz_id].users[user_id].attempts[quiz_attempt_id]) {
+      acc[quiz_id].users[user_id].attempts[quiz_attempt_id] = {
         quiz_attempt_id,
         quiz_attempt_date: expand.quiz_attempt_id.created,
         attempt_expand: expand.quiz_attempt_id,
@@ -56,7 +58,7 @@ async function getQuizGrades() {
       };
     }
 
-    acc[quiz_id].attempts[quiz_attempt_id].questions.push({
+    acc[quiz_id].users[user_id].attempts[quiz_attempt_id].questions.push({
       id,
       question,
       options,
@@ -68,11 +70,20 @@ async function getQuizGrades() {
     return acc;
   }, {});
 
-  const result = Object.values(sortedGrades).map((quiz) => ({
-    ...quiz,
-    attempts: Object.values(quiz.attempts),
-  }));
+  const result = Object.values(sortedGrades).flatMap((quiz) =>
+    Object.values(quiz.users).map((user) => ({
+      quiz_id: quiz.quiz_id,
+      quiz_name: quiz.quiz_name,
+      user_id: user.user_id,
+      user_first_name: user.user_first_name,
+      user_last_name: user.user_last_name,
+      user_rank: user.user_rank,
+      user_expanded: user.user_expanded,
+      attempts: Object.values(user.attempts),
+    })),
+  );
 
+  console.log(result);
   return result;
 }
 
@@ -83,7 +94,7 @@ async function getExamGrades() {
     .collection("exam_summary")
     .getFullList({ expand: "user_id,exam_attempt_id" });
 
-  console.log(records[0]);
+  console.log("Records", records);
 
   const sortedGrades = records.reduce((acc, entry) => {
     const {
@@ -109,19 +120,23 @@ async function getExamGrades() {
       acc[exam_id] = {
         exam_id,
         exam_name,
-        user: {
-          user_id,
-          user_first_name,
-          user_last_name,
-          user_rank,
-          user_expanded,
-        },
+        users: {},
+      };
+    }
+
+    if (!acc[exam_id].users[user_id]) {
+      acc[exam_id].users[user_id] = {
+        user_id,
+        user_first_name,
+        user_last_name,
+        user_rank,
+        user_expanded,
         attempts: {},
       };
     }
 
-    if (!acc[exam_id].attempts[exam_attempt_id]) {
-      acc[exam_id].attempts[exam_attempt_id] = {
+    if (!acc[exam_id].users[user_id].attempts[exam_attempt_id]) {
+      acc[exam_id].users[user_id].attempts[exam_attempt_id] = {
         exam_attempt_id,
         exam_attempt_date: expand.exam_attempt_id.created,
         attempt_expand: expand.exam_attempt_id,
@@ -129,7 +144,7 @@ async function getExamGrades() {
       };
     }
 
-    acc[exam_id].attempts[exam_attempt_id].questions.push({
+    acc[exam_id].users[user_id].attempts[exam_attempt_id].questions.push({
       id,
       question,
       options,
@@ -141,11 +156,20 @@ async function getExamGrades() {
     return acc;
   }, {});
 
-  const result = Object.values(sortedGrades).map((exam) => ({
-    ...exam,
-    attempts: Object.values(exam.attempts),
-  }));
+  const result = Object.values(sortedGrades).flatMap((exam) =>
+    Object.values(exam.users).map((user) => ({
+      exam_id: exam.exam_id,
+      exam_name: exam.exam_name,
+      user_id: user.user_id,
+      user_first_name: user.user_first_name,
+      user_last_name: user.user_last_name,
+      user_rank: user.user_rank,
+      user_expanded: user.user_expanded,
+      attempts: Object.values(user.attempts),
+    })),
+  );
 
+  console.log("Result", result);
   return result;
 }
 

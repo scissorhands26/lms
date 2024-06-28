@@ -8,7 +8,7 @@ export default async function Component() {
   const pb = await getPb();
 
   const attempt = await pb.collection("quiz_attempts").getFullList({
-    filter: `user = "${pb.authStore.model.id}"`,
+    filter: `user = "${pb.authStore.model?.id}"`,
     expand: "quiz,quiz.questions,quiz.questions.type",
     sort: "-created",
   });
@@ -33,7 +33,7 @@ export default async function Component() {
       <div className="grid gap-6">
         {attempt.length > 0 && (
           <QuestionCard
-            questions={attempt[0].expand.quiz.expand.questions}
+            questions={attempt[0].expand?.quiz.expand.questions}
             attempt={attempt[0]}
             answers={answers}
           />

@@ -1,6 +1,11 @@
+import ChatWindow from "@/components/chat/ChatWindow";
+
+<ChatWindow />
+
 # Logic and Databases Cyber Crash Course
 
 ## What is a Database?
+
 - A database is an organized collection of structured information or data, typically stored electronically.
 - **Key characteristics:**
   - **Storage:** Information is stored in a specific file format, which includes metadata (data about the data) and the actual data.
@@ -10,6 +15,7 @@
     - **Binary blobs:** Binary large objects, such as images, videos, and other files.
 
 ## Why Use a Database?
+
 - Databases provide a rigid structure, comparable to a table or spreadsheet with rows and columns.
 - **Advantages:**
   - **Fast and efficient searches:** Quickly retrieve specific information using indexed data.
@@ -19,6 +25,7 @@
   - **Scalable:** Efficiently handle large datasets. Example: SQLite can manage up to 140 terabytes of data.
 
 ## Types of Databases
+
 - **Commonly used databases and their file extensions:**
   - **Relational Databases:**
     - **Oracle:** `.dbf` - A robust, enterprise-level database known for handling large volumes of data.
@@ -35,6 +42,7 @@
     - **PocketBase:** `.db` - A small, versatile database designed for embedded systems and mobile applications.
 
 ## Interacting with Databases
+
 - Interaction varies based on the database type; some use SQL, others use more flexible formats like JSON, XML, or YAML.
 - **Structured Query Language (SQL):**
   - The standard language for relational databases.
@@ -46,47 +54,52 @@
 - **Schema Understanding:**
   - Knowing the structure of your data is crucial for effective querying.
   - Schema defines how data is organized, including tables, fields, and relationships.
-  
+
 ### MySQL Table Schema Example
-  ```sql
-  CREATE TABLE customers (
-      cust_id INT PRIMARY KEY,
-      first_name VARCHAR(50),
-      last_name VARCHAR(50),
-      email VARCHAR(100),
-      age INT,
-      occupation VARCHAR(50)
-  );
-  ```
-  - **Explanation:**
-    - `cust_id INT PRIMARY KEY`: Defines a unique identifier for each customer.
-    - `first_name VARCHAR(50)`, `last_name VARCHAR(50)`: Define text fields for the customer's first and last names, with a maximum length of 50 characters.
-    - `email VARCHAR(100)`: Defines a text field for the customer's email, with a maximum length of 100 characters.
-    - `age INT`: Defines a numerical field for the customer's age.
-    - `occupation VARCHAR(50)`: Defines a text field for the customer's occupation, with a maximum length of 50 characters.
+
+```sql
+CREATE TABLE customers (
+    cust_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    age INT,
+    occupation VARCHAR(50)
+);
+```
+
+- **Explanation:**
+  - `cust_id INT PRIMARY KEY`: Defines a unique identifier for each customer.
+  - `first_name VARCHAR(50)`, `last_name VARCHAR(50)`: Define text fields for the customer's first and last names, with a maximum length of 50 characters.
+  - `email VARCHAR(100)`: Defines a text field for the customer's email, with a maximum length of 100 characters.
+  - `age INT`: Defines a numerical field for the customer's age.
+  - `occupation VARCHAR(50)`: Defines a text field for the customer's occupation, with a maximum length of 50 characters.
 
 ### MongoDB Document Schema Example
-  ```json
-  {
-      "cust_id": 1,
-      "first_name": "John",
-      "last_name": "Doe",
-      "email": "john.doe@example.com",
-      "age": 30,
-      "occupation": "Engineer"
-  }
-  ```
-  - **Explanation:**
-    - **JSON format:** Documents are stored in a JSON-like format, allowing for flexibility in the types of data stored.
-    - `cust_id`: Unique identifier for the customer.
-    - `first_name`, `last_name`: Text fields for the customer's first and last names.
-    - `email`: Text field for the customer's email.
-    - `age`: Numerical field for the customer's age.
-    - `occupation`: Text field for the customer's occupation.
+
+```json
+{
+  "cust_id": 1,
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "occupation": "Engineer"
+}
+```
+
+- **Explanation:**
+  - **JSON format:** Documents are stored in a JSON-like format, allowing for flexibility in the types of data stored.
+  - `cust_id`: Unique identifier for the customer.
+  - `first_name`, `last_name`: Text fields for the customer's first and last names.
+  - `email`: Text field for the customer's email.
+  - `age`: Numerical field for the customer's age.
+  - `occupation`: Text field for the customer's occupation.
 
 ## The Logic of Databases
+
 - Queries retrieve information using schema identifiers. For example, you might query information about `cust_id` or `first_name`. You couldn't try to query something like `cust_address`, because it was not specified in the schema.
-- **Simple queries:** 
+- **Simple queries:**
   - Basic data retrieval.
   - **Example MySQL Query:** Retrieves all `cust_id` from the `customers` table
     ```mysql
@@ -96,7 +109,9 @@
     ```json
     db.customers.find({}, { cust_id: 1, _id: 0 })
     ```
+
 ### Logic Operators
+
 - **AND (`&&`)**: Results are returned only if all conditions are met.
   - **Example:** Retrieve customers who are doctors and aged 37.
     ```sql
@@ -138,7 +153,9 @@
       ]
     })
     ```
+
 ### Examples of Complex Queries
+
 - **Example 1:** Retrieve customers who are either engineers or doctors, aged between 30 and 50, and live in a specific city.
   ```sql
   SELECT * FROM customers
@@ -147,6 +164,7 @@
   AND city = 'New York';
   ```
 - **Equivalent NoSQL Query (MongoDB):**
+
 ```json
 db.customers.find({
 $and: [
@@ -156,6 +174,7 @@ $and: [
 ]
 })
 ```
+
 - **Example 2:** Retrieve customers who have made purchases above a certain amount and have a specified membership status.
   ```sql
   SELECT * FROM customers
@@ -164,6 +183,7 @@ $and: [
   AND customers.membership_status = 'Gold';
   ```
 - **Equivalent NoSQL Query (MongoDB):**
+
 ```json
 db.customers.aggregate([
 {
@@ -183,6 +203,7 @@ $match: {
 }
 ])
 ```
+
 - **Example 3:** Retrieve customers who have not made any purchases in the last year.
   ```sql
   SELECT * FROM customers
@@ -192,6 +213,7 @@ $match: {
   );
   ```
 - **Equivalent NoSQL Query (MongoDB):**
+
 ```json
 db.customers.find({
 cust_id: {
@@ -203,12 +225,14 @@ $nin: db.purchases.distinct('cust_id', {
 ```
 
 ## Benefits of Databases
+
 - **Structured Data Storage:** Data is organized in a consistent, logical manner.
 - **Efficient Data Retrieval:** Indexing and querying capabilities ensure quick access to needed information.
 - **Complex Query Support:** Ability to perform advanced searches and data manipulation.
 - **Scalability:** Databases can handle large volumes of data efficiently.
 
 ## Resources
+
 - **Database Basics:**
   - [What is a Database?](https://www.oracle.com/database/what-is-database/)
   - [Database Management Systems (DBMS)](https://www.ibm.com/cloud/learn/dbms)

@@ -43,7 +43,7 @@ export async function updateAnswerInDB(
     });
   } else {
     await pb.collection("exam_answers").create({
-      user: pb.authStore.model.id,
+      user: pb.authStore.model?.id,
       exam: attempt.expand.exam.id,
       question: question.id,
       attempt: attempt.id,

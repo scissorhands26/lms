@@ -28,10 +28,10 @@ export function ChatLayout({
   createChatMessage,
   user,
 }: ChatLayoutProps) {
-  const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
-  const [selectedUser, setSelectedUser] = useState(user);
+  const [isCollapsed, setIsCollapsed] = useState<any>(defaultCollapsed);
+  const [selectedUser, setSelectedUser] = useState<any>(user);
   const [isMobile, setIsMobile] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<any>([]);
 
   useEffect(() => {
     getChatMessages();

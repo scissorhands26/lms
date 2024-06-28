@@ -27,6 +27,7 @@ export async function GetExercise(exerciseID: string) {
 
     if (!response.ok) {
       console.log(`Error ${response.status}: ${JSON.stringify(response)}`);
+      // @ts-ignore
       throw new Error(`Error ${response.status}: ${response.detail}`);
     }
 

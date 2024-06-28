@@ -9,7 +9,7 @@ export async function handleCreateStudent(formData: FormData) {
   const branch = (formData.get("branch") as string) ?? "";
   const mos = (formData.get("mos") as string) ?? "";
   const rank = (formData.get("rank") as string) ?? "";
-  const birthdate = (formData.get("birthdate") as string) ?? "";
+  const birthdate = (formData.get("birthdate") as any) ?? "";
 
   const pb = await getPb();
 
@@ -21,6 +21,9 @@ export async function handleCreateStudent(formData: FormData) {
     const today = new Date();
     return today.toISOString();
   }
+
+  console.log("birthdate", birthdate);
+  console.log("rank", rank);
 
   const data = {
     username: generateUsername(),
@@ -38,7 +41,7 @@ export async function handleCreateStudent(formData: FormData) {
     courses: ["pwlhokhlenxh027"],
     roles: "k4punq9hul00961",
     last_login: "2022-01-01 10:00:00.123Z",
-    branch: "jrj8uvdrf4stx4d",
+    branch,
   };
 
   try {

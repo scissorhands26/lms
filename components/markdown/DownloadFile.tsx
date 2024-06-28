@@ -9,12 +9,12 @@ const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 pb.autoCancellation(false);
 
 export default function DownloadFile({ file }: any) {
-  const [records, setRecords] = useState([]);
-  const [url, setUrl] = useState(null);
+  const [records, setRecords] = useState<any>([]);
+  const [url, setUrl] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const pb_cookie = Cookies.get("pb_auth");
+      const pb_cookie: any = Cookies.get("pb_auth");
 
       pb.authStore.loadFromCookie(pb_cookie);
 

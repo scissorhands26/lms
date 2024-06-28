@@ -39,8 +39,8 @@ export default function ExercisesTable({ exercises }: any) {
       });
 
       // Update the state to reflect the change in the UI
-      setExercisesState((prevExercises) =>
-        prevExercises.map((ex) =>
+      setExercisesState((prevExercises: any) =>
+        prevExercises.map((ex: any) =>
           ex.id === exercise.id ? { ...ex, unlocked: !ex.unlocked } : ex,
         ),
       );
@@ -60,7 +60,7 @@ export default function ExercisesTable({ exercises }: any) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {exercisesState.map((exercise) => (
+        {exercisesState.map((exercise: any) => (
           <TableRow key={exercise.id}>
             <TableCell>
               <div className="flex items-center gap-2">

@@ -96,7 +96,8 @@ export default function ApiButton() {
                   item.completed = e.record.completed;
                   item.submitted_answer = e.record.submitted_answer;
                   e.record.completed
-                    ? toast("Task completed!", { type: "success" })
+                    ? // @ts-ignore
+                      toast("Task completed!", { type: "success" })
                     : toast("Task updated", {
                         description: `Submitted Answer: ${e.record.submitted_answer}`,
                       });
@@ -193,8 +194,8 @@ export default function ApiButton() {
     });
   }
 
-  function showDesc(index) {
-    const desc = document.getElementById(`desc-${index}`);
+  function showDesc(index: any) {
+    const desc: any = document.getElementById(`desc-${index}`);
     if (desc.style.display === "none") {
       desc.style.display = "block";
     } else {
@@ -202,7 +203,7 @@ export default function ApiButton() {
     }
   }
 
-  const statusIcon = (data) => {
+  const statusIcon = (data: any) => {
     if (data.submitted_answer === "" && !data.completed) {
       return (
         <span className="text-gray-700 dark:text-gray-500">
@@ -231,7 +232,7 @@ export default function ApiButton() {
     return null;
   };
 
-  const RenderIcon = ({ data }) => {
+  const RenderIcon = ({ data }: any) => {
     return statusIcon(data);
   };
 
